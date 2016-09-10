@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SyslogDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Syslog" >
+    <id column="LogID" property="logid"  />
+     <result column="LogUserID" property="loguserid"  />
+     <result column="LogActionID" property="logactionid"  />
+     <result column="LogDetail" property="logdetail"  />
+     <result column="LogShopID" property="logshopid"  />
+     <result column="LogCreateTime" property="logcreatetime"  />
+     <result column="LogIPAdress" property="logipadress"  />
+     <result column="LogType" property="logtype"  />
+     <result column="useraccount" property="useraccount"/>
+     <result column="username" property="username"/>
+     <result column="shopname" property="shopname"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="loguserid != null" >
+		       
+		         LogUserID = #{loguserid} 
+		      </if>
+     	
+     	
+		      <if test="logactionid != null" >
+		       
+		         and LogActionID = #{logactionid} 
+		      </if>
+     	
+     	
+		      <if test="logdetail != null" >
+		       
+		         and LogDetail = #{logdetail} 
+		      </if>
+     	
+     	
+		      <if test="logshopid != null and logshopid != 0" >
+		       
+		         and LogShopID = #{logshopid} 
+		      </if>
+     	
+     	
+		      <if test="logcreatetime != null" >
+		       
+		         and LogCreateTime = #{logcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="logipadress != null" >
+		       
+		         and LogIPAdress = #{logipadress} 
+		      </if>
+     	
+     	
+		      <if test="logtype != null" >
+		       
+		         and LogType = #{logtype} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+LogID,LogUserID,LogActionID,LogDetail,LogShopID,LogCreateTime,LogIPAdress,LogType    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Syslog" >
+    insert into syslog (LogID,LogUserID,LogActionID,LogDetail,LogShopID,LogCreateTime,LogIPAdress,LogType)values (#{logid},#{loguserid},#{logactionid},#{logdetail},#{logshopid},#{logcreatetime},#{logipadress},#{logtype})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Syslog" >
+    update syslog
+    <set >
+	      <if test="loguserid != null" >
+	        LogUserID = #{loguserid},
+	      </if>
+	      <if test="logactionid != null" >
+	        LogActionID = #{logactionid},
+	      </if>
+	      <if test="logdetail != null" >
+	        LogDetail = #{logdetail},
+	      </if>
+	      <if test="logshopid != null" >
+	        LogShopID = #{logshopid},
+	      </if>
+	      <if test="logcreatetime != null" >
+	        LogCreateTime = #{logcreatetime},
+	      </if>
+	      <if test="logipadress != null" >
+	        LogIPAdress = #{logipadress},
+	      </if>
+	      <if test="logtype != null" >
+	        LogType = #{logtype},
+	      </if>
+    </set>
+    where  LogID= #{logid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from syslog
+    where  LogID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from syslog
+    where  LogID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SyslogFormBean" resultType="int">
+		SELECT COUNT(*) FROM syslog
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SyslogFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" /> ,sysuser.UserAccount,sysuser.username,sysshop.ShopName
+		 FROM syslog  left join 
+sysuser on syslog.LogUserID=sysuser.UserID left join sysshop on syslog.LogShopID=sysshop.ShopID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Syslog" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM syslog
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

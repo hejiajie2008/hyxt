@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemcountDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memcount" >
+    <id column="CountID" property="countid"  />
+     <result column="CountMemID" property="countmemid"  />
+     <result column="CountAccount" property="countaccount"  />
+     <result column="CountTotalMoney" property="counttotalmoney"  />
+     <result column="CountDiscountMoney" property="countdiscountmoney"  />
+     <result column="CountIsCard" property="countiscard"  />
+     <result column="CountPayCard" property="countpaycard"  />
+     <result column="CountIsCash" property="countiscash"  />
+     <result column="CountPayCash" property="countpaycash"  />
+     <result column="CountIsBink" property="countisbink"  />
+     <result column="CountPayBink" property="countpaybink"  />
+     <result column="CountPayCoupon" property="countpaycoupon"  />
+     <result column="CountPayType" property="countpaytype"  />
+     <result column="CountPoint" property="countpoint"  />
+     <result column="CountRemark" property="countremark"  />
+     <result column="CountShopID" property="countshopid"  />
+     <result column="CountCreateTime" property="countcreatetime"  />
+     <result column="CountUserID" property="countuserid"  />
+      <result column="memcard" property="memcard"/>
+     <result column="memname" property="memname"/>
+     <result column="shopname" property="shopname"/>
+     <result column="username" property="username"/>
+  </resultMap>
+  
+  <resultMap id="MemcountResultMap" type="com.jfxy.pojo.Memcount" >
+    <id column="CountID" property="countid"  />
+     <result column="CountMemID" property="countmemid"  />
+     <result column="CountAccount" property="countaccount"  />
+     <result column="CountTotalMoney" property="counttotalmoney"  />
+     <result column="CountDiscountMoney" property="countdiscountmoney"  />
+     <result column="CountIsCard" property="countiscard"  />
+     <result column="CountPayCard" property="countpaycard"  />
+     <result column="CountIsCash" property="countiscash"  />
+     <result column="CountPayCash" property="countpaycash"  />
+     <result column="CountIsBink" property="countisbink"  />
+     <result column="CountPayBink" property="countpaybink"  />
+     <result column="CountPayCoupon" property="countpaycoupon"  />
+     <result column="CountPayType" property="countpaytype"  />
+     <result column="CountPoint" property="countpoint"  />
+     <result column="CountRemark" property="countremark"  />
+     <result column="CountShopID" property="countshopid"  />
+     <result column="CountCreateTime" property="countcreatetime"  />
+     <result column="CountUserID" property="countuserid"  />
+      <result column="memcard" property="memcard"/>
+     <result column="memname" property="memname"/>
+     <result column="shopname" property="shopname"/>
+     <result column="username" property="username"/>
+     <association property="details" column="CountID" 
+
+select="com.jfxy.dao.MemcountdetailDao.queryMemcountdetailbyid"
+/>  
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="countmemid != null" >
+		       
+		         CountMemID = #{countmemid} 
+		      </if>
+     	
+     	
+		      <if test="countaccount != null" >
+		       
+		         and CountAccount = #{countaccount} 
+		      </if>
+     	
+     	
+		      <if test="counttotalmoney != null" >
+		       
+		         and CountTotalMoney = #{counttotalmoney} 
+		      </if>
+     	
+     	
+		      <if test="countdiscountmoney != null" >
+		       
+		         and CountDiscountMoney = #{countdiscountmoney} 
+		      </if>
+     	
+     	
+		      <if test="countiscard != null" >
+		       
+		         and CountIsCard = #{countiscard} 
+		      </if>
+     	
+     	
+		      <if test="countpaycard != null" >
+		       
+		         and CountPayCard = #{countpaycard} 
+		      </if>
+     	
+     	
+		      <if test="countiscash != null" >
+		       
+		         and CountIsCash = #{countiscash} 
+		      </if>
+     	
+     	
+		      <if test="countpaycash != null" >
+		       
+		         and CountPayCash = #{countpaycash} 
+		      </if>
+     	
+     	
+		      <if test="countisbink != null" >
+		       
+		         and CountIsBink = #{countisbink} 
+		      </if>
+     	
+     	
+		      <if test="countpaybink != null" >
+		       
+		         and CountPayBink = #{countpaybink} 
+		      </if>
+     	
+     	
+		      <if test="countpaycoupon != null" >
+		       
+		         and CountPayCoupon = #{countpaycoupon} 
+		      </if>
+     	
+     	
+		      <if test="countpaytype != null" >
+		       
+		         and CountPayType = #{countpaytype} 
+		      </if>
+     	
+     	
+		      <if test="countpoint != null" >
+		       
+		         and CountPoint = #{countpoint} 
+		      </if>
+     	
+     	
+		      <if test="countremark != null" >
+		       
+		         and CountRemark = #{countremark} 
+		      </if>
+     	
+     	
+		      <if test="countshopid != null" >
+		       
+		         and CountShopID = #{countshopid} 
+		      </if>
+     	
+     	
+		      <if test="countcreatetime != null" >
+		       
+		         and CountCreateTime = #{countcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="countuserid != null" >
+		       
+		         and CountUserID = #{countuserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+CountID,CountMemID,CountAccount,CountTotalMoney,CountDiscountMoney,CountIsCard,CountPayCard,CountIsCash,CountPayCash,CountIsBink,CountPayBink,CountPayCoupon,CountPayType,CountPoint,CountRemark,CountShopID,CountCreateTime,CountUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memcount" useGeneratedKeys="true" keyProperty="countid">
+    insert into memcount (CountID,CountMemID,CountAccount,CountTotalMoney,CountDiscountMoney,CountIsCard,CountPayCard,CountIsCash,CountPayCash,CountIsBink,CountPayBink,CountPayCoupon,CountPayType,CountPoint,CountRemark,CountShopID,CountCreateTime,CountUserID)values (#{countid},#{countmemid},#{countaccount},#{counttotalmoney},#{countdiscountmoney},#{countiscard},#{countpaycard},#{countiscash},#{countpaycash},#{countisbink},#{countpaybink},#{countpaycoupon},#{countpaytype},#{countpoint},#{countremark},#{countshopid},#{countcreatetime},#{countuserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memcount" >
+    update memcount
+    <set >
+	      <if test="countmemid != null" >
+	        CountMemID = #{countmemid},
+	      </if>
+	      <if test="countaccount != null" >
+	        CountAccount = #{countaccount},
+	      </if>
+	      <if test="counttotalmoney != null" >
+	        CountTotalMoney = #{counttotalmoney},
+	      </if>
+	      <if test="countdiscountmoney != null" >
+	        CountDiscountMoney = #{countdiscountmoney},
+	      </if>
+	      <if test="countiscard != null" >
+	        CountIsCard = #{countiscard},
+	      </if>
+	      <if test="countpaycard != null" >
+	        CountPayCard = #{countpaycard},
+	      </if>
+	      <if test="countiscash != null" >
+	        CountIsCash = #{countiscash},
+	      </if>
+	      <if test="countpaycash != null" >
+	        CountPayCash = #{countpaycash},
+	      </if>
+	      <if test="countisbink != null" >
+	        CountIsBink = #{countisbink},
+	      </if>
+	      <if test="countpaybink != null" >
+	        CountPayBink = #{countpaybink},
+	      </if>
+	      <if test="countpaycoupon != null" >
+	        CountPayCoupon = #{countpaycoupon},
+	      </if>
+	      <if test="countpaytype != null" >
+	        CountPayType = #{countpaytype},
+	      </if>
+	      <if test="countpoint != null" >
+	        CountPoint = #{countpoint},
+	      </if>
+	      <if test="countremark != null" >
+	        CountRemark = #{countremark},
+	      </if>
+	      <if test="countshopid != null" >
+	        CountShopID = #{countshopid},
+	      </if>
+	      <if test="countcreatetime != null" >
+	        CountCreateTime = #{countcreatetime},
+	      </if>
+	      <if test="countuserid != null" >
+	        CountUserID = #{countuserid},
+	      </if>
+    </set>
+    where  CountID= #{countid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memcount
+    where  CountID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memcount
+    where  CountID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemcountFormBean" resultType="int">
+		SELECT COUNT(*) FROM memcount
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemcountFormBean" resultMap="MemcountResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		,mem.MemCard,mem.MemName,sysshop.ShopName,sysuser.UserName
+		 FROM memcount
+		  left join mem on memcount.countmemid= mem.MemID
+		left join sysshop on memcount.countshopid=sysshop.ShopID 
+		left join sysuser on memcount.countuserid=sysuser.UserID
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memcount" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memcount
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

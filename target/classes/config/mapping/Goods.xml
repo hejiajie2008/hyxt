@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.GoodsDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Goods" >
+    <id column="GoodsID" property="goodsid"  />
+     <result column="GoodsCode" property="goodscode"  />
+     <result column="GoodsClassID" property="goodsclassid"  />
+     <result column="Name" property="name"  />
+     <result column="NameCode" property="namecode"  />
+     <result column="Unit" property="unit"  />
+     <result column="GoodsNumber" property="goodsnumber"  />
+     <result column="GoodsSaleNumber" property="goodssalenumber"  />
+     <result column="Price" property="price"  />
+     <result column="CommissionType" property="commissiontype"  />
+     <result column="CommissionNumber" property="commissionnumber"  />
+     <result column="SalePercet" property="salepercet"  />
+     <result column="Point" property="point"  />
+     <result column="MinPercent" property="minpercent"  />
+     <result column="GoodsType" property="goodstype"  />
+     <result column="GoodsBidPrice" property="goodsbidprice"  />
+     <result column="GoodsRemark" property="goodsremark"  />
+     <result column="GoodsPicture" property="goodspicture"  />
+     <result column="GoodsCreateTime" property="goodscreatetime"  />
+     <result column="CreateShopID" property="createshopid"  />
+     <result column="classname" property="classname"  />
+     <result column="shopid" property="shopid"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	<if test="goodsid != null" >
+		       
+		         GoodsID = #{goodsid} 
+		      </if>
+		      <if test="goodscode != null" >
+		       
+		         GoodsCode = #{goodscode} 
+		      </if>
+     	
+     	
+		      <if test="goodsclassid != null" >
+		       
+		         and GoodsClassID = #{goodsclassid} 
+		      </if>
+     	
+     	
+		      <if test="name != null" >
+		       
+		         and Name = #{name} 
+		      </if>
+     	
+     	
+		      <if test="namecode != null" >
+		       
+		         and NameCode = #{namecode} 
+		      </if>
+     	
+     	
+		      <if test="unit != null" >
+		       
+		         and Unit = #{unit} 
+		      </if>
+     	
+     	
+		      <if test="goodsnumber != null" >
+		       
+		         and GoodsNumber = #{goodsnumber} 
+		      </if>
+     	
+     	
+		      <if test="goodssalenumber != null" >
+		       
+		         and GoodsSaleNumber = #{goodssalenumber} 
+		      </if>
+     	
+     	
+		      <if test="price != null" >
+		       
+		         and Price = #{price} 
+		      </if>
+     	
+     	
+		      <if test="commissiontype != null" >
+		       
+		         and CommissionType = #{commissiontype} 
+		      </if>
+     	
+     	
+		      <if test="commissionnumber != null" >
+		       
+		         and CommissionNumber = #{commissionnumber} 
+		      </if>
+     	
+     	
+		      <if test="salepercet != null" >
+		       
+		         and SalePercet = #{salepercet} 
+		      </if>
+     	
+     	
+		      <if test="point != null" >
+		       
+		         and Point = #{point} 
+		      </if>
+     	
+     	
+		      <if test="minpercent != null" >
+		       
+		         and MinPercent = #{minpercent} 
+		      </if>
+     	
+     	
+		      <if test="goodstype != null" >
+		       
+		         and GoodsType = #{goodstype} 
+		      </if>
+     	
+     	
+		      <if test="goodsbidprice != null" >
+		       
+		         and GoodsBidPrice = #{goodsbidprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsremark != null" >
+		       
+		         and GoodsRemark = #{goodsremark} 
+		      </if>
+     	
+     	
+		      <if test="goodspicture != null" >
+		       
+		         and GoodsPicture = #{goodspicture} 
+		      </if>
+     	
+     	
+		      <if test="goodscreatetime != null" >
+		       
+		         and GoodsCreateTime = #{goodscreatetime} 
+		      </if>
+     	
+     	
+		      <if test="createshopid != null" >
+		       
+		         and CreateShopID = #{createshopid} 
+		      </if>
+		      
+		      
+    </where>
+    
+   
+		       
+		         
+		     
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+GoodsID,GoodsCode,GoodsClassID,Name,NameCode,Unit,GoodsNumber,GoodsSaleNumber,Price,CommissionType,CommissionNumber,SalePercet,Point,MinPercent,GoodsType,GoodsBidPrice,GoodsRemark,GoodsPicture,GoodsCreateTime,CreateShopID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Goods" useGeneratedKeys="true" keyProperty="goodsid" >
+    insert into goods 
+    (GoodsCode,GoodsClassID,Name,NameCode,Unit,GoodsNumber,GoodsSaleNumber,Price,CommissionType,CommissionNumber,SalePercet,Point,MinPercent,GoodsType,GoodsBidPrice,GoodsRemark,GoodsPicture,GoodsCreateTime,CreateShopID
+     <if test="map!=null and map.size!=0">
+	    	 ,
+		    <foreach collection="map.keys" item="item"  separator=","  >
+		     ${item}  
+		    </foreach>
+		</if>
+    )
+    values 
+    (#{goodscode},#{goodsclassid},#{name},#{namecode},#{unit},#{goodsnumber},#{goodssalenumber},#{price},#{commissiontype},#{commissionnumber},#{salepercet},#{point},#{minpercent},#{goodstype},#{goodsbidprice},#{goodsremark},#{goodspicture},#{goodscreatetime},#{createshopid}
+    <if test="map!=null and map.size!=0">
+	    	 ,
+		    <foreach collection="map.values" item="item"  separator=","  >
+            #{item}
+		    </foreach>
+		</if>
+    )
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Goods" >
+    update goods
+    <set >
+	      <if test="goodscode != null" >
+	        GoodsCode = #{goodscode},
+	      </if>
+	      <if test="goodsclassid != null" >
+	        GoodsClassID = #{goodsclassid},
+	      </if>
+	      <if test="name != null" >
+	        Name = #{name},
+	      </if>
+	      <if test="namecode != null" >
+	        NameCode = #{namecode},
+	      </if>
+	      <if test="unit != null" >
+	        Unit = #{unit},
+	      </if>
+	      <if test="goodsnumber != null" >
+	        GoodsNumber = #{goodsnumber},
+	      </if>
+	      <if test="goodssalenumber != null" >
+	        GoodsSaleNumber = #{goodssalenumber},
+	      </if>
+	      <if test="price != null" >
+	        Price = #{price},
+	      </if>
+	      <if test="commissiontype != null" >
+	        CommissionType = #{commissiontype},
+	      </if>
+	      <if test="commissionnumber != null" >
+	        CommissionNumber = #{commissionnumber},
+	      </if>
+	      <if test="salepercet != null" >
+	        SalePercet = #{salepercet},
+	      </if>
+	      <if test="point != null" >
+	        Point = #{point},
+	      </if>
+	      <if test="minpercent != null" >
+	        MinPercent = #{minpercent},
+	      </if>
+	      <if test="goodstype != null" >
+	        GoodsType = #{goodstype},
+	      </if>
+	      <if test="goodsbidprice != null" >
+	        GoodsBidPrice = #{goodsbidprice},
+	      </if>
+	      <if test="goodsremark != null" >
+	        GoodsRemark = #{goodsremark},
+	      </if>
+	      <if test="goodspicture != null" >
+	        GoodsPicture = #{goodspicture},
+	      </if>
+	      <if test="goodscreatetime != null" >
+	        GoodsCreateTime = #{goodscreatetime},
+	      </if>
+	      <if test="createshopid != null" >
+	        CreateShopID = #{createshopid},
+	      </if>
+	      
+	      <foreach collection="map" item="item" index="key"  separator=","  >
+		    
+		    
+		     <choose>  
+            <when test="item==''">  
+            ${key}=null
+            </when>
+            	<when test="item!=null">
+            	${key}=#{item} 
+            	</when>
+            	<otherwise>
+            		${key}=#{item} 
+            	</otherwise>
+            </choose>
+	
+            
+		</foreach>
+    </set>
+    where  GoodsID= #{goodsid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from goods
+    where  GoodsID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from goods
+    where  GoodsID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.GoodsFormBean" resultType="int">
+		SELECT  count(*)
+		 FROM goods left join goodsclass on goods.goodsclassid=classid
+		 left join goodsnumber on  goods.goodsid=goodsnumber.goodsid 
+		 
+		
+		<where >
+     	
+     	
+     	
+     	<if test="goodsid != null" >
+		       
+		         goods.GoodsID = #{goodsid} 
+		      </if>
+		      <if test="goodscode != null" >
+		       
+		         GoodsCode = #{goodscode} 
+		      </if>
+     	
+     	
+		      <if test="goodsclassid != null" >
+		       
+		         and GoodsClassID = #{goodsclassid} 
+		      </if>
+     	
+     	
+		      <if test="name != null" >
+		       
+		         and Name = #{name} 
+		      </if>
+     	
+     	
+		      <if test="namecode != null" >
+		       
+		         and NameCode = #{namecode} 
+		      </if>
+     	
+     	
+		      <if test="unit != null" >
+		       
+		         and Unit = #{unit} 
+		      </if>
+     	
+     	
+		      <if test="goodsnumber != null" >
+		       
+		         and goodsnumber.Number >= #{goodsnumber} 
+		      </if>
+     	
+     	
+		      <if test="goodssalenumber != null" >
+		       
+		         and GoodsSaleNumber = #{goodssalenumber} 
+		      </if>
+     	
+     	
+		      <if test="price != null" >
+		       
+		         and Price = #{price} 
+		      </if>
+     	
+     	
+		      <if test="commissiontype != null" >
+		       
+		         and CommissionType = #{commissiontype} 
+		      </if>
+     	
+     	
+		      <if test="commissionnumber != null" >
+		       
+		         and CommissionNumber = #{commissionnumber} 
+		      </if>
+     	
+     	
+		      <if test="salepercet != null" >
+		       
+		         and SalePercet = #{salepercet} 
+		      </if>
+     	
+     	
+		      <if test="point != null" >
+		       
+		         and Point = #{point} 
+		      </if>
+     	
+     	
+		      <if test="minpercent != null" >
+		       
+		         and MinPercent = #{minpercent} 
+		      </if>
+     	
+     	
+		      <if test="goodstype != null" >
+		       
+		         and GoodsType = #{goodstype} 
+		      </if>
+     	
+     	
+		      <if test="goodsbidprice != null" >
+		       
+		         and GoodsBidPrice = #{goodsbidprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsremark != null" >
+		       
+		         and GoodsRemark = #{goodsremark} 
+		      </if>
+     	
+     	
+		      <if test="goodspicture != null" >
+		       
+		         and GoodsPicture = #{goodspicture} 
+		      </if>
+     	
+     	
+		      <if test="goodscreatetime != null" >
+		       
+		         and GoodsCreateTime = #{goodscreatetime} 
+		      </if>
+     	
+     	
+		      <if test="createshopid != null" >
+		       
+		         and CreateShopID = #{createshopid} 
+		      </if>
+		      
+		      <if test="shopid != null" >
+		       
+		         and goodsnumber.shopid = #{shopid} 
+		      </if>
+    </where>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.GoodsFormBean" resultMap="ResultMap">
+		SELECT  goods.GoodsID,
+goods.GoodsCode,
+goods.GoodsClassID,
+goods.Name,
+goods.NameCode,
+goods.Unit,
+goodsnumber.Number GoodsNumber,
+goods.GoodsSaleNumber,
+goods.Price,
+goods.CommissionType,
+goods.CommissionNumber,
+goods.SalePercet,
+goods.Point,
+goods.MinPercent,
+goods.GoodsType,
+goods.GoodsBidPrice,
+goods.GoodsRemark,
+goods.GoodsPicture,
+goods.GoodsCreateTime,
+goods.CreateShopID ,
+goodsnumber.shopid,   
+goodsclass.classname
+		 FROM goods left join goodsclass on goods.goodsclassid=classid
+		 left join goodsnumber on  goods.goodsid=goodsnumber.goodsid 
+		 
+		
+		<where >
+     	
+     	
+     	
+     	<if test="goodsid != null" >
+		       
+		         goods.GoodsID = #{goodsid} 
+		      </if>
+		      <if test="goodscode != null" >
+		       
+		         GoodsCode = #{goodscode} 
+		      </if>
+     	
+     	
+		      <if test="goodsclassid != null" >
+		       
+		         and GoodsClassID = #{goodsclassid} 
+		      </if>
+     	
+     	
+		      <if test="name != null" >
+		       
+		         and Name = #{name} 
+		      </if>
+     	
+     	
+		      <if test="namecode != null" >
+		       
+		         and NameCode = #{namecode} 
+		      </if>
+     	
+     	
+		      <if test="unit != null" >
+		       
+		         and Unit = #{unit} 
+		      </if>
+     	
+     	
+		      <if test="goodsnumber != null" >
+		       
+		         and goodsnumber.Number >= #{goodsnumber} 
+		      </if>
+     	
+     	
+		      <if test="goodssalenumber != null" >
+		       
+		         and GoodsSaleNumber = #{goodssalenumber} 
+		      </if>
+     	
+     	
+		      <if test="price != null" >
+		       
+		         and Price = #{price} 
+		      </if>
+     	
+     	
+		      <if test="commissiontype != null" >
+		       
+		         and CommissionType = #{commissiontype} 
+		      </if>
+     	
+     	
+		      <if test="commissionnumber != null" >
+		       
+		         and CommissionNumber = #{commissionnumber} 
+		      </if>
+     	
+     	
+		      <if test="salepercet != null" >
+		       
+		         and SalePercet = #{salepercet} 
+		      </if>
+     	
+     	
+		      <if test="point != null" >
+		       
+		         and Point = #{point} 
+		      </if>
+     	
+     	
+		      <if test="minpercent != null" >
+		       
+		         and MinPercent = #{minpercent} 
+		      </if>
+     	
+     	
+		      <if test="goodstype != null" >
+		       
+		         and GoodsType = #{goodstype} 
+		      </if>
+     	
+     	
+		      <if test="goodsbidprice != null" >
+		       
+		         and GoodsBidPrice = #{goodsbidprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsremark != null" >
+		       
+		         and GoodsRemark = #{goodsremark} 
+		      </if>
+     	
+     	
+		      <if test="goodspicture != null" >
+		       
+		         and GoodsPicture = #{goodspicture} 
+		      </if>
+     	
+     	
+		      <if test="goodscreatetime != null" >
+		       
+		         and GoodsCreateTime = #{goodscreatetime} 
+		      </if>
+     	
+     	
+		      <if test="createshopid != null" >
+		       
+		         and CreateShopID = #{createshopid} 
+		      </if>
+		      
+		      <if test="shopid != null" >
+		       
+		         and goodsnumber.shopid = #{shopid} 
+		      </if>
+    </where>
+		
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Goods" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM goods
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+  
+  <insert id="batchCreateGoods"  parameterType="com.jfxy.pojo.Batch" useGeneratedKeys="true" keyProperty="goodsid">
+		insert into goods 
+    (GoodsCode,GoodsClassID,Name,NameCode,Unit,GoodsNumber,GoodsSaleNumber,Price,CommissionType,CommissionNumber,SalePercet,Point,MinPercent,GoodsType,GoodsBidPrice,GoodsRemark,GoodsPicture,GoodsCreateTime,CreateShopID
+      <if test="head!=null and head.size!=0">
+	    	 ,
+		    <foreach collection="head.keys" item="item"  separator=","  >
+		     ${item}  
+		    </foreach>
+		</if>
+      
+      )  values
+      
+       <foreach collection="listvalue" item="item"  separator=","  >
+      (#{item.goodscode},
+      #{item.goodsclassid},
+      #{item.name},
+      #{item.namecode},
+      #{item.unit},
+      #{item.goodsnumber},
+      #{item.goodssalenumber},
+      #{item.price},
+      #{item.commissiontype},
+      #{item.commissionnumber},
+      #{item.salepercet},
+      #{item.point},
+      #{item.minpercent},
+      #{item.goodstype},
+      #{item.goodsbidprice},
+      #{item.goodsremark},
+      #{item.goodspicture},
+      #{item.goodscreatetime},
+      #{item.createshopid}
+     
+      <if test="item.map!=null and item.map.size!=0">
+	    	 ,
+	    	 
+	    	 
+		    <foreach collection="item.map.values" item="mitem"  separator=","  >
+		    
+		    
+            		#{mitem}
+            	
+            
+            
+		    </foreach>
+		</if>
+      
+      )
+      </foreach>
+      
+    
+  
+     
+	</insert>
+	
+	<select id="validateGoodsCode" parameterType="map" resultType="int">
+		select count(goods.goodsid) from goods left join goodsnumber on goods.goodsid=goodsnumber.goodsid 
+		where goods.goodscode=#{goodscode} and goodsnumber.shopid=#{shopid}
+	</select>
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

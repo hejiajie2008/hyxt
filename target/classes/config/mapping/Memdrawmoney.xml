@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemdrawmoneyDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memdrawmoney" >
+    <id column="DrawMoneyID" property="drawmoneyid"  />
+     <result column="DrawMoneyMemID" property="drawmoneymemid"  />
+     <result column="DrawMoneyAccount" property="drawmoneyaccount"  />
+     <result column="DrawMoney" property="drawmoney"  />
+     <result column="DrawActualMoney" property="drawactualmoney"  />
+     <result column="DrawMoneyRemark" property="drawmoneyremark"  />
+     <result column="DrawMoneyShopID" property="drawmoneyshopid"  />
+     <result column="DrawMoneyUserID" property="drawmoneyuserid"  />
+     <result column="DrawMoneyCreateTime" property="drawmoneycreatetime"  />
+     <result column="memcard" property="memcard"  />
+     <result column="memname" property="memname"  />
+     <result column="shopname" property="shopname"  />
+     <result column="username" property="username"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="drawmoneymemid != null" >
+		       
+		         DrawMoneyMemID = #{drawmoneymemid} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneyaccount != null" >
+		       
+		         and DrawMoneyAccount = #{drawmoneyaccount} 
+		      </if>
+     	
+     	
+		      <if test="drawmoney != null" >
+		       
+		         and DrawMoney = #{drawmoney} 
+		      </if>
+     	
+     	
+		      <if test="drawactualmoney != null" >
+		       
+		         and DrawActualMoney = #{drawactualmoney} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneyremark != null" >
+		       
+		         and DrawMoneyRemark = #{drawmoneyremark} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneyshopid != null" >
+		       
+		         and DrawMoneyShopID = #{drawmoneyshopid} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneyuserid != null" >
+		       
+		         and DrawMoneyUserID = #{drawmoneyuserid} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneycreatetime != null" >
+		       
+		         and DrawMoneyCreateTime = #{drawmoneycreatetime} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+DrawMoneyID,DrawMoneyMemID,DrawMoneyAccount,DrawMoney,DrawActualMoney,DrawMoneyRemark,DrawMoneyShopID,DrawMoneyUserID,DrawMoneyCreateTime    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memdrawmoney" >
+    insert into memdrawmoney (DrawMoneyID,DrawMoneyMemID,DrawMoneyAccount,DrawMoney,DrawActualMoney,DrawMoneyRemark,DrawMoneyShopID,DrawMoneyUserID,DrawMoneyCreateTime)values (#{drawmoneyid},#{drawmoneymemid},#{drawmoneyaccount},#{drawmoney},#{drawactualmoney},#{drawmoneyremark},#{drawmoneyshopid},#{drawmoneyuserid},#{drawmoneycreatetime})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memdrawmoney" >
+    update memdrawmoney
+    <set >
+	      <if test="drawmoneymemid != null" >
+	        DrawMoneyMemID = #{drawmoneymemid},
+	      </if>
+	      <if test="drawmoneyaccount != null" >
+	        DrawMoneyAccount = #{drawmoneyaccount},
+	      </if>
+	      <if test="drawmoney != null" >
+	        DrawMoney = #{drawmoney},
+	      </if>
+	      <if test="drawactualmoney != null" >
+	        DrawActualMoney = #{drawactualmoney},
+	      </if>
+	      <if test="drawmoneyremark != null" >
+	        DrawMoneyRemark = #{drawmoneyremark},
+	      </if>
+	      <if test="drawmoneyshopid != null" >
+	        DrawMoneyShopID = #{drawmoneyshopid},
+	      </if>
+	      <if test="drawmoneyuserid != null" >
+	        DrawMoneyUserID = #{drawmoneyuserid},
+	      </if>
+	      <if test="drawmoneycreatetime != null" >
+	        DrawMoneyCreateTime = #{drawmoneycreatetime},
+	      </if>
+    </set>
+    where  DrawMoneyID= #{drawmoneyid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memdrawmoney
+    where  DrawMoneyID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memdrawmoney
+    where  DrawMoneyID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemdrawmoneyFormBean" resultType="int">
+		SELECT COUNT(*) FROM memdrawmoney
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemdrawmoneyFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,mem.MemCard,mem.MemName,sysshop.ShopName,sysuser.UserName
+		 FROM memdrawmoney
+		 left join mem on memdrawmoney.DrawMoneyMemID=mem.MemID left join sysshop
+ on memdrawmoney.DrawMoneyShopID=sysshop.ShopID left join sysuser on memdrawmoney.DrawMoneyUserID=sysuser.UserID
+ 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memdrawmoney" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memdrawmoney
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+  
+  <insert id="batchCreateMemdrawmoney" parameterType="list">
+		 insert into memdrawmoney (DrawMoneyID,DrawMoneyMemID,DrawMoneyAccount,DrawMoney,DrawActualMoney,DrawMoneyRemark,DrawMoneyShopID,DrawMoneyUserID,DrawMoneyCreateTime)values 
+		 <foreach collection="list" item="item" separator=",">
+		 (#{item.drawmoneyid},getmemid(#{item.memcard}),
+		 #{item.drawmoneyaccount},#{item.drawmoney},
+		 #{item.drawactualmoney},#{item.drawmoneyremark},
+		 #{item.drawmoneyshopid},#{item.drawmoneyuserid},#{item.drawmoneycreatetime})
+  		</foreach>
+	</insert>
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemrechargeDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memrecharge" >
+    <id column="RechargeID" property="rechargeid"  />
+     <result column="RechargeMemID" property="rechargememid"  />
+     <result column="RechargeAccount" property="rechargeaccount"  />
+     <result column="RechargeType" property="rechargetype"  />
+     <result column="RechargeMoney" property="rechargemoney"  />
+     <result column="RechargeGive" property="rechargegive"  />
+     <result column="RechargeRemark" property="rechargeremark"  />
+     <result column="RechargeShopID" property="rechargeshopid"  />
+     <result column="RechargeCreateTime" property="rechargecreatetime"  />
+     <result column="RechargeUserID" property="rechargeuserid"  />
+     <result column="RechargeCardBalance" property="rechargecardbalance"  />
+     <result column="RechargeIsApprove" property="rechargeisapprove"  />
+     <result column="point" property="point"  />
+     <result column="RechargePoint" property="rechargepoint"  />
+      <result column="memcard" property="memcard"  />
+     <result column="memname" property="memname"  />
+     <result column="shopname" property="shopname"  />
+     <result column="username" property="username"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="rechargememid != null" >
+		       
+		         RechargeMemID = #{rechargememid} 
+		      </if>
+     	
+     	
+		      <if test="rechargeaccount != null" >
+		       
+		         and RechargeAccount like   
+		         
+		         CONCAT('%/',#{rechargeaccount},'/%')  
+		      </if>
+     	
+     	
+		      <if test="rechargetype != null" >
+		       
+		         and RechargeType = #{rechargetype} 
+		      </if>
+     	
+     	
+		      <if test="rechargemoney != null" >
+		       
+		         and RechargeMoney = #{rechargemoney} 
+		      </if>
+     	
+     	
+		      <if test="rechargegive != null" >
+		       
+		         and RechargeGive = #{rechargegive} 
+		      </if>
+     	
+     	
+		      <if test="rechargeremark != null" >
+		       
+		         and RechargeRemark = #{rechargeremark} 
+		      </if>
+     	
+     	
+		      <if test="rechargeshopid != null" >
+		       
+		         and RechargeShopID = #{rechargeshopid} 
+		      </if>
+     	
+     	
+		      <if test="rechargecreatetime != null" >
+		       
+		         and RechargeCreateTime = #{rechargecreatetime} 
+		      </if>
+     	
+     	
+		      <if test="rechargeuserid != null" >
+		       
+		         and RechargeUserID = #{rechargeuserid} 
+		      </if>
+     	
+     	
+		      <if test="rechargecardbalance != null" >
+		       
+		         and RechargeCardBalance = #{rechargecardbalance} 
+		      </if>
+     	
+     	
+		      <if test="rechargeisapprove != null" >
+		       
+		         and RechargeIsApprove = #{rechargeisapprove} 
+		      </if>
+     	
+     	
+		      <if test="point != null" >
+		       
+		         and point = #{point} 
+		      </if>
+     	
+     	
+		      <if test="rechargepoint != null" >
+		       
+		         and RechargePoint = #{rechargepoint} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+RechargeID,RechargeMemID,RechargeAccount,RechargeType,RechargeMoney,RechargeGive,RechargeRemark,RechargeShopID,RechargeCreateTime,RechargeUserID,RechargeCardBalance,RechargeIsApprove,point,RechargePoint    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memrecharge" >
+    insert into memrecharge (RechargeID,RechargeMemID,RechargeAccount,RechargeType,RechargeMoney,RechargeGive,RechargeRemark,RechargeShopID,RechargeCreateTime,RechargeUserID,RechargeCardBalance,RechargeIsApprove,point,RechargePoint)values (#{rechargeid},#{rechargememid},#{rechargeaccount},#{rechargetype},#{rechargemoney},#{rechargegive},#{rechargeremark},#{rechargeshopid},#{rechargecreatetime},#{rechargeuserid},#{rechargecardbalance},#{rechargeisapprove},#{point},#{rechargepoint})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memrecharge" >
+    update memrecharge
+    <set >
+	      <if test="rechargememid != null" >
+	        RechargeMemID = #{rechargememid},
+	      </if>
+	      <if test="rechargeaccount != null" >
+	        and RechargeAccount like   
+		         
+		         CONCAT('%/',#{rechargeaccount},'/%')
+	      </if>
+	      <if test="rechargetype != null" >
+	        RechargeType = #{rechargetype},
+	      </if>
+	      <if test="rechargemoney != null" >
+	        RechargeMoney = #{rechargemoney},
+	      </if>
+	      <if test="rechargegive != null" >
+	        RechargeGive = #{rechargegive},
+	      </if>
+	      <if test="rechargeremark != null" >
+	        RechargeRemark = #{rechargeremark},
+	      </if>
+	      <if test="rechargeshopid != null" >
+	        RechargeShopID = #{rechargeshopid},
+	      </if>
+	      <if test="rechargecreatetime != null" >
+	        RechargeCreateTime = #{rechargecreatetime},
+	      </if>
+	      <if test="rechargeuserid != null" >
+	        RechargeUserID = #{rechargeuserid},
+	      </if>
+	      <if test="rechargecardbalance != null" >
+	        RechargeCardBalance = #{rechargecardbalance},
+	      </if>
+	      <if test="rechargeisapprove != null" >
+	        RechargeIsApprove = #{rechargeisapprove},
+	      </if>
+	      <if test="point != null" >
+	        point = #{point},
+	      </if>
+	      <if test="rechargepoint != null" >
+	        RechargePoint = #{rechargepoint},
+	      </if>
+    </set>
+    where  RechargeID= #{rechargeid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memrecharge
+    where  RechargeID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memrecharge
+    where  RechargeID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemrechargeFormBean" resultType="int">
+		SELECT COUNT(*) FROM memrecharge
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemrechargeFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,mem.MemCard,mem.MemName,sysshop.ShopName,sysuser.UserName
+		 FROM memrecharge
+		  left join mem on memrecharge.RechargeMemID=mem.MemID left join sysshop
+ on memrecharge.RechargeShopID=sysshop.ShopID 
+ left join sysuser on memrecharge.RechargeUserID=sysuser.UserID
+ 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memrecharge" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memrecharge
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

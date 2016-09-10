@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+		<properties resource="config/properties/mysqldb.properties" />  
+    <classPathEntry
+        location="C:\Users\PC\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar" />
+    <context id="mysqlTables" targetRuntime="MyBatis3">
+   			 <!-- 生成的pojo，将implements Serializable-->  
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin> 
+        
+        
+        <commentGenerator>  
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+            <property name="suppressAllComments" value="false" />  
+        </commentGenerator>  
+        
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+            connectionURL="${mysql.db.url}"
+            userId="${mysql.db.username}" password="${mysql.db.password}" />
+            
+            
+            
+        <javaModelGenerator targetPackage="com.yz.model"
+            targetProject="D:\tt" />
+        <sqlMapGenerator targetPackage="com.yz.persistence"
+            targetProject="D:\tt" />
+        <javaClientGenerator targetPackage="com.yz.tt"
+            targetProject="D:\tt" type="XMLMAPPER" />
+            <!-- 
+        <table schema="jfxy" tableName="t_news" />
+		<table schema="jfxy" tableName="t_store" />
+		<table schema="jfxy" tableName="t_image" />
+		
+		<table schema="jfxy" tableName="t_maps" />
+		<table schema="jfxy" tableName="t_contact" />
+		 
+		 
+		 <table schema="hyxt" tableName="mem" />
+		 
+		 -->
+		 <table schema="hyxt" tableName="weixinnews" />
+    </context>
+</generatorConfiguration>

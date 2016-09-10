@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SyscustomremindDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Syscustomremind" >
+    <id column="CustomRemindID" property="customremindid"  />
+     <result column="CustomRemindTitle" property="customremindtitle"  />
+     <result column="CustomRemindDetail" property="customreminddetail"  />
+     <result column="CustomReminder" property="customreminder"  />
+     <result column="CustomRemindTime" property="customremindtime"  />
+     <result column="CustomRemindCreateTime" property="customremindcreatetime"  />
+     <result column="CustomRemindShopID" property="customremindshopid"  />
+     <result column="CustomRemindUserID" property="customreminduserid"  />
+     <result column="username" property="username"/>
+      <result column="shopname" property="shopname"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="customremindtitle != null" >
+		       
+		         CustomRemindTitle = #{customremindtitle} 
+		      </if>
+     	
+     	
+		      <if test="customreminddetail != null" >
+		       
+		         and CustomRemindDetail = #{customreminddetail} 
+		      </if>
+     	
+     	
+		      <if test="customreminder != null" >
+		       
+		         and CustomReminder = #{customreminder} 
+		      </if>
+     	
+     	
+		      <if test="customremindtime != null" >
+		       
+		         and CustomRemindTime = #{customremindtime} 
+		      </if>
+     	
+     	
+		      <if test="customremindcreatetime != null" >
+		       
+		         and CustomRemindCreateTime = #{customremindcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="customremindshopid != null" >
+		       
+		         and CustomRemindShopID = #{customremindshopid} 
+		      </if>
+     	
+     	
+		      <if test="customreminduserid != null" >
+		       
+		         and CustomRemindUserID = #{customreminduserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+CustomRemindID,CustomRemindTitle,CustomRemindDetail,CustomReminder,CustomRemindTime,CustomRemindCreateTime,CustomRemindShopID,CustomRemindUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Syscustomremind" >
+    insert into syscustomremind (CustomRemindID,CustomRemindTitle,CustomRemindDetail,CustomReminder,CustomRemindTime,CustomRemindCreateTime,CustomRemindShopID,CustomRemindUserID)values (#{customremindid},#{customremindtitle},#{customreminddetail},#{customreminder},#{customremindtime},#{customremindcreatetime},#{customremindshopid},#{customreminduserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Syscustomremind" >
+    update syscustomremind
+    <set >
+	      <if test="customremindtitle != null" >
+	        CustomRemindTitle = #{customremindtitle},
+	      </if>
+	      <if test="customreminddetail != null" >
+	        CustomRemindDetail = #{customreminddetail},
+	      </if>
+	      <if test="customreminder != null" >
+	        CustomReminder = #{customreminder},
+	      </if>
+	      <if test="customremindtime != null" >
+	        CustomRemindTime = #{customremindtime},
+	      </if>
+	      <if test="customremindcreatetime != null" >
+	        CustomRemindCreateTime = #{customremindcreatetime},
+	      </if>
+	      <if test="customremindshopid != null" >
+	        CustomRemindShopID = #{customremindshopid},
+	      </if>
+	      <if test="customreminduserid != null" >
+	        CustomRemindUserID = #{customreminduserid},
+	      </if>
+    </set>
+    where  CustomRemindID= #{customremindid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from syscustomremind
+    where  CustomRemindID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from syscustomremind
+    where  CustomRemindID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SyscustomremindFormBean" resultType="int">
+		SELECT COUNT(*) FROM syscustomremind
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SyscustomremindFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,sysuser.UserName,sysshop.ShopName
+		 FROM syscustomremind left join sysuser on syscustomremind.CustomRemindUserID=sysuser.UserID
+left join sysshop on syscustomremind.CustomRemindShopID=sysshop.ShopID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Syscustomremind" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM syscustomremind
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

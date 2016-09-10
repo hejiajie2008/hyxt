@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.OrderdetailDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Orderdetail" >
+    <id column="OrderDetailID" property="orderdetailid"  />
+     <result column="OrderID" property="orderid"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="OrderDetailPrice" property="orderdetailprice"  />
+     <result column="OrderDetailPoint" property="orderdetailpoint"  />
+     <result column="OrderDetailDiscountPrice" property="orderdetaildiscountprice"  />
+     <result column="OrderDetailNumber" property="orderdetailnumber"  />
+     <result column="OrderDetailType" property="orderdetailtype"  />
+     <result column="name" property="name"  />
+     <result column="goodstype" property="goodstype"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="orderid != null" >
+		       
+		         OrderID = #{orderid} 
+		      </if>
+     	
+     	
+		      <if test="goodsid != null" >
+		       
+		         and GoodsID = #{goodsid} 
+		      </if>
+     	
+     	
+		      <if test="orderdetailprice != null" >
+		       
+		         and OrderDetailPrice = #{orderdetailprice} 
+		      </if>
+     	
+     	
+		      <if test="orderdetailpoint != null" >
+		       
+		         and OrderDetailPoint = #{orderdetailpoint} 
+		      </if>
+     	
+     	
+		      <if test="orderdetaildiscountprice != null" >
+		       
+		         and OrderDetailDiscountPrice = #{orderdetaildiscountprice} 
+		      </if>
+     	
+     	
+		      <if test="orderdetailnumber != null" >
+		       
+		         and OrderDetailNumber = #{orderdetailnumber} 
+		      </if>
+     	
+     	
+		      <if test="orderdetailtype != null" >
+		       
+		         and OrderDetailType = #{orderdetailtype} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+OrderDetailID,OrderID,GoodsID,OrderDetailPrice,OrderDetailPoint,OrderDetailDiscountPrice,OrderDetailNumber,OrderDetailType    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Orderdetail" >
+    insert into orderdetail (OrderDetailID,OrderID,GoodsID,OrderDetailPrice,OrderDetailPoint,OrderDetailDiscountPrice,OrderDetailNumber,OrderDetailType)values (#{orderdetailid},#{orderid},#{goodsid},#{orderdetailprice},#{orderdetailpoint},#{orderdetaildiscountprice},#{orderdetailnumber},#{orderdetailtype})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Orderdetail" >
+    update orderdetail
+    <set >
+	      <if test="orderid != null" >
+	        OrderID = #{orderid},
+	      </if>
+	      <if test="goodsid != null" >
+	        GoodsID = #{goodsid},
+	      </if>
+	      <if test="orderdetailprice != null" >
+	        OrderDetailPrice = #{orderdetailprice},
+	      </if>
+	      <if test="orderdetailpoint != null" >
+	        OrderDetailPoint = #{orderdetailpoint},
+	      </if>
+	      <if test="orderdetaildiscountprice != null" >
+	        OrderDetailDiscountPrice = #{orderdetaildiscountprice},
+	      </if>
+	      <if test="orderdetailnumber != null" >
+	        OrderDetailNumber = #{orderdetailnumber},
+	      </if>
+	      <if test="orderdetailtype != null" >
+	        OrderDetailType = #{orderdetailtype},
+	      </if>
+    </set>
+    where  OrderDetailID= #{orderdetailid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from orderdetail
+    where  OrderDetailID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from orderdetail
+    where  OrderDetailID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.OrderdetailFormBean" resultType="int">
+		SELECT COUNT(*) FROM orderdetail
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.OrderdetailFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM orderdetail
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Orderdetail" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM orderdetail
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  <!-- 按条件查询结果集(不带分页) -->
+	<select id="queryOrderlogdetailbyid" parameterType="int" resultMap="ResultMap">
+SELECT 
+		 OrderDetailID,OrderID,orderdetail.GoodsID,OrderDetailPrice,OrderDetailPoint,OrderDetailDiscountPrice,OrderDetailNumber,OrderDetailType    
+		 ,goods.name,goods.goodscode,goods.goodstype
+		  FROM orderdetail left join goods on orderdetail.goodsid=goods.goodsid
+		 where OrderID=#{id}
+		  
+		
+	</select>
+ 
+  
+
+</mapper>

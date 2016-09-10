@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysparameterDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysparameter" >
+    <id column="ParameterID" property="parameterid"  />
+     <result column="Pwd" property="pwd"  />
+     <result column="MoneyAndPoint" property="moneyandpoint"  />
+     <result column="AutoLevel" property="autolevel"  />
+     <result column="DegradeLevel" property="degradelevel"  />
+     <result column="PastTime" property="pasttime"  />
+     <result column="RecommendPoint" property="recommendpoint"  />
+     <result column="PointPeriod" property="pointperiod"  />
+     <result column="ExpensePrefix" property="expenseprefix"  />
+     <result column="GoodsExpensePrefix" property="goodsexpenseprefix"  />
+     <result column="TimeExpensePrefix" property="timeexpenseprefix"  />
+     <result column="MemCountPrefix" property="memcountprefix"  />
+     <result column="MemRechargePrefix" property="memrechargeprefix"  />
+     <result column="GoodsInPrefix" property="goodsinprefix"  />
+     <result column="GoodsAllotPrefix" property="goodsallotprefix"  />
+     <result column="MemDrawMoneyPrefix" property="memdrawmoneyprefix"  />
+     <result column="MemPointChangePrefix" property="mempointchangeprefix"  />
+     <result column="GiftExchangePrefix" property="giftexchangeprefix"  />
+     <result column="AutoPrint" property="autoprint"  />
+     <result column="AccordPrint" property="accordprint"  />
+     <result column="PrintTitle" property="printtitle"  />
+     <result column="PrintFootNote" property="printfootnote"  />
+     <result column="Sms" property="sms"  />
+     <result column="MoneySms" property="moneysms"  />
+     <result column="IsSmsShopName" property="issmsshopname"  />
+     <result column="SmsShopName" property="smsshopname"  />
+     <result column="SmsSeries" property="smsseries"  />
+     <result column="SmsSerialPwd" property="smsserialpwd"  />
+     <result column="DrawMoneyPercent" property="drawmoneypercent"  />
+     <result column="Tel" property="tel"  />
+     <result column="TelNoMember" property="telnomember"  />
+     <result column="IsStaff" property="isstaff"  />
+     <result column="StaffType" property="stafftype"  />
+     <result column="PointLevel" property="pointlevel"  />
+     <result column="MMS" property="mms"  />
+     <result column="MMSSeries" property="mmsseries"  />
+     <result column="MMSSerialPwd" property="mmsserialpwd"  />
+     <result column="IsPayCard" property="ispaycard"  />
+     <result column="IsPayCash" property="ispaycash"  />
+     <result column="IsPayBink" property="ispaybink"  />
+     <result column="IsPayCoupon" property="ispaycoupon"  />
+     <result column="RegNullPwd" property="regnullpwd"  />
+     <result column="EmailAdress" property="emailadress"  />
+     <result column="EmailPwd" property="emailpwd"  />
+     <result column="EmailSMTP" property="emailsmtp"  />
+     <result column="StockCount" property="stockcount"  />
+     <result column="UnitList" property="unitlist"  />
+     <result column="WeiXinSMSVcode" property="weixinsmsvcode"  />
+     <result column="IsAutoSendSMSByMemRegister" property="isautosendsmsbymemregister"  />
+     <result column="IsAutoSendMMSByMemRegister" property="isautosendmmsbymemregister"  />
+     <result column="IsAutoSendSMSByMemRecharge" property="isautosendsmsbymemrecharge"  />
+     <result column="IsAutoSendSMSByMemWithdraw" property="isautosendsmsbymemwithdraw"  />
+     <result column="IsAutoSendSMSByMemGiftExchange" property="isautosendsmsbymemgiftexchange"  />
+     <result column="IsAutoSendSMSByMemPointChange" property="isautosendsmsbymempointchange"  />
+     <result column="IsAutoSendSMSByCommodityConsumption" property="isautosendsmsbycommodityconsumption"  />
+     <result column="IsAutoSendSMSByFastConsumption" property="isautosendsmsbyfastconsumption"  />
+     <result column="IsAutoSendSMSByMemRedTimes" property="isautosendsmsbymemredtimes"  />
+     <result column="IsAutoSendSMSByTimingConsumption" property="isautosendsmsbytimingconsumption"  />
+     <result column="SellerAccount" property="selleraccount"  />
+     <result column="PartnerID" property="partnerid"  />
+     <result column="PartnerKey" property="partnerkey"  />
+     <result column="IsEditPwdNeedOldPwd" property="iseditpwdneedoldpwd"  />
+     <result column="WeiXinType" property="weixintype"  />
+     <result column="WeiXinVerified" property="weixinverified"  />
+     <result column="WeiXinToken" property="weixintoken"  />
+     <result column="WeiXinEncodingAESKey" property="weixinencodingaeskey"  />
+     <result column="WeiXinShopName" property="weixinshopname"  />
+     <result column="WeiXinSalutatory" property="weixinsalutatory"  />
+     <result column="WeiXinAppID" property="weixinappid"  />
+     <result column="WeiXinAppSecret" property="weixinappsecret"  />
+     <result column="SignInPoint" property="signinpoint"  />
+     <result column="IsMemRegisterStaff" property="ismemregisterstaff"  />
+     <result column="IsMustSlotCard" property="ismustslotcard"  />
+     <result column="StorageTimingPrefix" property="storagetimingprefix"  />
+     <result column="IsAutoSendSMSByStorageTiming" property="isautosendsmsbystoragetiming"  />
+     <result column="EnterpriseEmailPort" property="enterpriseemailport"  />
+     <result column="EnterpriseEmailDisplayName" property="enterpriseemaildisplayname"  />
+     <result column="EnterpriseEmailEnableSSL" property="enterpriseemailenablessl"  />
+     <result column="EnterpriseEmailUseDefaultCredentials" property="enterpriseemailusedefaultcredentials"  />
+     <result column="IsEmail" property="isemail"  />
+     <result column="IsEmailNotice" property="isemailnotice"  />
+     <result column="MemCountExpensePrefix" property="memcountexpenseprefix"  />
+     <result column="IsAutoSendSMSByMemPast" property="isautosendsmsbymempast"  />
+     <result column="AutoSendSMSByMemPastForDay" property="autosendsmsbymempastforday"  />
+     <result column="IsAutoSendSMSByMemBirthday" property="isautosendsmsbymembirthday"  />
+     <result column="AutoSendSMSByMemBirthdayForDay" property="autosendsmsbymembirthdayforday"  />
+     <result column="IsStartWeiXin" property="isstartweixin"  />
+     <result column="IsStartTimingProject" property="isstarttimingproject"  />
+     <result column="IsStartMemCount" property="isstartmemcount"  />
+     <result column="MarketingSMS" property="marketingsms"  />
+     <result column="MarketingSmsSeries" property="marketingsmsseries"  />
+     <result column="MarketingSmsSerialPwd" property="marketingsmsserialpwd"  />
+     <result column="Senseiccard" property="senseiccard"  />
+     <result column="Contacticcard" property="contacticcard"  />
+     <result column="EmailUserName" property="emailusername"  />
+     <result column="PointNumStr" property="pointnumstr"  />
+     <result column="PrintPreview" property="printpreview"  />
+     <result column="PrintPaperType" property="printpapertype"  />
+     <result column="IsSendCard" property="issendcard"  />
+     <result column="ShopSmsManage" property="shopsmsmanage"  />
+     <result column="ShopPointManage" property="shoppointmanage"  />
+     <result column="ShopSettlement" property="shopsettlement"  />
+     <result column="AutoBackupDB" property="autobackupdb"  />
+     <result column="AutoBackupDay" property="autobackupday"  />
+     <result column="SystemDomain" property="systemdomain"  />
+     <result column="MchId" property="mchid"  />
+     <result column="Api" property="api"  />
+     <result column="Pay" property="pay"  />
+     <result column="Xiane" property="xiane"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="pwd != null" >
+		       
+		         Pwd = #{pwd} 
+		      </if>
+     	
+     	
+		      <if test="moneyandpoint != null" >
+		       
+		         and MoneyAndPoint = #{moneyandpoint} 
+		      </if>
+     	
+     	
+		      <if test="autolevel != null" >
+		       
+		         and AutoLevel = #{autolevel} 
+		      </if>
+     	
+     	
+		      <if test="degradelevel != null" >
+		       
+		         and DegradeLevel = #{degradelevel} 
+		      </if>
+     	
+     	
+		      <if test="pasttime != null" >
+		       
+		         and PastTime = #{pasttime} 
+		      </if>
+     	
+     	
+		      <if test="recommendpoint != null" >
+		       
+		         and RecommendPoint = #{recommendpoint} 
+		      </if>
+     	
+     	
+		      <if test="pointperiod != null" >
+		       
+		         and PointPeriod = #{pointperiod} 
+		      </if>
+     	
+     	
+		      <if test="expenseprefix != null" >
+		       
+		         and ExpensePrefix = #{expenseprefix} 
+		      </if>
+     	
+     	
+		      <if test="goodsexpenseprefix != null" >
+		       
+		         and GoodsExpensePrefix = #{goodsexpenseprefix} 
+		      </if>
+     	
+     	
+		      <if test="timeexpenseprefix != null" >
+		       
+		         and TimeExpensePrefix = #{timeexpenseprefix} 
+		      </if>
+     	
+     	
+		      <if test="memcountprefix != null" >
+		       
+		         and MemCountPrefix = #{memcountprefix} 
+		      </if>
+     	
+     	
+		      <if test="memrechargeprefix != null" >
+		       
+		         and MemRechargePrefix = #{memrechargeprefix} 
+		      </if>
+     	
+     	
+		      <if test="goodsinprefix != null" >
+		       
+		         and GoodsInPrefix = #{goodsinprefix} 
+		      </if>
+     	
+     	
+		      <if test="goodsallotprefix != null" >
+		       
+		         and GoodsAllotPrefix = #{goodsallotprefix} 
+		      </if>
+     	
+     	
+		      <if test="memdrawmoneyprefix != null" >
+		       
+		         and MemDrawMoneyPrefix = #{memdrawmoneyprefix} 
+		      </if>
+     	
+     	
+		      <if test="mempointchangeprefix != null" >
+		       
+		         and MemPointChangePrefix = #{mempointchangeprefix} 
+		      </if>
+     	
+     	
+		      <if test="giftexchangeprefix != null" >
+		       
+		         and GiftExchangePrefix = #{giftexchangeprefix} 
+		      </if>
+     	
+     	
+		      <if test="autoprint != null" >
+		       
+		         and AutoPrint = #{autoprint} 
+		      </if>
+     	
+     	
+		      <if test="accordprint != null" >
+		       
+		         and AccordPrint = #{accordprint} 
+		      </if>
+     	
+     	
+		      <if test="printtitle != null" >
+		       
+		         and PrintTitle = #{printtitle} 
+		      </if>
+     	
+     	
+		      <if test="printfootnote != null" >
+		       
+		         and PrintFootNote = #{printfootnote} 
+		      </if>
+     	
+     	
+		      <if test="sms != null" >
+		       
+		         and Sms = #{sms} 
+		      </if>
+     	
+     	
+		      <if test="moneysms != null" >
+		       
+		         and MoneySms = #{moneysms} 
+		      </if>
+     	
+     	
+		      <if test="issmsshopname != null" >
+		       
+		         and IsSmsShopName = #{issmsshopname} 
+		      </if>
+     	
+     	
+		      <if test="smsshopname != null" >
+		       
+		         and SmsShopName = #{smsshopname} 
+		      </if>
+     	
+     	
+		      <if test="smsseries != null" >
+		       
+		         and SmsSeries = #{smsseries} 
+		      </if>
+     	
+     	
+		      <if test="smsserialpwd != null" >
+		       
+		         and SmsSerialPwd = #{smsserialpwd} 
+		      </if>
+     	
+     	
+		      <if test="drawmoneypercent != null" >
+		       
+		         and DrawMoneyPercent = #{drawmoneypercent} 
+		      </if>
+     	
+     	
+		      <if test="tel != null" >
+		       
+		         and Tel = #{tel} 
+		      </if>
+     	
+     	
+		      <if test="telnomember != null" >
+		       
+		         and TelNoMember = #{telnomember} 
+		      </if>
+     	
+     	
+		      <if test="isstaff != null" >
+		       
+		         and IsStaff = #{isstaff} 
+		      </if>
+     	
+     	
+		      <if test="stafftype != null" >
+		       
+		         and StaffType = #{stafftype} 
+		      </if>
+     	
+     	
+		      <if test="pointlevel != null" >
+		       
+		         and PointLevel = #{pointlevel} 
+		      </if>
+     	
+     	
+		      <if test="mms != null" >
+		       
+		         and MMS = #{mms} 
+		      </if>
+     	
+     	
+		      <if test="mmsseries != null" >
+		       
+		         and MMSSeries = #{mmsseries} 
+		      </if>
+     	
+     	
+		      <if test="mmsserialpwd != null" >
+		       
+		         and MMSSerialPwd = #{mmsserialpwd} 
+		      </if>
+     	
+     	
+		      <if test="ispaycard != null" >
+		       
+		         and IsPayCard = #{ispaycard} 
+		      </if>
+     	
+     	
+		      <if test="ispaycash != null" >
+		       
+		         and IsPayCash = #{ispaycash} 
+		      </if>
+     	
+     	
+		      <if test="ispaybink != null" >
+		       
+		         and IsPayBink = #{ispaybink} 
+		      </if>
+     	
+     	
+		      <if test="ispaycoupon != null" >
+		       
+		         and IsPayCoupon = #{ispaycoupon} 
+		      </if>
+     	
+     	
+		      <if test="regnullpwd != null" >
+		       
+		         and RegNullPwd = #{regnullpwd} 
+		      </if>
+     	
+     	
+		      <if test="emailadress != null" >
+		       
+		         and EmailAdress = #{emailadress} 
+		      </if>
+     	
+     	
+		      <if test="emailpwd != null" >
+		       
+		         and EmailPwd = #{emailpwd} 
+		      </if>
+     	
+     	
+		      <if test="emailsmtp != null" >
+		       
+		         and EmailSMTP = #{emailsmtp} 
+		      </if>
+     	
+     	
+		      <if test="stockcount != null" >
+		       
+		         and StockCount = #{stockcount} 
+		      </if>
+     	
+     	
+		      <if test="unitlist != null" >
+		       
+		         and UnitList = #{unitlist} 
+		      </if>
+     	
+     	
+		      <if test="weixinsmsvcode != null" >
+		       
+		         and WeiXinSMSVcode = #{weixinsmsvcode} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymemregister != null" >
+		       
+		         and IsAutoSendSMSByMemRegister = #{isautosendsmsbymemregister} 
+		      </if>
+     	
+     	
+		      <if test="isautosendmmsbymemregister != null" >
+		       
+		         and IsAutoSendMMSByMemRegister = #{isautosendmmsbymemregister} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymemrecharge != null" >
+		       
+		         and IsAutoSendSMSByMemRecharge = #{isautosendsmsbymemrecharge} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymemwithdraw != null" >
+		       
+		         and IsAutoSendSMSByMemWithdraw = #{isautosendsmsbymemwithdraw} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymemgiftexchange != null" >
+		       
+		         and IsAutoSendSMSByMemGiftExchange = #{isautosendsmsbymemgiftexchange} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymempointchange != null" >
+		       
+		         and IsAutoSendSMSByMemPointChange = #{isautosendsmsbymempointchange} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbycommodityconsumption != null" >
+		       
+		         and IsAutoSendSMSByCommodityConsumption = #{isautosendsmsbycommodityconsumption} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbyfastconsumption != null" >
+		       
+		         and IsAutoSendSMSByFastConsumption = #{isautosendsmsbyfastconsumption} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymemredtimes != null" >
+		       
+		         and IsAutoSendSMSByMemRedTimes = #{isautosendsmsbymemredtimes} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbytimingconsumption != null" >
+		       
+		         and IsAutoSendSMSByTimingConsumption = #{isautosendsmsbytimingconsumption} 
+		      </if>
+     	
+     	
+		      <if test="selleraccount != null" >
+		       
+		         and SellerAccount = #{selleraccount} 
+		      </if>
+     	
+     	
+		      <if test="partnerid != null" >
+		       
+		         and PartnerID = #{partnerid} 
+		      </if>
+     	
+     	
+		      <if test="partnerkey != null" >
+		       
+		         and PartnerKey = #{partnerkey} 
+		      </if>
+     	
+     	
+		      <if test="iseditpwdneedoldpwd != null" >
+		       
+		         and IsEditPwdNeedOldPwd = #{iseditpwdneedoldpwd} 
+		      </if>
+     	
+     	
+		      <if test="weixintype != null" >
+		       
+		         and WeiXinType = #{weixintype} 
+		      </if>
+     	
+     	
+		      <if test="weixinverified != null" >
+		       
+		         and WeiXinVerified = #{weixinverified} 
+		      </if>
+     	
+     	
+		      <if test="weixintoken != null" >
+		       
+		         and WeiXinToken = #{weixintoken} 
+		      </if>
+     	
+     	
+		      <if test="weixinencodingaeskey != null" >
+		       
+		         and WeiXinEncodingAESKey = #{weixinencodingaeskey} 
+		      </if>
+     	
+     	
+		      <if test="weixinshopname != null" >
+		       
+		         and WeiXinShopName = #{weixinshopname} 
+		      </if>
+     	
+     	
+		      <if test="weixinsalutatory != null" >
+		       
+		         and WeiXinSalutatory = #{weixinsalutatory} 
+		      </if>
+     	
+     	
+		      <if test="weixinappid != null" >
+		       
+		         and WeiXinAppID = #{weixinappid} 
+		      </if>
+     	
+     	
+		      <if test="weixinappsecret != null" >
+		       
+		         and WeiXinAppSecret = #{weixinappsecret} 
+		      </if>
+     	
+     	
+		      <if test="signinpoint != null" >
+		       
+		         and SignInPoint = #{signinpoint} 
+		      </if>
+     	
+     	
+		      <if test="ismemregisterstaff != null" >
+		       
+		         and IsMemRegisterStaff = #{ismemregisterstaff} 
+		      </if>
+     	
+     	
+		      <if test="ismustslotcard != null" >
+		       
+		         and IsMustSlotCard = #{ismustslotcard} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingprefix != null" >
+		       
+		         and StorageTimingPrefix = #{storagetimingprefix} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbystoragetiming != null" >
+		       
+		         and IsAutoSendSMSByStorageTiming = #{isautosendsmsbystoragetiming} 
+		      </if>
+     	
+     	
+		      <if test="enterpriseemailport != null" >
+		       
+		         and EnterpriseEmailPort = #{enterpriseemailport} 
+		      </if>
+     	
+     	
+		      <if test="enterpriseemaildisplayname != null" >
+		       
+		         and EnterpriseEmailDisplayName = #{enterpriseemaildisplayname} 
+		      </if>
+     	
+     	
+		      <if test="enterpriseemailenablessl != null" >
+		       
+		         and EnterpriseEmailEnableSSL = #{enterpriseemailenablessl} 
+		      </if>
+     	
+     	
+		      <if test="enterpriseemailusedefaultcredentials != null" >
+		       
+		         and EnterpriseEmailUseDefaultCredentials = #{enterpriseemailusedefaultcredentials} 
+		      </if>
+     	
+     	
+		      <if test="isemail != null" >
+		       
+		         and IsEmail = #{isemail} 
+		      </if>
+     	
+     	
+		      <if test="isemailnotice != null" >
+		       
+		         and IsEmailNotice = #{isemailnotice} 
+		      </if>
+     	
+     	
+		      <if test="memcountexpenseprefix != null" >
+		       
+		         and MemCountExpensePrefix = #{memcountexpenseprefix} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymempast != null" >
+		       
+		         and IsAutoSendSMSByMemPast = #{isautosendsmsbymempast} 
+		      </if>
+     	
+     	
+		      <if test="autosendsmsbymempastforday != null" >
+		       
+		         and AutoSendSMSByMemPastForDay = #{autosendsmsbymempastforday} 
+		      </if>
+     	
+     	
+		      <if test="isautosendsmsbymembirthday != null" >
+		       
+		         and IsAutoSendSMSByMemBirthday = #{isautosendsmsbymembirthday} 
+		      </if>
+     	
+     	
+		      <if test="autosendsmsbymembirthdayforday != null" >
+		       
+		         and AutoSendSMSByMemBirthdayForDay = #{autosendsmsbymembirthdayforday} 
+		      </if>
+     	
+     	
+		      <if test="isstartweixin != null" >
+		       
+		         and IsStartWeiXin = #{isstartweixin} 
+		      </if>
+     	
+     	
+		      <if test="isstarttimingproject != null" >
+		       
+		         and IsStartTimingProject = #{isstarttimingproject} 
+		      </if>
+     	
+     	
+		      <if test="isstartmemcount != null" >
+		       
+		         and IsStartMemCount = #{isstartmemcount} 
+		      </if>
+     	
+     	
+		      <if test="marketingsms != null" >
+		       
+		         and MarketingSMS = #{marketingsms} 
+		      </if>
+     	
+     	
+		      <if test="marketingsmsseries != null" >
+		       
+		         and MarketingSmsSeries = #{marketingsmsseries} 
+		      </if>
+     	
+     	
+		      <if test="marketingsmsserialpwd != null" >
+		       
+		         and MarketingSmsSerialPwd = #{marketingsmsserialpwd} 
+		      </if>
+     	
+     	
+		      <if test="senseiccard != null" >
+		       
+		         and Senseiccard = #{senseiccard} 
+		      </if>
+     	
+     	
+		      <if test="contacticcard != null" >
+		       
+		         and Contacticcard = #{contacticcard} 
+		      </if>
+     	
+     	
+		      <if test="emailusername != null" >
+		       
+		         and EmailUserName = #{emailusername} 
+		      </if>
+     	
+     	
+		      <if test="pointnumstr != null" >
+		       
+		         and PointNumStr = #{pointnumstr} 
+		      </if>
+     	
+     	
+		      <if test="printpreview != null" >
+		       
+		         and PrintPreview = #{printpreview} 
+		      </if>
+     	
+     	
+		      <if test="printpapertype != null" >
+		       
+		         and PrintPaperType = #{printpapertype} 
+		      </if>
+     	
+     	
+		      <if test="issendcard != null" >
+		       
+		         and IsSendCard = #{issendcard} 
+		      </if>
+     	
+     	
+		      <if test="shopsmsmanage != null" >
+		       
+		         and ShopSmsManage = #{shopsmsmanage} 
+		      </if>
+     	
+     	
+		      <if test="shoppointmanage != null" >
+		       
+		         and ShopPointManage = #{shoppointmanage} 
+		      </if>
+     	
+     	
+		      <if test="shopsettlement != null" >
+		       
+		         and ShopSettlement = #{shopsettlement} 
+		      </if>
+     	
+     	
+		      <if test="autobackupdb != null" >
+		       
+		         and AutoBackupDB = #{autobackupdb} 
+		      </if>
+     	
+     	
+		      <if test="autobackupday != null" >
+		       
+		         and AutoBackupDay = #{autobackupday} 
+		      </if>
+     	
+     	
+		      <if test="systemdomain != null" >
+		       
+		         and SystemDomain = #{systemdomain} 
+		      </if>
+     	
+     	
+		      <if test="mchid != null" >
+		       
+		         and MchId = #{mchid} 
+		      </if>
+     	
+     	
+		      <if test="api != null" >
+		       
+		         and Api = #{api} 
+		      </if>
+     	
+     	
+		      <if test="pay != null" >
+		       
+		         and Pay = #{pay} 
+		      </if>
+     	
+     	
+		      <if test="xiane != null" >
+		       
+		         and Xiane = #{xiane} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ParameterID,Pwd,MoneyAndPoint,AutoLevel,DegradeLevel,PastTime,RecommendPoint,PointPeriod,ExpensePrefix,GoodsExpensePrefix,TimeExpensePrefix,MemCountPrefix,MemRechargePrefix,GoodsInPrefix,GoodsAllotPrefix,MemDrawMoneyPrefix,MemPointChangePrefix,GiftExchangePrefix,AutoPrint,AccordPrint,PrintTitle,PrintFootNote,Sms,MoneySms,IsSmsShopName,SmsShopName,SmsSeries,SmsSerialPwd,DrawMoneyPercent,Tel,TelNoMember,IsStaff,StaffType,PointLevel,MMS,MMSSeries,MMSSerialPwd,IsPayCard,IsPayCash,IsPayBink,IsPayCoupon,RegNullPwd,EmailAdress,EmailPwd,EmailSMTP,StockCount,UnitList,WeiXinSMSVcode,IsAutoSendSMSByMemRegister,IsAutoSendMMSByMemRegister,IsAutoSendSMSByMemRecharge,IsAutoSendSMSByMemWithdraw,IsAutoSendSMSByMemGiftExchange,IsAutoSendSMSByMemPointChange,IsAutoSendSMSByCommodityConsumption,IsAutoSendSMSByFastConsumption,IsAutoSendSMSByMemRedTimes,IsAutoSendSMSByTimingConsumption,SellerAccount,PartnerID,PartnerKey,IsEditPwdNeedOldPwd,WeiXinType,WeiXinVerified,WeiXinToken,WeiXinEncodingAESKey,WeiXinShopName,WeiXinSalutatory,WeiXinAppID,WeiXinAppSecret,SignInPoint,IsMemRegisterStaff,IsMustSlotCard,StorageTimingPrefix,IsAutoSendSMSByStorageTiming,EnterpriseEmailPort,EnterpriseEmailDisplayName,EnterpriseEmailEnableSSL,EnterpriseEmailUseDefaultCredentials,IsEmail,IsEmailNotice,MemCountExpensePrefix,IsAutoSendSMSByMemPast,AutoSendSMSByMemPastForDay,IsAutoSendSMSByMemBirthday,AutoSendSMSByMemBirthdayForDay,IsStartWeiXin,IsStartTimingProject,IsStartMemCount,MarketingSMS,MarketingSmsSeries,MarketingSmsSerialPwd,Senseiccard,Contacticcard,EmailUserName,PointNumStr,PrintPreview,PrintPaperType,IsSendCard,ShopSmsManage,ShopPointManage,ShopSettlement,AutoBackupDB,AutoBackupDay,SystemDomain,MchId,Api,Pay,Xiane    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysparameter" >
+    insert into sysparameter (ParameterID,Pwd,MoneyAndPoint,AutoLevel,DegradeLevel,PastTime,RecommendPoint,PointPeriod,ExpensePrefix,GoodsExpensePrefix,TimeExpensePrefix,MemCountPrefix,MemRechargePrefix,GoodsInPrefix,GoodsAllotPrefix,MemDrawMoneyPrefix,MemPointChangePrefix,GiftExchangePrefix,AutoPrint,AccordPrint,PrintTitle,PrintFootNote,Sms,MoneySms,IsSmsShopName,SmsShopName,SmsSeries,SmsSerialPwd,DrawMoneyPercent,Tel,TelNoMember,IsStaff,StaffType,PointLevel,MMS,MMSSeries,MMSSerialPwd,IsPayCard,IsPayCash,IsPayBink,IsPayCoupon,RegNullPwd,EmailAdress,EmailPwd,EmailSMTP,StockCount,UnitList,WeiXinSMSVcode,IsAutoSendSMSByMemRegister,IsAutoSendMMSByMemRegister,IsAutoSendSMSByMemRecharge,IsAutoSendSMSByMemWithdraw,IsAutoSendSMSByMemGiftExchange,IsAutoSendSMSByMemPointChange,IsAutoSendSMSByCommodityConsumption,IsAutoSendSMSByFastConsumption,IsAutoSendSMSByMemRedTimes,IsAutoSendSMSByTimingConsumption,SellerAccount,PartnerID,PartnerKey,IsEditPwdNeedOldPwd,WeiXinType,WeiXinVerified,WeiXinToken,WeiXinEncodingAESKey,WeiXinShopName,WeiXinSalutatory,WeiXinAppID,WeiXinAppSecret,SignInPoint,IsMemRegisterStaff,IsMustSlotCard,StorageTimingPrefix,IsAutoSendSMSByStorageTiming,EnterpriseEmailPort,EnterpriseEmailDisplayName,EnterpriseEmailEnableSSL,EnterpriseEmailUseDefaultCredentials,IsEmail,IsEmailNotice,MemCountExpensePrefix,IsAutoSendSMSByMemPast,AutoSendSMSByMemPastForDay,IsAutoSendSMSByMemBirthday,AutoSendSMSByMemBirthdayForDay,IsStartWeiXin,IsStartTimingProject,IsStartMemCount,MarketingSMS,MarketingSmsSeries,MarketingSmsSerialPwd,Senseiccard,Contacticcard,EmailUserName,PointNumStr,PrintPreview,PrintPaperType,IsSendCard,ShopSmsManage,ShopPointManage,ShopSettlement,AutoBackupDB,AutoBackupDay,SystemDomain,MchId,Api,Pay,Xiane)values (#{parameterid},#{pwd},#{moneyandpoint},#{autolevel},#{degradelevel},#{pasttime},#{recommendpoint},#{pointperiod},#{expenseprefix},#{goodsexpenseprefix},#{timeexpenseprefix},#{memcountprefix},#{memrechargeprefix},#{goodsinprefix},#{goodsallotprefix},#{memdrawmoneyprefix},#{mempointchangeprefix},#{giftexchangeprefix},#{autoprint},#{accordprint},#{printtitle},#{printfootnote},#{sms},#{moneysms},#{issmsshopname},#{smsshopname},#{smsseries},#{smsserialpwd},#{drawmoneypercent},#{tel},#{telnomember},#{isstaff},#{stafftype},#{pointlevel},#{mms},#{mmsseries},#{mmsserialpwd},#{ispaycard},#{ispaycash},#{ispaybink},#{ispaycoupon},#{regnullpwd},#{emailadress},#{emailpwd},#{emailsmtp},#{stockcount},#{unitlist},#{weixinsmsvcode},#{isautosendsmsbymemregister},#{isautosendmmsbymemregister},#{isautosendsmsbymemrecharge},#{isautosendsmsbymemwithdraw},#{isautosendsmsbymemgiftexchange},#{isautosendsmsbymempointchange},#{isautosendsmsbycommodityconsumption},#{isautosendsmsbyfastconsumption},#{isautosendsmsbymemredtimes},#{isautosendsmsbytimingconsumption},#{selleraccount},#{partnerid},#{partnerkey},#{iseditpwdneedoldpwd},#{weixintype},#{weixinverified},#{weixintoken},#{weixinencodingaeskey},#{weixinshopname},#{weixinsalutatory},#{weixinappid},#{weixinappsecret},#{signinpoint},#{ismemregisterstaff},#{ismustslotcard},#{storagetimingprefix},#{isautosendsmsbystoragetiming},#{enterpriseemailport},#{enterpriseemaildisplayname},#{enterpriseemailenablessl},#{enterpriseemailusedefaultcredentials},#{isemail},#{isemailnotice},#{memcountexpenseprefix},#{isautosendsmsbymempast},#{autosendsmsbymempastforday},#{isautosendsmsbymembirthday},#{autosendsmsbymembirthdayforday},#{isstartweixin},#{isstarttimingproject},#{isstartmemcount},#{marketingsms},#{marketingsmsseries},#{marketingsmsserialpwd},#{senseiccard},#{contacticcard},#{emailusername},#{pointnumstr},#{printpreview},#{printpapertype},#{issendcard},#{shopsmsmanage},#{shoppointmanage},#{shopsettlement},#{autobackupdb},#{autobackupday},#{systemdomain},#{mchid},#{api},#{pay},#{xiane})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysparameter" >
+    update sysparameter
+    <set >
+	      <if test="pwd != null" >
+	        Pwd = #{pwd},
+	      </if>
+	      <if test="moneyandpoint != null" >
+	        MoneyAndPoint = #{moneyandpoint},
+	      </if>
+	      <if test="autolevel != null" >
+	        AutoLevel = #{autolevel},
+	      </if>
+	      <if test="degradelevel != null" >
+	        DegradeLevel = #{degradelevel},
+	      </if>
+	      <if test="pasttime != null" >
+	        PastTime = #{pasttime},
+	      </if>
+	      <if test="recommendpoint != null" >
+	        RecommendPoint = #{recommendpoint},
+	      </if>
+	      <if test="pointperiod != null" >
+	        PointPeriod = #{pointperiod},
+	      </if>
+	      <if test="expenseprefix != null" >
+	        ExpensePrefix = #{expenseprefix},
+	      </if>
+	      <if test="goodsexpenseprefix != null" >
+	        GoodsExpensePrefix = #{goodsexpenseprefix},
+	      </if>
+	      <if test="timeexpenseprefix != null" >
+	        TimeExpensePrefix = #{timeexpenseprefix},
+	      </if>
+	      <if test="memcountprefix != null" >
+	        MemCountPrefix = #{memcountprefix},
+	      </if>
+	      <if test="memrechargeprefix != null" >
+	        MemRechargePrefix = #{memrechargeprefix},
+	      </if>
+	      <if test="goodsinprefix != null" >
+	        GoodsInPrefix = #{goodsinprefix},
+	      </if>
+	      <if test="goodsallotprefix != null" >
+	        GoodsAllotPrefix = #{goodsallotprefix},
+	      </if>
+	      <if test="memdrawmoneyprefix != null" >
+	        MemDrawMoneyPrefix = #{memdrawmoneyprefix},
+	      </if>
+	      <if test="mempointchangeprefix != null" >
+	        MemPointChangePrefix = #{mempointchangeprefix},
+	      </if>
+	      <if test="giftexchangeprefix != null" >
+	        GiftExchangePrefix = #{giftexchangeprefix},
+	      </if>
+	      <if test="autoprint != null" >
+	        AutoPrint = #{autoprint},
+	      </if>
+	      <if test="accordprint != null" >
+	        AccordPrint = #{accordprint},
+	      </if>
+	      <if test="printtitle != null" >
+	        PrintTitle = #{printtitle},
+	      </if>
+	      <if test="printfootnote != null" >
+	        PrintFootNote = #{printfootnote},
+	      </if>
+	      <if test="sms != null" >
+	        Sms = #{sms},
+	      </if>
+	      <if test="moneysms != null" >
+	        MoneySms = #{moneysms},
+	      </if>
+	      <if test="issmsshopname != null" >
+	        IsSmsShopName = #{issmsshopname},
+	      </if>
+	      <if test="smsshopname != null" >
+	        SmsShopName = #{smsshopname},
+	      </if>
+	      <if test="smsseries != null" >
+	        SmsSeries = #{smsseries},
+	      </if>
+	      <if test="smsserialpwd != null" >
+	        SmsSerialPwd = #{smsserialpwd},
+	      </if>
+	      <if test="drawmoneypercent != null" >
+	        DrawMoneyPercent = #{drawmoneypercent},
+	      </if>
+	      <if test="tel != null" >
+	        Tel = #{tel},
+	      </if>
+	      <if test="telnomember != null" >
+	        TelNoMember = #{telnomember},
+	      </if>
+	      <if test="isstaff != null" >
+	        IsStaff = #{isstaff},
+	      </if>
+	      <if test="stafftype != null" >
+	        StaffType = #{stafftype},
+	      </if>
+	      <if test="pointlevel != null" >
+	        PointLevel = #{pointlevel},
+	      </if>
+	      <if test="mms != null" >
+	        MMS = #{mms},
+	      </if>
+	      <if test="mmsseries != null" >
+	        MMSSeries = #{mmsseries},
+	      </if>
+	      <if test="mmsserialpwd != null" >
+	        MMSSerialPwd = #{mmsserialpwd},
+	      </if>
+	      <if test="ispaycard != null" >
+	        IsPayCard = #{ispaycard},
+	      </if>
+	      <if test="ispaycash != null" >
+	        IsPayCash = #{ispaycash},
+	      </if>
+	      <if test="ispaybink != null" >
+	        IsPayBink = #{ispaybink},
+	      </if>
+	      <if test="ispaycoupon != null" >
+	        IsPayCoupon = #{ispaycoupon},
+	      </if>
+	      <if test="regnullpwd != null" >
+	        RegNullPwd = #{regnullpwd},
+	      </if>
+	      <if test="emailadress != null" >
+	        EmailAdress = #{emailadress},
+	      </if>
+	      <if test="emailpwd != null" >
+	        EmailPwd = #{emailpwd},
+	      </if>
+	      <if test="emailsmtp != null" >
+	        EmailSMTP = #{emailsmtp},
+	      </if>
+	      <if test="stockcount != null" >
+	        StockCount = #{stockcount},
+	      </if>
+	      <if test="unitlist != null" >
+	        UnitList = #{unitlist},
+	      </if>
+	      <if test="weixinsmsvcode != null" >
+	        WeiXinSMSVcode = #{weixinsmsvcode},
+	      </if>
+	      <if test="isautosendsmsbymemregister != null" >
+	        IsAutoSendSMSByMemRegister = #{isautosendsmsbymemregister},
+	      </if>
+	      <if test="isautosendmmsbymemregister != null" >
+	        IsAutoSendMMSByMemRegister = #{isautosendmmsbymemregister},
+	      </if>
+	      <if test="isautosendsmsbymemrecharge != null" >
+	        IsAutoSendSMSByMemRecharge = #{isautosendsmsbymemrecharge},
+	      </if>
+	      <if test="isautosendsmsbymemwithdraw != null" >
+	        IsAutoSendSMSByMemWithdraw = #{isautosendsmsbymemwithdraw},
+	      </if>
+	      <if test="isautosendsmsbymemgiftexchange != null" >
+	        IsAutoSendSMSByMemGiftExchange = #{isautosendsmsbymemgiftexchange},
+	      </if>
+	      <if test="isautosendsmsbymempointchange != null" >
+	        IsAutoSendSMSByMemPointChange = #{isautosendsmsbymempointchange},
+	      </if>
+	      <if test="isautosendsmsbycommodityconsumption != null" >
+	        IsAutoSendSMSByCommodityConsumption = #{isautosendsmsbycommodityconsumption},
+	      </if>
+	      <if test="isautosendsmsbyfastconsumption != null" >
+	        IsAutoSendSMSByFastConsumption = #{isautosendsmsbyfastconsumption},
+	      </if>
+	      <if test="isautosendsmsbymemredtimes != null" >
+	        IsAutoSendSMSByMemRedTimes = #{isautosendsmsbymemredtimes},
+	      </if>
+	      <if test="isautosendsmsbytimingconsumption != null" >
+	        IsAutoSendSMSByTimingConsumption = #{isautosendsmsbytimingconsumption},
+	      </if>
+	      <if test="selleraccount != null" >
+	        SellerAccount = #{selleraccount},
+	      </if>
+	      <if test="partnerid != null" >
+	        PartnerID = #{partnerid},
+	      </if>
+	      <if test="partnerkey != null" >
+	        PartnerKey = #{partnerkey},
+	      </if>
+	      <if test="iseditpwdneedoldpwd != null" >
+	        IsEditPwdNeedOldPwd = #{iseditpwdneedoldpwd},
+	      </if>
+	      <if test="weixintype != null" >
+	        WeiXinType = #{weixintype},
+	      </if>
+	      <if test="weixinverified != null" >
+	        WeiXinVerified = #{weixinverified},
+	      </if>
+	      <if test="weixintoken != null" >
+	        WeiXinToken = #{weixintoken},
+	      </if>
+	      <if test="weixinencodingaeskey != null" >
+	        WeiXinEncodingAESKey = #{weixinencodingaeskey},
+	      </if>
+	      <if test="weixinshopname != null" >
+	        WeiXinShopName = #{weixinshopname},
+	      </if>
+	      <if test="weixinsalutatory != null" >
+	        WeiXinSalutatory = #{weixinsalutatory},
+	      </if>
+	      <if test="weixinappid != null" >
+	        WeiXinAppID = #{weixinappid},
+	      </if>
+	      <if test="weixinappsecret != null" >
+	        WeiXinAppSecret = #{weixinappsecret},
+	      </if>
+	      <if test="signinpoint != null" >
+	        SignInPoint = #{signinpoint},
+	      </if>
+	      <if test="ismemregisterstaff != null" >
+	        IsMemRegisterStaff = #{ismemregisterstaff},
+	      </if>
+	      <if test="ismustslotcard != null" >
+	        IsMustSlotCard = #{ismustslotcard},
+	      </if>
+	      <if test="storagetimingprefix != null" >
+	        StorageTimingPrefix = #{storagetimingprefix},
+	      </if>
+	      <if test="isautosendsmsbystoragetiming != null" >
+	        IsAutoSendSMSByStorageTiming = #{isautosendsmsbystoragetiming},
+	      </if>
+	      <if test="enterpriseemailport != null" >
+	        EnterpriseEmailPort = #{enterpriseemailport},
+	      </if>
+	      <if test="enterpriseemaildisplayname != null" >
+	        EnterpriseEmailDisplayName = #{enterpriseemaildisplayname},
+	      </if>
+	      <if test="enterpriseemailenablessl != null" >
+	        EnterpriseEmailEnableSSL = #{enterpriseemailenablessl},
+	      </if>
+	      <if test="enterpriseemailusedefaultcredentials != null" >
+	        EnterpriseEmailUseDefaultCredentials = #{enterpriseemailusedefaultcredentials},
+	      </if>
+	      <if test="isemail != null" >
+	        IsEmail = #{isemail},
+	      </if>
+	      <if test="isemailnotice != null" >
+	        IsEmailNotice = #{isemailnotice},
+	      </if>
+	      <if test="memcountexpenseprefix != null" >
+	        MemCountExpensePrefix = #{memcountexpenseprefix},
+	      </if>
+	      <if test="isautosendsmsbymempast != null" >
+	        IsAutoSendSMSByMemPast = #{isautosendsmsbymempast},
+	      </if>
+	      <if test="autosendsmsbymempastforday != null" >
+	        AutoSendSMSByMemPastForDay = #{autosendsmsbymempastforday},
+	      </if>
+	      <if test="isautosendsmsbymembirthday != null" >
+	        IsAutoSendSMSByMemBirthday = #{isautosendsmsbymembirthday},
+	      </if>
+	      <if test="autosendsmsbymembirthdayforday != null" >
+	        AutoSendSMSByMemBirthdayForDay = #{autosendsmsbymembirthdayforday},
+	      </if>
+	      <if test="isstartweixin != null" >
+	        IsStartWeiXin = #{isstartweixin},
+	      </if>
+	      <if test="isstarttimingproject != null" >
+	        IsStartTimingProject = #{isstarttimingproject},
+	      </if>
+	      <if test="isstartmemcount != null" >
+	        IsStartMemCount = #{isstartmemcount},
+	      </if>
+	      <if test="marketingsms != null" >
+	        MarketingSMS = #{marketingsms},
+	      </if>
+	      <if test="marketingsmsseries != null" >
+	        MarketingSmsSeries = #{marketingsmsseries},
+	      </if>
+	      <if test="marketingsmsserialpwd != null" >
+	        MarketingSmsSerialPwd = #{marketingsmsserialpwd},
+	      </if>
+	      <if test="senseiccard != null" >
+	        Senseiccard = #{senseiccard},
+	      </if>
+	      <if test="contacticcard != null" >
+	        Contacticcard = #{contacticcard},
+	      </if>
+	      <if test="emailusername != null" >
+	        EmailUserName = #{emailusername},
+	      </if>
+	      <if test="pointnumstr != null" >
+	        PointNumStr = #{pointnumstr},
+	      </if>
+	      <if test="printpreview != null" >
+	        PrintPreview = #{printpreview},
+	      </if>
+	      <if test="printpapertype != null" >
+	        PrintPaperType = #{printpapertype},
+	      </if>
+	      <if test="issendcard != null" >
+	        IsSendCard = #{issendcard},
+	      </if>
+	      <if test="shopsmsmanage != null" >
+	        ShopSmsManage = #{shopsmsmanage},
+	      </if>
+	      <if test="shoppointmanage != null" >
+	        ShopPointManage = #{shoppointmanage},
+	      </if>
+	      <if test="shopsettlement != null" >
+	        ShopSettlement = #{shopsettlement},
+	      </if>
+	      <if test="autobackupdb != null" >
+	        AutoBackupDB = #{autobackupdb},
+	      </if>
+	      <if test="autobackupday != null" >
+	        AutoBackupDay = #{autobackupday},
+	      </if>
+	      <if test="systemdomain != null" >
+	        SystemDomain = #{systemdomain},
+	      </if>
+	      <if test="mchid != null" >
+	        MchId = #{mchid},
+	      </if>
+	      <if test="api != null" >
+	        Api = #{api},
+	      </if>
+	      <if test="pay != null" >
+	        Pay = #{pay},
+	      </if>
+	      <if test="xiane != null" >
+	        Xiane = #{xiane},
+	      </if>
+    </set>
+    where  ParameterID= #{parameterid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysparameter
+    where  ParameterID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysparameter
+    where  ParameterID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysparameterFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysparameter
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysparameterFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM sysparameter
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysparameter" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysparameter
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

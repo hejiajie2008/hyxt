@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.StaffDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Staff" >
+    <id column="StaffID" property="staffid"  />
+     <result column="StaffNumber" property="staffnumber"  />
+     <result column="StaffName" property="staffname"  />
+     <result column="StaffSex" property="staffsex"  />
+     <result column="StaffMobile" property="staffmobile"  />
+     <result column="StaffAddress" property="staffaddress"  />
+     <result column="StaffClassID" property="staffclassid"  />
+     <result column="StaffRemark" property="staffremark"  />
+     <result column="classname" property="classname"/>
+     <result column="shopname" property="shopname"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	  <if test="staffid != null" >
+		       
+		          Staffid = #{staffid} 
+		      </if>
+     	
+     	
+		      <if test="staffnumber != null" >
+		       
+		        and  StaffNumber = #{staffnumber} 
+		      </if>
+     	
+     	
+		      <if test="staffname != null" >
+		       
+		         and StaffName = #{staffname} 
+		      </if>
+     	
+     	
+		      <if test="staffsex != null" >
+		       
+		         and StaffSex = #{staffsex} 
+		      </if>
+     	
+     	
+		      <if test="staffmobile != null" >
+		       
+		         and StaffMobile = #{staffmobile} 
+		      </if>
+     	
+     	
+		      <if test="staffaddress != null" >
+		       
+		         and StaffAddress = #{staffaddress} 
+		      </if>
+     	
+     	
+		      <if test="staffclassid != null" >
+		       
+		         and StaffClassID = #{staffclassid} 
+		      </if>
+     	
+     	
+		      <if test="staffremark != null" >
+		       
+		         and StaffRemark = #{staffremark} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+StaffID,StaffNumber,StaffName,StaffSex,StaffMobile,StaffAddress,StaffClassID,StaffRemark    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Staff" >
+    insert into staff (StaffID,StaffNumber,StaffName,StaffSex,StaffMobile,StaffAddress,StaffClassID,StaffRemark)values (#{staffid},#{staffnumber},#{staffname},#{staffsex},#{staffmobile},#{staffaddress},#{staffclassid},#{staffremark})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Staff" >
+    update staff
+    <set >
+	      <if test="staffnumber != null" >
+	        StaffNumber = #{staffnumber},
+	      </if>
+	      <if test="staffname != null" >
+	        StaffName = #{staffname},
+	      </if>
+	      <if test="staffsex != null" >
+	        StaffSex = #{staffsex},
+	      </if>
+	      <if test="staffmobile != null" >
+	        StaffMobile = #{staffmobile},
+	      </if>
+	      <if test="staffaddress != null" >
+	        StaffAddress = #{staffaddress},
+	      </if>
+	      <if test="staffclassid != null" >
+	        StaffClassID = #{staffclassid},
+	      </if>
+	      <if test="staffremark != null" >
+	        StaffRemark = #{staffremark},
+	      </if>
+    </set>
+    where  StaffID= #{staffid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from staff
+    where  StaffID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from staff
+    where  StaffID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.StaffFormBean" resultType="int">
+		SELECT COUNT(*) FROM staff
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.StaffFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,staffclass.classname,sysshop.shopname
+		 FROM staff  left join staffclass on staffclass.classid=staff.staffclassid
+		 left join sysshop on sysshop.shopid=staffclass.classshopid
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Staff" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM staff
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

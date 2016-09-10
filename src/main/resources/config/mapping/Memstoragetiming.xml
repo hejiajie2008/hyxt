@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemstoragetimingDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memstoragetiming" >
+    <id column="StorageTimingID" property="storagetimingid"  />
+     <result column="StorageTimingMemID" property="storagetimingmemid"  />
+     <result column="StorageTimingAccount" property="storagetimingaccount"  />
+     <result column="StorageTimingTotalMoney" property="storagetimingtotalmoney"  />
+     <result column="StorageTimingDiscountMoney" property="storagetimingdiscountmoney"  />
+     <result column="StorageTimingIsCard" property="storagetimingiscard"  />
+     <result column="StorageTimingPayCard" property="storagetimingpaycard"  />
+     <result column="StorageTimingIsCash" property="storagetimingiscash"  />
+     <result column="StorageTimingPayCash" property="storagetimingpaycash"  />
+     <result column="StorageTimingIsBink" property="storagetimingisbink"  />
+     <result column="StorageTimingPayBink" property="storagetimingpaybink"  />
+     <result column="StorageTimingPayCoupon" property="storagetimingpaycoupon"  />
+     <result column="StorageTimingPayType" property="storagetimingpaytype"  />
+     <result column="StorageTimingPoint" property="storagetimingpoint"  />
+     <result column="StorageTimingRemark" property="storagetimingremark"  />
+     <result column="StorageTimingShopID" property="storagetimingshopid"  />
+     <result column="StorageTimingUserID" property="storagetiminguserid"  />
+     <result column="StorageTimingCreateTime" property="storagetimingcreatetime"  />
+     <result column="StorageTotalTime" property="storagetotaltime"  />
+     <result column="StorageResidueTime" property="storageresiduetime"  />
+     <result column="StorageTimingProjectID" property="storagetimingprojectid"  />
+     <result column="ProjectName" property="projectname"/>
+     <result column="MemName" property="memname"/>
+     <result column="username" property="username"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="storagetimingmemid != null" >
+		       
+		         StorageTimingMemID = #{storagetimingmemid} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingaccount != null" >
+		       
+		         and StorageTimingAccount = #{storagetimingaccount} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingtotalmoney != null" >
+		       
+		         and StorageTimingTotalMoney = #{storagetimingtotalmoney} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingdiscountmoney != null" >
+		       
+		         and StorageTimingDiscountMoney = #{storagetimingdiscountmoney} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingiscard != null" >
+		       
+		         and StorageTimingIsCard = #{storagetimingiscard} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpaycard != null" >
+		       
+		         and StorageTimingPayCard = #{storagetimingpaycard} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingiscash != null" >
+		       
+		         and StorageTimingIsCash = #{storagetimingiscash} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpaycash != null" >
+		       
+		         and StorageTimingPayCash = #{storagetimingpaycash} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingisbink != null" >
+		       
+		         and StorageTimingIsBink = #{storagetimingisbink} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpaybink != null" >
+		       
+		         and StorageTimingPayBink = #{storagetimingpaybink} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpaycoupon != null" >
+		       
+		         and StorageTimingPayCoupon = #{storagetimingpaycoupon} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpaytype != null" >
+		       
+		         and StorageTimingPayType = #{storagetimingpaytype} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingpoint != null" >
+		       
+		         and StorageTimingPoint = #{storagetimingpoint} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingremark != null" >
+		       
+		         and StorageTimingRemark = #{storagetimingremark} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingshopid != null" >
+		       
+		         and StorageTimingShopID = #{storagetimingshopid} 
+		      </if>
+     	
+     	
+		      <if test="storagetiminguserid != null" >
+		       
+		         and StorageTimingUserID = #{storagetiminguserid} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingcreatetime != null" >
+		       
+		         and StorageTimingCreateTime = #{storagetimingcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="storagetotaltime != null" >
+		       
+		         and StorageTotalTime = #{storagetotaltime} 
+		      </if>
+     	
+     	
+		      <if test="storageresiduetime != null" >
+		       
+		         and StorageResidueTime = #{storageresiduetime} 
+		      </if>
+     	
+     	
+		      <if test="storagetimingprojectid != null" >
+		       
+		         and StorageTimingProjectID = #{storagetimingprojectid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+StorageTimingID,StorageTimingMemID,StorageTimingAccount,StorageTimingTotalMoney,StorageTimingDiscountMoney,StorageTimingIsCard,StorageTimingPayCard,StorageTimingIsCash,StorageTimingPayCash,StorageTimingIsBink,StorageTimingPayBink,StorageTimingPayCoupon,StorageTimingPayType,StorageTimingPoint,StorageTimingRemark,StorageTimingShopID,StorageTimingUserID,StorageTimingCreateTime,StorageTotalTime,StorageResidueTime,StorageTimingProjectID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memstoragetiming" >
+    insert into memstoragetiming (StorageTimingID,StorageTimingMemID,StorageTimingAccount,StorageTimingTotalMoney,StorageTimingDiscountMoney,StorageTimingIsCard,StorageTimingPayCard,StorageTimingIsCash,StorageTimingPayCash,StorageTimingIsBink,StorageTimingPayBink,StorageTimingPayCoupon,StorageTimingPayType,StorageTimingPoint,StorageTimingRemark,StorageTimingShopID,StorageTimingUserID,StorageTimingCreateTime,StorageTotalTime,StorageResidueTime,StorageTimingProjectID)values (#{storagetimingid},#{storagetimingmemid},#{storagetimingaccount},#{storagetimingtotalmoney},#{storagetimingdiscountmoney},#{storagetimingiscard},#{storagetimingpaycard},#{storagetimingiscash},#{storagetimingpaycash},#{storagetimingisbink},#{storagetimingpaybink},#{storagetimingpaycoupon},#{storagetimingpaytype},#{storagetimingpoint},#{storagetimingremark},#{storagetimingshopid},#{storagetiminguserid},#{storagetimingcreatetime},#{storagetotaltime},#{storageresiduetime},#{storagetimingprojectid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memstoragetiming" >
+    update memstoragetiming
+    <set >
+	      <if test="storagetimingmemid != null" >
+	        StorageTimingMemID = #{storagetimingmemid},
+	      </if>
+	      <if test="storagetimingaccount != null" >
+	        StorageTimingAccount = #{storagetimingaccount},
+	      </if>
+	      <if test="storagetimingtotalmoney != null" >
+	        StorageTimingTotalMoney = #{storagetimingtotalmoney},
+	      </if>
+	      <if test="storagetimingdiscountmoney != null" >
+	        StorageTimingDiscountMoney = #{storagetimingdiscountmoney},
+	      </if>
+	      <if test="storagetimingiscard != null" >
+	        StorageTimingIsCard = #{storagetimingiscard},
+	      </if>
+	      <if test="storagetimingpaycard != null" >
+	        StorageTimingPayCard = #{storagetimingpaycard},
+	      </if>
+	      <if test="storagetimingiscash != null" >
+	        StorageTimingIsCash = #{storagetimingiscash},
+	      </if>
+	      <if test="storagetimingpaycash != null" >
+	        StorageTimingPayCash = #{storagetimingpaycash},
+	      </if>
+	      <if test="storagetimingisbink != null" >
+	        StorageTimingIsBink = #{storagetimingisbink},
+	      </if>
+	      <if test="storagetimingpaybink != null" >
+	        StorageTimingPayBink = #{storagetimingpaybink},
+	      </if>
+	      <if test="storagetimingpaycoupon != null" >
+	        StorageTimingPayCoupon = #{storagetimingpaycoupon},
+	      </if>
+	      <if test="storagetimingpaytype != null" >
+	        StorageTimingPayType = #{storagetimingpaytype},
+	      </if>
+	      <if test="storagetimingpoint != null" >
+	        StorageTimingPoint = #{storagetimingpoint},
+	      </if>
+	      <if test="storagetimingremark != null" >
+	        StorageTimingRemark = #{storagetimingremark},
+	      </if>
+	      <if test="storagetimingshopid != null" >
+	        StorageTimingShopID = #{storagetimingshopid},
+	      </if>
+	      <if test="storagetiminguserid != null" >
+	        StorageTimingUserID = #{storagetiminguserid},
+	      </if>
+	      <if test="storagetimingcreatetime != null" >
+	        StorageTimingCreateTime = #{storagetimingcreatetime},
+	      </if>
+	      <if test="storagetotaltime != null" >
+	        StorageTotalTime = #{storagetotaltime},
+	      </if>
+	      <if test="storageresiduetime != null" >
+	        StorageResidueTime = #{storageresiduetime},
+	      </if>
+	      <if test="storagetimingprojectid != null" >
+	        StorageTimingProjectID = #{storagetimingprojectid},
+	      </if>
+    </set>
+    where  StorageTimingID= #{storagetimingid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memstoragetiming
+    where  StorageTimingID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memstoragetiming
+    where  StorageTimingID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemstoragetimingFormBean" resultType="int">
+		SELECT COUNT(*) FROM memstoragetiming
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemstoragetimingFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,timingproject.ProjectName,mem.MemName,sysuser.username
+		 FROM memstoragetiming left join timingproject on memstoragetiming.StorageTimingProjectID =timingproject.ProjectID
+		 left join mem on mem.MemID =memstoragetiming.StorageTimingMemID left join sysuser
+		 on memstoragetiming.StorageTimingUserID=sysuser.UserID
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memstoragetiming" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memstoragetiming
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysgroupDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysgroup" >
+    <id column="GroupID" property="groupid"  />
+     <result column="GroupName" property="groupname"  />
+     <result column="GroupRemark" property="groupremark"  />
+     <result column="ParentGroupID" property="parentgroupid"  />
+     <result column="ParentIDStr" property="parentidstr"  />
+     <result column="IsPublic" property="ispublic"  />
+     <result column="CreateUserID" property="createuserid"  />
+     <result column="username" property="username"/>
+  </resultMap>
+  
+  
+  <resultMap id="sysGroupResultMap" type="com.jfxy.pojo.Sysgroup" >
+    <id column="GroupID" property="groupid"  />
+     <result column="GroupName" property="groupname"  />
+     <result column="GroupRemark" property="groupremark"  />
+     <result column="ParentGroupID" property="parentgroupid"  />
+     <result column="ParentIDStr" property="parentidstr"  />
+     <result column="IsPublic" property="ispublic"  />
+     <result column="CreateUserID" property="createuserid"  />
+     <result column="username" property="username"/>
+     
+     
+     <association property="sysgroupauthorityList" column="GroupID" 
+
+select="com.jfxy.dao.SysgroupauthorityDao.findgroupauthorityList"
+/>  
+     
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="groupname != null" >
+		       
+		         GroupName = #{groupname} 
+		      </if>
+     	
+     	
+		      <if test="groupremark != null" >
+		       
+		         and GroupRemark = #{groupremark} 
+		      </if>
+     	
+     	
+		       
+     	
+     	
+		      <if test="parentgroupid != null" >
+		       
+		         and  ParentIDStr like  CONCAT('%/',#{parentgroupid},'/%')  
+		         	or GroupID=#{parentgroupid}
+		      </if>
+     	
+     	
+		      <if test="ispublic != null" >
+		       
+		         and IsPublic = #{ispublic} 
+		      </if>
+     	
+     	
+		      <if test="createuserid != null" >
+		       
+		         and CreateUserID = #{createuserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+GroupID,GroupName,GroupRemark,ParentGroupID,ParentIDStr,IsPublic,CreateUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysgroup" useGeneratedKeys="true" keyProperty="groupid" >
+    insert into sysgroup (GroupName,GroupRemark,ParentGroupID,ParentIDStr,IsPublic,CreateUserID)values (#{groupname},#{groupremark},#{parentgroupid},#{parentidstr},#{ispublic},#{createuserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysgroup" >
+    update sysgroup
+    <set >
+	      <if test="groupname != null" >
+	        GroupName = #{groupname},
+	      </if>
+	      <if test="groupremark != null" >
+	        GroupRemark = #{groupremark},
+	      </if>
+	      <if test="parentgroupid != null" >
+	        ParentGroupID = #{parentgroupid},
+	      </if>
+	      <if test="parentidstr != null" >
+	        ParentIDStr = #{parentidstr},
+	      </if>
+	      <if test="ispublic != null" >
+	        IsPublic = #{ispublic},
+	      </if>
+	      <if test="createuserid != null" >
+	        CreateUserID = #{createuserid},
+	      </if>
+    </set>
+    where  GroupID= #{groupid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysgroup
+    where  GroupID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysgroup
+    where  GroupID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysgroupFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysgroup
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysgroupFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 ,sysuser.UserName
+		 FROM sysgroup 
+		 
+		 sysgroup left join sysuser on sysgroup.createuserid=sysuser.UserID
+		 
+		 <if test="_parameter != null" >
+		
+		 
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysgroup" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysgroup
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		
+		
+		  
+		
+	</select>
+	
+	
+	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="querybyid" parameterType="int" resultMap="sysGroupResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysgroup
+		 where groupid=${value}
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

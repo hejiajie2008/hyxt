@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysnoticeDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysnotice" >
+    <id column="SysNoticeID" property="sysnoticeid"  />
+     <result column="SysNoticeCode" property="sysnoticecode"  />
+     <result column="SysNotieceName" property="sysnotiecename"  />
+     <result column="SysNoticeTitle" property="sysnoticetitle"  />
+     <result column="SysNoticeDetail" property="sysnoticedetail"  />
+     <result column="SysNoticeTime" property="sysnoticetime"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="sysnoticecode != null" >
+		       
+		         SysNoticeCode = #{sysnoticecode} 
+		      </if>
+     	
+     	
+		      <if test="sysnotiecename != null" >
+		       
+		         and SysNotieceName = #{sysnotiecename} 
+		      </if>
+     	
+     	
+		      <if test="sysnoticetitle != null" >
+		       
+		         and SysNoticeTitle = #{sysnoticetitle} 
+		      </if>
+     	
+     	
+		      <if test="sysnoticedetail != null" >
+		       
+		         and SysNoticeDetail = #{sysnoticedetail} 
+		      </if>
+     	
+     	
+		      <if test="sysnoticetime != null" >
+		       
+		         and SysNoticeTime = #{sysnoticetime} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+SysNoticeID,SysNoticeCode,SysNotieceName,SysNoticeTitle,SysNoticeDetail,SysNoticeTime    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysnotice" >
+    insert into sysnotice (SysNoticeID,SysNoticeCode,SysNotieceName,SysNoticeTitle,SysNoticeDetail,SysNoticeTime)values (#{sysnoticeid},#{sysnoticecode},#{sysnotiecename},#{sysnoticetitle},#{sysnoticedetail},#{sysnoticetime})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysnotice" >
+    update sysnotice
+    <set >
+	      <if test="sysnoticecode != null" >
+	        SysNoticeCode = #{sysnoticecode},
+	      </if>
+	      <if test="sysnotiecename != null" >
+	        SysNotieceName = #{sysnotiecename},
+	      </if>
+	      <if test="sysnoticetitle != null" >
+	        SysNoticeTitle = #{sysnoticetitle},
+	      </if>
+	      <if test="sysnoticedetail != null" >
+	        SysNoticeDetail = #{sysnoticedetail},
+	      </if>
+	      <if test="sysnoticetime != null" >
+	        SysNoticeTime = #{sysnoticetime},
+	      </if>
+    </set>
+    where  SysNoticeID= #{sysnoticeid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysnotice
+    where  SysNoticeID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysnotice
+    where  SysNoticeID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysnoticeFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysnotice
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysnoticeFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM sysnotice
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysnotice" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysnotice
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	<select id="findSysnotice" parameterType="int" resultType="com.jfxy.pojo.Sysnotice">
+	SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysnotice
+		  where sysnoticeid=#{value}
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

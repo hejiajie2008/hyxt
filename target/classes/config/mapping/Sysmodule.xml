@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysmoduleDao">
+	<!--映射返回值 -->
+	<resultMap id="ResultMap" type="com.jfxy.pojo.Sysmodule">
+		<id column="ModuleID" property="moduleid" />
+		<result column="ModuleCaption" property="modulecaption" />
+		<result column="ModuleLink" property="modulelink" />
+		<result column="ModuleParentID" property="moduleparentid" />
+		<result column="ModuleOrder" property="moduleorder" />
+		<result column="ModuleVisible" property="modulevisible" />
+		<result column="ModuleIcoPath" property="moduleicopath" />
+		<result column="ModuleRemark" property="moduleremark" />
+	</resultMap>
+	
+	<resultMap id="sysModuleResultMap" type="com.jfxy.pojo.Sysmodule">
+		<id column="ModuleID" property="moduleid" />
+		<result column="ModuleCaption" property="modulecaption" />
+		<result column="ModuleLink" property="modulelink" />
+		<result column="ModuleParentID" property="moduleparentid" />
+		<result column="ModuleOrder" property="moduleorder" />
+		<result column="ModuleVisible" property="modulevisible" />
+		<result column="ModuleIcoPath" property="moduleicopath" />
+		<result column="ModuleRemark" property="moduleremark" />
+		<association property="sysmoduleactionList" column="ModuleID" 
+
+select="com.jfxy.dao.SysmoduleactionDao.findlistbyid"
+/>  
+	</resultMap>
+	
+	
+	
+	<!--where 条件组装 -->
+
+	<sql id="Where_Clause">
+		<where>
+
+
+
+
+			<if test="modulecaption != null">
+
+				ModuleCaption = #{modulecaption}
+			</if>
+
+
+			<if test="modulelink != null">
+
+				and ModuleLink = #{modulelink}
+			</if>
+
+
+			<if test="moduleparentid != null">
+
+				and ModuleParentID = #{moduleparentid}
+			</if>
+
+
+			<if test="moduleorder != null">
+
+				and ModuleOrder = #{moduleorder}
+			</if>
+
+
+			<if test="modulevisible != null">
+
+				and ModuleVisible = #{modulevisible}
+			</if>
+
+
+			<if test="moduleicopath != null">
+
+				and ModuleIcoPath = #{moduleicopath}
+			</if>
+
+
+			<if test="moduleremark != null">
+
+				and ModuleRemark = #{moduleremark}
+			</if>
+		</where>
+	</sql>
+
+	<!--基本列 -->
+	<sql id="Base_Column_List">
+		ModuleID,ModuleCaption,ModuleLink,ModuleParentID,ModuleOrder,ModuleVisible,ModuleIcoPath,ModuleRemark
+	</sql>
+
+
+	<!--添加数据 -->
+	<insert id="insert" parameterType="com.jfxy.pojo.Sysmodule">
+		insert into sysmodule
+		(ModuleID,ModuleCaption,ModuleLink,ModuleParentID,ModuleOrder,ModuleVisible,ModuleIcoPath,ModuleRemark)values
+		(#{moduleid},#{modulecaption},#{modulelink},#{moduleparentid},#{moduleorder},#{modulevisible},#{moduleicopath},#{moduleremark})
+	</insert>
+
+
+	<!--修改数据 -->
+	<update id="update" parameterType="com.jfxy.pojo.Sysmodule">
+		update sysmodule
+		<set>
+			<if test="modulecaption != null">
+				ModuleCaption = #{modulecaption},
+			</if>
+			<if test="modulelink != null">
+				ModuleLink = #{modulelink},
+			</if>
+			<if test="moduleparentid != null">
+				ModuleParentID = #{moduleparentid},
+			</if>
+			<if test="moduleorder != null">
+				ModuleOrder = #{moduleorder},
+			</if>
+			<if test="modulevisible != null">
+				ModuleVisible = #{modulevisible},
+			</if>
+			<if test="moduleicopath != null">
+				ModuleIcoPath = #{moduleicopath},
+			</if>
+			<if test="moduleremark != null">
+				ModuleRemark = #{moduleremark},
+			</if>
+		</set>
+		where ModuleID= #{moduleid}
+	</update>
+
+
+	<!--批量删除的方法 -->
+	<delete id="deleteById" parameterType="int">
+		delete from sysmodule
+		where ModuleID=#{value}
+	</delete>
+
+
+	<!--批量删除的方法 -->
+	<delete id="deleteByIds" parameterType="map">
+		delete from sysmodule
+		where ModuleID in (
+		<foreach collection="Ids" item="item" index="index" separator=",">
+			#{item}
+		</foreach>
+		)
+	</delete>
+
+
+
+	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysmoduleFormBean"
+		resultType="int">
+		SELECT COUNT(*) FROM sysmodule
+
+		<include refid="Where_Clause" />
+	</select>
+
+	<!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysmoduleFormBean"
+		resultMap="ResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM sysmodule
+
+		<if test="_parameter != null">
+			<include refid="Where_Clause" />
+
+			LIMIT #{firstResult},#{pageSize}
+		</if>
+	</select>
+
+	<!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysmodule"
+		resultMap="ResultMap">
+		select t1.ModuleLink ModuleLink,GROUP_CONCAT(distinct t2.GroupID)
+		groupIds from sysmodule t1 left join sysgroupauthority t2 on
+		t1.ModuleID=t2.ModuleID where t1.ModuleLink!='' group by t1.ModuleLink
+
+		<if test="_parameter != null">
+			<include refid="Where_Clause" />
+		</if>
+
+
+	</select>
+	
+	
+	<!-- 按条件查询结果集(不带分页) -->
+	<select id="findalllist"  resultMap="ResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM sysmodule
+
+	</select>
+
+
+
+	<!-- 按条件查询结果集(不带分页) -->
+	<select id="findMenus" parameterType="int" resultMap="ResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sysmodule
+		where ModuleID in(select ModuleID from sysgroupauthority where
+		GroupID=#{value}) and modulevisible=1
+
+		order by moduleparentid asc, ModuleOrder asc
+
+
+	</select>
+	
+	
+	<!-- 按条件查询结果集(不带分页) -->
+	<select id="findModuleList" parameterType="int" resultMap="sysModuleResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from sysmodule
+		where ModuleID in(select ModuleID from sysgroupauthority where
+		GroupID=#{value}) and modulevisible=1
+
+		order by moduleparentid asc, ModuleOrder asc
+
+
+	</select>
+
+
+
+
+
+
+
+
+</mapper>

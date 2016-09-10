@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysuserDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysuser" >
+    <id column="UserID" property="userid"  />
+     <result column="UserAccount" property="useraccount"  />
+     <result column="UserName" property="username"  />
+     <result column="UserPassword" property="userpassword"  />
+     <result column="UserShopID" property="usershopid"  />
+     <result column="UserGroupID" property="usergroupid"  />
+     <result column="UserLock" property="userlock"  />
+     <result column="UserRemark" property="userremark"  />
+     <result column="UserCreateTime" property="usercreatetime"  />
+     <result column="UserTelephone" property="usertelephone"  />
+     <result column="UserNumber" property="usernumber"  />
+     <result column="shopName" property="shopname"/>
+     <result column="groupName" property="groupname"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="useraccount != null" >
+		       
+		         UserAccount = #{useraccount} 
+		      </if>
+     	
+     	
+		      <if test="username != null" >
+		       
+		         and UserName = #{username} 
+		      </if>
+     	
+     	
+		      
+     	
+     	
+		      <if test="usershopid != null" >
+		       
+		         and UserShopID = #{usershopid} 
+		      </if>
+     	
+     	
+		      <if test="usergroupid != null" >
+		       
+		         and UserGroupID = #{usergroupid} 
+		      </if>
+     	
+     	
+		      <if test="userlock != null" >
+		       
+		         and UserLock = #{userlock} 
+		      </if>
+     	
+     	
+		      <if test="userremark != null" >
+		       
+		         and UserRemark = #{userremark} 
+		      </if>
+     	
+     	
+		      <if test="usercreatetime != null" >
+		       
+		         and UserCreateTime = #{usercreatetime} 
+		      </if>
+     	
+     	
+		      <if test="usertelephone != null" >
+		       
+		         and UserTelephone = #{usertelephone} 
+		      </if>
+     	
+     	
+		      <if test="usernumber != null" >
+		       
+		         and UserNumber = #{usernumber} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+UserID,UserAccount,UserName,UserPassword,UserShopID,UserGroupID,UserLock,UserRemark,UserCreateTime,UserTelephone,UserNumber    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysuser" >
+    insert into sysuser (UserID,UserAccount,UserName,UserPassword,UserShopID,UserGroupID,UserLock,UserRemark,UserCreateTime,UserTelephone,UserNumber)values (#{userid},#{useraccount},#{username},#{userpassword},#{usershopid},#{usergroupid},#{userlock},#{userremark},#{usercreatetime},#{usertelephone},#{usernumber})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysuser" >
+    update sysuser
+    <set >
+	      <if test="useraccount != null" >
+	        UserAccount = #{useraccount},
+	      </if>
+	      <if test="username != null" >
+	        UserName = #{username},
+	      </if>
+	      
+	      <if test="usershopid != null" >
+	        UserShopID = #{usershopid},
+	      </if>
+	      <if test="usergroupid != null" >
+	        UserGroupID = #{usergroupid},
+	      </if>
+	      <if test="userlock != null" >
+	        UserLock = #{userlock},
+	      </if>
+	      <if test="userremark != null" >
+	        UserRemark = #{userremark},
+	      </if>
+	      <if test="usercreatetime != null" >
+	        UserCreateTime = #{usercreatetime},
+	      </if>
+	      <if test="usertelephone != null" >
+	        UserTelephone = #{usertelephone},
+	      </if>
+	      <if test="usernumber != null" >
+	        UserNumber = #{usernumber},
+	      </if>
+    </set>
+    where  UserID= #{userid}
+  </update>
+  
+  
+   <!--修改数据-->
+  <update id="updatePassword" parameterType="com.jfxy.pojo.Sysuser" >
+    update sysuser
+	      set
+	        UserPassword = #{userpassword}
+	      
+    where  UserID= #{userid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysuser
+    where  UserID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysuser
+    where  UserID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysuserFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysuser
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysuserFormBean" resultMap="ResultMap">
+		SELECT  UserID,UserAccount,UserName,sysshop.shopName shopName,sysgroup.GroupName GroupName,UserLock,UserRemark,UserCreateTime,UserTelephone,UserNumber 
+		
+		from sysuser left join sysshop on sysuser.UserShopID=sysshop.shopID left join sysgroup on sysgroup.GroupID=sysuser.UserGroupID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysuser" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />,sysgroup.GroupName
+		  FROM sysuser left join sysgroup on sysuser.UserGroupID=sysgroup.groupid
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+   
+	<!-- findByUsername -->
+	<select id="findByUsername" parameterType="string" resultMap="ResultMap">
+	
+	
+		SELECT userID,useraccount,userpassword,usergroupid,usershopid FROM sysuser WHERE useraccount = #{username}
+		
+	</select>
+	
+	<!-- findByUsername -->
+	<select id="findByUserid" parameterType="int" resultMap="ResultMap">
+	
+	
+		SELECT <include refid="Base_Column_List" /> FROM sysuser WHERE userID = #{userid}
+		
+	</select>
+	
+	<!-- findPermissions -->
+	<select id="findPermissions" parameterType="int" resultType="String">
+		select distinct t1.ModuleLink from sysmodule t1 left join sysgroupauthority t2 on t1.ModuleID=t2.ModuleID
+		where t1.ModuleLink!='' and  t2.groupid=#{value}
+	</select>
+	
+	
+ 
+  
+
+</mapper>

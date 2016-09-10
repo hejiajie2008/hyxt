@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.OrderlogDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Orderlog" >
+    <id column="OrderID" property="orderid"  />
+     <result column="OrderAccount" property="orderaccount"  />
+     <result column="OrderType" property="ordertype"  />
+     <result column="OrderMemID" property="ordermemid"  />
+     <result column="OrderTotalMoney" property="ordertotalmoney"  />
+     <result column="OrderDiscountMoney" property="orderdiscountmoney"  />
+     <result column="OrderIsCard" property="orderiscard"  />
+     <result column="OrderPayCard" property="orderpaycard"  />
+     <result column="OrderIsCash" property="orderiscash"  />
+     <result column="OrderPayCash" property="orderpaycash"  />
+     <result column="OrderIsBink" property="orderisbink"  />
+     <result column="OrderPayBink" property="orderpaybink"  />
+     <result column="OrderPayCoupon" property="orderpaycoupon"  />
+     <result column="OrderPoint" property="orderpoint"  />
+     <result column="OrderRemark" property="orderremark"  />
+     <result column="OrderPayType" property="orderpaytype"  />
+     <result column="OrderShopID" property="ordershopid"  />
+     <result column="OrderCreateTime" property="ordercreatetime"  />
+     <result column="OrderUserID" property="orderuserid"  />
+     <result column="OldAccount" property="oldaccount"  />
+     <result column="OrderCardBalance" property="ordercardbalance"  />
+     <result column="OrderCardPoint" property="ordercardpoint"  />
+     <result column="memcard" property="memcard"/>
+     <result column="memname" property="memname"/>
+     <result column="shopname" property="shopname"/>
+     <result column="username" property="username"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  
+  
+  <resultMap id="orderResultMap" type="com.jfxy.pojo.Orderlog" >
+    <id column="OrderID" property="orderid"  />
+     <result column="OrderAccount" property="orderaccount"  />
+     <result column="OrderType" property="ordertype"  />
+     <result column="OrderMemID" property="ordermemid"  />
+     <result column="OrderTotalMoney" property="ordertotalmoney"  />
+     <result column="OrderDiscountMoney" property="orderdiscountmoney"  />
+     <result column="OrderIsCard" property="orderiscard"  />
+     <result column="OrderPayCard" property="orderpaycard"  />
+     <result column="OrderIsCash" property="orderiscash"  />
+     <result column="OrderPayCash" property="orderpaycash"  />
+     <result column="OrderIsBink" property="orderisbink"  />
+     <result column="OrderPayBink" property="orderpaybink"  />
+     <result column="OrderPayCoupon" property="orderpaycoupon"  />
+     <result column="OrderPoint" property="orderpoint"  />
+     <result column="OrderRemark" property="orderremark"  />
+     <result column="OrderPayType" property="orderpaytype"  />
+     <result column="OrderShopID" property="ordershopid"  />
+     <result column="OrderCreateTime" property="ordercreatetime"  />
+     <result column="OrderUserID" property="orderuserid"  />
+     <result column="OldAccount" property="oldaccount"  />
+     <result column="OrderCardBalance" property="ordercardbalance"  />
+     <result column="OrderCardPoint" property="ordercardpoint"  />
+     <result column="memcard" property="memcard"/>
+     <result column="memname" property="memname"/>
+     <result column="shopname" property="shopname"/>
+     <result column="username" property="username"/>
+     
+     
+     <association property="details" column="OrderID" 
+
+select="com.jfxy.dao.OrderdetailDao.queryOrderlogdetailbyid"
+/>  
+     
+     
+  </resultMap>
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="orderaccount != null" >
+		       
+		         OrderAccount = #{orderaccount} 
+		      </if>
+     	
+     	
+		      <if test="ordertype != null" >
+		       
+		         and OrderType = #{ordertype} 
+		      </if>
+     	
+     	
+		      <if test="ordermemid != null" >
+		       
+		         and OrderMemID = #{ordermemid} 
+		      </if>
+     	
+     	
+		      <if test="ordertotalmoney != null" >
+		       
+		         and OrderTotalMoney = #{ordertotalmoney} 
+		      </if>
+     	
+     	
+		      <if test="orderdiscountmoney != null" >
+		       
+		         and OrderDiscountMoney = #{orderdiscountmoney} 
+		      </if>
+     	
+     	
+		      <if test="orderiscard != null" >
+		       
+		         and OrderIsCard = #{orderiscard} 
+		      </if>
+     	
+     	
+		      <if test="orderpaycard != null" >
+		       
+		         and OrderPayCard = #{orderpaycard} 
+		      </if>
+     	
+     	
+		      <if test="orderiscash != null" >
+		       
+		         and OrderIsCash = #{orderiscash} 
+		      </if>
+     	
+     	
+		      <if test="orderpaycash != null" >
+		       
+		         and OrderPayCash = #{orderpaycash} 
+		      </if>
+     	
+     	
+		      <if test="orderisbink != null" >
+		       
+		         and OrderIsBink = #{orderisbink} 
+		      </if>
+     	
+     	
+		      <if test="orderpaybink != null" >
+		       
+		         and OrderPayBink = #{orderpaybink} 
+		      </if>
+     	
+     	
+		      <if test="orderpaycoupon != null" >
+		       
+		         and OrderPayCoupon = #{orderpaycoupon} 
+		      </if>
+     	
+     	
+		      <if test="orderpoint != null" >
+		       
+		         and OrderPoint = #{orderpoint} 
+		      </if>
+     	
+     	
+		      <if test="orderremark != null" >
+		       
+		         and OrderRemark = #{orderremark} 
+		      </if>
+     	
+     	
+		      <if test="orderpaytype != null" >
+		       
+		         and OrderPayType = #{orderpaytype} 
+		      </if>
+     	
+     	
+		      <if test="ordershopid != null" >
+		       
+		         and OrderShopID = #{ordershopid} 
+		      </if>
+     	
+     	
+		      <if test="ordercreatetime != null" >
+		       
+		         and OrderCreateTime = #{ordercreatetime} 
+		      </if>
+     	
+     	
+		      <if test="orderuserid != null" >
+		       
+		         and OrderUserID = #{orderuserid} 
+		      </if>
+     	
+     	
+		      <if test="oldaccount != null" >
+		       
+		         and OldAccount = #{oldaccount} 
+		      </if>
+     	
+     	
+		      <if test="ordercardbalance != null" >
+		       
+		         and OrderCardBalance = #{ordercardbalance} 
+		      </if>
+     	
+     	
+		      <if test="ordercardpoint != null" >
+		       
+		         and OrderCardPoint = #{ordercardpoint} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+OrderID,OrderAccount,OrderType,OrderMemID,OrderTotalMoney,OrderDiscountMoney,OrderIsCard,OrderPayCard,OrderIsCash,OrderPayCash,OrderIsBink,OrderPayBink,OrderPayCoupon,OrderPoint,OrderRemark,OrderPayType,OrderShopID,OrderCreateTime,OrderUserID,OldAccount,OrderCardBalance,OrderCardPoint    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Orderlog" useGeneratedKeys="true" keyProperty="orderid">
+    insert into orderlog (OrderID,OrderAccount,OrderType,OrderMemID,OrderTotalMoney,OrderDiscountMoney,OrderIsCard,OrderPayCard,OrderIsCash,OrderPayCash,OrderIsBink,OrderPayBink,OrderPayCoupon,OrderPoint,OrderRemark,OrderPayType,OrderShopID,OrderCreateTime,OrderUserID,OldAccount,OrderCardBalance,OrderCardPoint)values (#{orderid},#{orderaccount},#{ordertype},#{ordermemid},#{ordertotalmoney},#{orderdiscountmoney},#{orderiscard},#{orderpaycard},#{orderiscash},#{orderpaycash},#{orderisbink},#{orderpaybink},#{orderpaycoupon},#{orderpoint},#{orderremark},#{orderpaytype},#{ordershopid},#{ordercreatetime},#{orderuserid},#{oldaccount},#{ordercardbalance},#{ordercardpoint})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Orderlog" >
+    update orderlog
+    <set >
+	      <if test="orderaccount != null" >
+	        OrderAccount = #{orderaccount},
+	      </if>
+	      <if test="ordertype != null" >
+	        OrderType = #{ordertype},
+	      </if>
+	      <if test="ordermemid != null" >
+	        OrderMemID = #{ordermemid},
+	      </if>
+	      <if test="ordertotalmoney != null" >
+	        OrderTotalMoney = #{ordertotalmoney},
+	      </if>
+	      <if test="orderdiscountmoney != null" >
+	        OrderDiscountMoney = #{orderdiscountmoney},
+	      </if>
+	      <if test="orderiscard != null" >
+	        OrderIsCard = #{orderiscard},
+	      </if>
+	      <if test="orderpaycard != null" >
+	        OrderPayCard = #{orderpaycard},
+	      </if>
+	      <if test="orderiscash != null" >
+	        OrderIsCash = #{orderiscash},
+	      </if>
+	      <if test="orderpaycash != null" >
+	        OrderPayCash = #{orderpaycash},
+	      </if>
+	      <if test="orderisbink != null" >
+	        OrderIsBink = #{orderisbink},
+	      </if>
+	      <if test="orderpaybink != null" >
+	        OrderPayBink = #{orderpaybink},
+	      </if>
+	      <if test="orderpaycoupon != null" >
+	        OrderPayCoupon = #{orderpaycoupon},
+	      </if>
+	      <if test="orderpoint != null" >
+	        OrderPoint = #{orderpoint},
+	      </if>
+	      <if test="orderremark != null" >
+	        OrderRemark = #{orderremark},
+	      </if>
+	      <if test="orderpaytype != null" >
+	        OrderPayType = #{orderpaytype},
+	      </if>
+	      <if test="ordershopid != null" >
+	        OrderShopID = #{ordershopid},
+	      </if>
+	      <if test="ordercreatetime != null" >
+	        OrderCreateTime = #{ordercreatetime},
+	      </if>
+	      <if test="orderuserid != null" >
+	        OrderUserID = #{orderuserid},
+	      </if>
+	      <if test="oldaccount != null" >
+	        OldAccount = #{oldaccount},
+	      </if>
+	      <if test="ordercardbalance != null" >
+	        OrderCardBalance = #{ordercardbalance},
+	      </if>
+	      <if test="ordercardpoint != null" >
+	        OrderCardPoint = #{ordercardpoint},
+	      </if>
+    </set>
+    where  OrderID= #{orderid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from orderlog
+    where  OrderID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from orderlog
+    where  OrderID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.OrderlogFormBean" resultType="int">
+		SELECT COUNT(*) FROM orderlog
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.OrderlogFormBean" resultMap="orderResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		,mem.MemCard,mem.MemName,sysshop.ShopName,sysuser.UserName
+		 FROM orderlog
+		 
+		 left join mem on orderlog.ordermemid= mem.MemID
+		left join sysshop on orderlog.OrderShopID=sysshop.ShopID 
+		left join sysuser on orderlog.OrderUserID=sysuser.UserID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		 order by  orderlog.OrderCreateTime desc
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+		  
+		  
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Orderlog" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM orderlog
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	
+	
+	<select id="queryOrderlogbymemid" parameterType="int" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM orderlog
+		where ordermemid=#{value}
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

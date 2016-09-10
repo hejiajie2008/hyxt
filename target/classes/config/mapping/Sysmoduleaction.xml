@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysmoduleactionDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysmoduleaction" >
+    <id column="ActionID" property="actionid"  />
+     <result column="ActionCaption" property="actioncaption"  />
+     <result column="ActionControl" property="actioncontrol"  />
+     <result column="ActionRemark" property="actionremark"  />
+     <result column="ActionModuleID" property="actionmoduleid"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="actioncaption != null" >
+		       
+		         ActionCaption = #{actioncaption} 
+		      </if>
+     	
+     	
+		      <if test="actioncontrol != null" >
+		       
+		         and ActionControl = #{actioncontrol} 
+		      </if>
+     	
+     	
+		      <if test="actionremark != null" >
+		       
+		         and ActionRemark = #{actionremark} 
+		      </if>
+     	
+     	
+		      <if test="actionmoduleid != null" >
+		       
+		         and ActionModuleID = #{actionmoduleid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ActionID,ActionCaption,ActionControl,ActionRemark,ActionModuleID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysmoduleaction" >
+    insert into sysmoduleaction (ActionID,ActionCaption,ActionControl,ActionRemark,ActionModuleID)values (#{actionid},#{actioncaption},#{actioncontrol},#{actionremark},#{actionmoduleid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysmoduleaction" >
+    update sysmoduleaction
+    <set >
+	      <if test="actioncaption != null" >
+	        ActionCaption = #{actioncaption},
+	      </if>
+	      <if test="actioncontrol != null" >
+	        ActionControl = #{actioncontrol},
+	      </if>
+	      <if test="actionremark != null" >
+	        ActionRemark = #{actionremark},
+	      </if>
+	      <if test="actionmoduleid != null" >
+	        ActionModuleID = #{actionmoduleid},
+	      </if>
+    </set>
+    where  ActionID= #{actionid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysmoduleaction
+    where  ActionID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysmoduleaction
+    where  ActionID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysmoduleactionFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysmoduleaction
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysmoduleactionFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM sysmoduleaction
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysmoduleaction" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysmoduleaction
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	
+	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="findlistbyid" parameterType="int" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysmoduleaction
+		where actionmoduleid=#{value}
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

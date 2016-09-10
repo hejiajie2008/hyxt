@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.TimingrulesDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Timingrules" >
+    <id column="RulesID" property="rulesid"  />
+     <result column="RulesName" property="rulesname"  />
+     <result column="RulesInterval" property="rulesinterval"  />
+     <result column="RulesUnitPrice" property="rulesunitprice"  />
+     <result column="RulesExceedTime" property="rulesexceedtime"  />
+     <result column="RulesAddTime" property="rulesaddtime"  />
+     <result column="RulesShopID" property="rulesshopid"  />
+     <result column="RulesUserID" property="rulesuserid"  />
+     <result column="RulesRemark" property="rulesremark"  />
+     <result column="UserName" property="username"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	<if test="rulesid != null" >
+		       
+		        and  RulesID = #{rulesid} 
+		      </if>
+     	
+     	
+		      <if test="rulesname != null" >
+		       
+		        and  RulesName = #{rulesname} 
+		      </if>
+     	
+     	
+		      <if test="rulesinterval != null" >
+		       
+		         and RulesInterval = #{rulesinterval} 
+		      </if>
+     	
+     	
+		      <if test="rulesunitprice != null" >
+		       
+		         and RulesUnitPrice = #{rulesunitprice} 
+		      </if>
+     	
+     	
+		      <if test="rulesexceedtime != null" >
+		       
+		         and RulesExceedTime = #{rulesexceedtime} 
+		      </if>
+     	
+     	
+		      <if test="rulesaddtime != null" >
+		       
+		         and RulesAddTime = #{rulesaddtime} 
+		      </if>
+     	
+     	
+		      <if test="rulesshopid != null" >
+		       
+		         and RulesShopID = #{rulesshopid} 
+		      </if>
+     	
+     	
+		      <if test="rulesuserid != null" >
+		       
+		         and RulesUserID = #{rulesuserid} 
+		      </if>
+     	
+     	
+		      <if test="rulesremark != null" >
+		       
+		         and RulesRemark = #{rulesremark} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+RulesID,RulesName,RulesInterval,RulesUnitPrice,RulesExceedTime,RulesAddTime,RulesShopID,RulesUserID,RulesRemark    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Timingrules" >
+    insert into timingrules (RulesID,RulesName,RulesInterval,RulesUnitPrice,RulesExceedTime,RulesAddTime,RulesShopID,RulesUserID,RulesRemark)values (#{rulesid},#{rulesname},#{rulesinterval},#{rulesunitprice},#{rulesexceedtime},#{rulesaddtime},#{rulesshopid},#{rulesuserid},#{rulesremark})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Timingrules" >
+    update timingrules
+    <set >
+	      <if test="rulesname != null" >
+	        RulesName = #{rulesname},
+	      </if>
+	      <if test="rulesinterval != null" >
+	        RulesInterval = #{rulesinterval},
+	      </if>
+	      <if test="rulesunitprice != null" >
+	        RulesUnitPrice = #{rulesunitprice},
+	      </if>
+	      <if test="rulesexceedtime != null" >
+	        RulesExceedTime = #{rulesexceedtime},
+	      </if>
+	      <if test="rulesaddtime != null" >
+	        RulesAddTime = #{rulesaddtime},
+	      </if>
+	      <if test="rulesshopid != null" >
+	        RulesShopID = #{rulesshopid},
+	      </if>
+	      <if test="rulesuserid != null" >
+	        RulesUserID = #{rulesuserid},
+	      </if>
+	      <if test="rulesremark != null" >
+	        RulesRemark = #{rulesremark},
+	      </if>
+    </set>
+    where  RulesID= #{rulesid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from timingrules
+    where  RulesID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from timingrules
+    where  RulesID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.TimingrulesFormBean" resultType="int">
+		SELECT COUNT(*) FROM timingrules
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.TimingrulesFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,sysuser.UserName 
+		 FROM timingrules left join sysuser  on timingrules.RulesUserID=sysuser.UserID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Timingrules" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM timingrules
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

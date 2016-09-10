@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.GoodslogDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Goodslog" >
+    <id column="ID" property="id"  />
+     <result column="GoodsAccount" property="goodsaccount"  />
+     <result column="Type" property="type"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="TotalPrice" property="totalprice"  />
+     <result column="GoodsNumber" property="goodsnumber"  />
+     <result column="Remark" property="remark"  />
+     <result column="CreateTime" property="createtime"  />
+     <result column="ShopID" property="shopid"  />
+     <result column="UserID" property="userid"  />
+     <result column="ChangeShopID" property="changeshopid"  />
+      <result column="username" property="username"  />
+     <result column="shopname" property="shopname"  />
+     <result column="changeshopname" property="changeshopname"  />
+     
+  </resultMap>
+  
+  <resultMap id="ResultAllMap" type="com.jfxy.pojo.Goodslog" >
+    <id column="ID" property="id"  />
+     <result column="GoodsAccount" property="goodsaccount"  />
+     <result column="Type" property="type"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="TotalPrice" property="totalprice"  />
+     <result column="GoodsNumber" property="goodsnumber"  />
+     <result column="Remark" property="remark"  />
+     <result column="CreateTime" property="createtime"  />
+     <result column="ShopID" property="shopid"  />
+     <result column="UserID" property="userid"  />
+     <result column="ChangeShopID" property="changeshopid"  />
+      <result column="username" property="username"  />
+     <result column="shopname" property="shopname"  />
+     <result column="changeshopname" property="changeshopname"  />
+
+
+<association property="details" column="ID" 
+
+select="com.jfxy.dao.GoodslogdetailDao.queryGoodslogdetailbyid"
+/>  
+
+
+     
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="goodsaccount != null" >
+		       
+		         GoodsAccount = #{goodsaccount} 
+		      </if>
+     	
+     	
+		      <if test="type != null" >
+		       
+		         and Type = #{type} 
+		      </if>
+     	
+     	
+		      <if test="goodsid != null" >
+		       
+		         and goodslog.GoodsID = #{goodsid} 
+		      </if>
+     	
+     	
+		      <if test="totalprice != null" >
+		       
+		         and TotalPrice = #{totalprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsnumber != null" >
+		       
+		         and GoodsNumber = #{goodsnumber} 
+		      </if>
+     	
+     	
+		      <if test="remark != null" >
+		       
+		         and Remark = #{remark} 
+		      </if>
+     	
+     	
+		      <if test="createtime != null" >
+		       
+		         and CreateTime = #{createtime} 
+		      </if>
+     	
+     	
+		      <if test="shopid != null" >
+		       
+		         and goodslog.ShopID = #{shopid} 
+		      </if>
+     	
+     	
+		      <if test="userid != null" >
+		       
+		         and goodslog.UserID = #{userid} 
+		      </if>
+     	
+     	
+		      <if test="changeshopid != null" >
+		       
+		         and ChangeShopID = #{changeshopid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ID,GoodsAccount,Type,GoodsID,TotalPrice,GoodsNumber,Remark,CreateTime,ShopID,UserID,ChangeShopID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Goodslog" useGeneratedKeys="true" keyProperty="id">
+    insert into goodslog (GoodsAccount,Type,GoodsID,TotalPrice,GoodsNumber,Remark,CreateTime,ShopID,UserID,ChangeShopID)values (#{goodsaccount},#{type},#{goodsid},#{totalprice},#{goodsnumber},#{remark},#{createtime},#{shopid},#{userid},#{changeshopid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Goodslog" >
+    update goodslog
+    <set >
+	      <if test="goodsaccount != null" >
+	        GoodsAccount = #{goodsaccount},
+	      </if>
+	      <if test="type != null" >
+	        Type = #{type},
+	      </if>
+	      <if test="goodsid != null" >
+	        GoodsID = #{goodsid},
+	      </if>
+	      <if test="totalprice != null" >
+	        TotalPrice = #{totalprice},
+	      </if>
+	      <if test="goodsnumber != null" >
+	        GoodsNumber = #{goodsnumber},
+	      </if>
+	      <if test="remark != null" >
+	        Remark = #{remark},
+	      </if>
+	      <if test="createtime != null" >
+	        CreateTime = #{createtime},
+	      </if>
+	      <if test="shopid != null" >
+	        ShopID = #{shopid},
+	      </if>
+	      <if test="userid != null" >
+	        UserID = #{userid},
+	      </if>
+	      <if test="changeshopid != null" >
+	        ChangeShopID = #{changeshopid},
+	      </if>
+    </set>
+    where  ID= #{id}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from goodslog
+    where  ID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from goodslog
+    where  ID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.GoodslogFormBean" resultType="int">
+		SELECT COUNT(*) FROM goodslog
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.GoodslogFormBean" resultMap="ResultAllMap">
+		SELECT  ID,GoodsAccount,Type,GoodsID,TotalPrice,GoodsNumber,Remark,CreateTime,goodslog.ShopID,goodslog.UserID,ChangeShopID  
+		,sysuser.username,sysshop.shopname ,sysshopchange.ShopName changeshopname
+		 FROM goodslog left join sysuser on goodslog.userid=sysuser.userid
+
+left join sysshop on goodslog.shopid=sysshop.ShopID
+left join sysshop sysshopchange on goodslog.changeshopid=sysshopchange.ShopID
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+		  
+		 
+		  
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Goodslog" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM goodslog
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

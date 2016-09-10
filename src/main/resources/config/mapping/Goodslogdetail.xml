@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.GoodslogdetailDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Goodslogdetail" >
+    <id column="GoodsLogDetailID" property="goodslogdetailid"  />
+     <result column="GoodsLogID" property="goodslogid"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="GoodsInPrice" property="goodsinprice"  />
+     <result column="GoodsOutPrice" property="goodsoutprice"  />
+     <result column="GoodsNumber" property="goodsnumber"  />
+     <result column="goodscode" property="goodscode"  />
+     <result column="name" property="name"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="goodslogid != null" >
+		       
+		         GoodsLogID = #{goodslogid} 
+		      </if>
+     	
+     	
+		      <if test="goodsid != null" >
+		       
+		         and GoodsID = #{goodsid} 
+		      </if>
+     	
+     	
+		      <if test="goodsinprice != null" >
+		       
+		         and GoodsInPrice = #{goodsinprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsoutprice != null" >
+		       
+		         and GoodsOutPrice = #{goodsoutprice} 
+		      </if>
+     	
+     	
+		      <if test="goodsnumber != null" >
+		       
+		         and GoodsNumber = #{goodsnumber} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+GoodsLogDetailID,GoodsLogID,GoodsID,GoodsInPrice,GoodsOutPrice,GoodsNumber    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Goodslogdetail" >
+    insert into goodslogdetail (GoodsLogDetailID,GoodsLogID,GoodsID,GoodsInPrice,GoodsOutPrice,GoodsNumber)values (#{goodslogdetailid},#{goodslogid},#{goodsid},#{goodsinprice},#{goodsoutprice},#{goodsnumber})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Goodslogdetail" >
+    update goodslogdetail
+    <set >
+	      <if test="goodslogid != null" >
+	        GoodsLogID = #{goodslogid},
+	      </if>
+	      <if test="goodsid != null" >
+	        GoodsID = #{goodsid},
+	      </if>
+	      <if test="goodsinprice != null" >
+	        GoodsInPrice = #{goodsinprice},
+	      </if>
+	      <if test="goodsoutprice != null" >
+	        GoodsOutPrice = #{goodsoutprice},
+	      </if>
+	      <if test="goodsnumber != null" >
+	        GoodsNumber = #{goodsnumber},
+	      </if>
+    </set>
+    where  GoodsLogDetailID= #{goodslogdetailid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from goodslogdetail
+    where  GoodsLogDetailID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from goodslogdetail
+    where  GoodsLogDetailID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.GoodslogdetailFormBean" resultType="int">
+		SELECT COUNT(*) FROM goodslogdetail
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.GoodslogdetailFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM goodslogdetail
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Goodslogdetail" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM goodslogdetail
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="queryGoodslogdetailbyid" parameterType="int" resultMap="ResultMap">
+SELECT 
+		 GoodsLogDetailID,GoodsLogID,goodslogdetail.GoodsID,GoodsInPrice,GoodsOutPrice,goodslogdetail.GoodsNumber,goods.goodscode,goods.name
+		 
+		  FROM goodslogdetail left join goods on goodslogdetail.goodsid=goods.goodsid
+		 where goodslogid=#{id}
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

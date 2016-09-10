@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.WeixinmenuDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Weixinmenu" >
+    <id column="MenuID" property="menuid"  />
+     <result column="MenuName" property="menuname"  />
+     <result column="MenuType" property="menutype"  />
+     <result column="MenuKey" property="menukey"  />
+     <result column="MenuUrl" property="menuurl"  />
+     <result column="parentMenuID" property="parentmenuid"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="menuname != null" >
+		       
+		         MenuName = #{menuname} 
+		      </if>
+     	
+     	
+		      <if test="menutype != null" >
+		       
+		         and MenuType = #{menutype} 
+		      </if>
+     	
+     	
+		      <if test="menukey != null" >
+		       
+		         and MenuKey = #{menukey} 
+		      </if>
+     	
+     	
+		      <if test="menuurl != null" >
+		       
+		         and MenuUrl = #{menuurl} 
+		      </if>
+     	
+     	
+		      <if test="parentmenuid != null" >
+		       
+		         and parentMenuID = #{parentmenuid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+MenuID,MenuName,MenuType,MenuKey,MenuUrl,parentMenuID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Weixinmenu" >
+    insert into weixinmenu (MenuID,MenuName,MenuType,MenuKey,MenuUrl,parentMenuID)values (#{menuid},#{menuname},#{menutype},#{menukey},#{menuurl},#{parentmenuid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Weixinmenu" >
+    update weixinmenu
+    <set >
+	      <if test="menuname != null" >
+	        MenuName = #{menuname},
+	      </if>
+	      <if test="menutype != null" >
+	        MenuType = #{menutype},
+	      </if>
+	      <if test="menukey != null" >
+	        MenuKey = #{menukey},
+	      </if>
+	      <if test="menuurl != null" >
+	        MenuUrl = #{menuurl},
+	      </if>
+	      <if test="parentmenuid != null" >
+	        parentMenuID = #{parentmenuid},
+	      </if>
+    </set>
+    where  MenuID= #{menuid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from weixinmenu
+    where  MenuID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from weixinmenu
+    where  MenuID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.WeixinmenuFormBean" resultType="int">
+		SELECT COUNT(*) FROM weixinmenu
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.WeixinmenuFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM weixinmenu
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Weixinmenu" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM weixinmenu
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  <select id="findWeixinmenu" parameterType="java.util.Map" statementType="CALLABLE"  
+     resultMap="ResultMap" >  
+      {call pro_show_weixinmenu(
+      #{rootId,jdbcType=INTEGER,mode=IN}
+      )
+        }
+    </select>    
+  
+  
+ 
+  
+
+</mapper>

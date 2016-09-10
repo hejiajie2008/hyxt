@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MessageDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Message" >
+    <id column="MessageID" property="messageid"  />
+     <result column="MessageMemID" property="messagememid"  />
+     <result column="MessageContent" property="messagecontent"  />
+     <result column="MessageTime" property="messagetime"  />
+     <result column="MessageIsReply" property="messageisreply"  />
+     <result column="MessageReplyContent" property="messagereplycontent"  />
+     <result column="MessageReplyTime" property="messagereplytime"  />
+     <result column="MessageReplyUserID" property="messagereplyuserid"  />
+     <result column="memcard" property="memcard"/>
+     <result column="memname" property="memname"/>
+     <result column="memmobile" property="memmobile"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="messagememid != null" >
+		       
+		         MessageMemID = #{messagememid} 
+		      </if>
+     	
+     	
+		      <if test="messagecontent != null" >
+		       
+		         and MessageContent = #{messagecontent} 
+		      </if>
+     	
+     	
+		      <if test="messagetime != null" >
+		       
+		         and MessageTime = #{messagetime} 
+		      </if>
+     	
+     	
+		      <if test="messageisreply != null" >
+		       
+		         and MessageIsReply = #{messageisreply} 
+		      </if>
+     	
+     	
+		      <if test="messagereplycontent != null" >
+		       
+		         and MessageReplyContent = #{messagereplycontent} 
+		      </if>
+     	
+     	
+		      <if test="messagereplytime != null" >
+		       
+		         and MessageReplyTime = #{messagereplytime} 
+		      </if>
+     	
+     	
+		      <if test="messagereplyuserid != null" >
+		       
+		         and MessageReplyUserID = #{messagereplyuserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+MessageID,MessageMemID,MessageContent,MessageTime,MessageIsReply,MessageReplyContent,MessageReplyTime,MessageReplyUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Message" >
+    insert into message (MessageID,MessageMemID,MessageContent,MessageTime,MessageIsReply,MessageReplyContent,MessageReplyTime,MessageReplyUserID)values (#{messageid},#{messagememid},#{messagecontent},#{messagetime},#{messageisreply},#{messagereplycontent},#{messagereplytime},#{messagereplyuserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Message" >
+    update message
+    <set >
+	      <if test="messagememid != null" >
+	        MessageMemID = #{messagememid},
+	      </if>
+	      <if test="messagecontent != null" >
+	        MessageContent = #{messagecontent},
+	      </if>
+	      <if test="messagetime != null" >
+	        MessageTime = #{messagetime},
+	      </if>
+	      <if test="messageisreply != null" >
+	        MessageIsReply = #{messageisreply},
+	      </if>
+	      <if test="messagereplycontent != null" >
+	        MessageReplyContent = #{messagereplycontent},
+	      </if>
+	      <if test="messagereplytime != null" >
+	        MessageReplyTime = #{messagereplytime},
+	      </if>
+	      <if test="messagereplyuserid != null" >
+	        MessageReplyUserID = #{messagereplyuserid},
+	      </if>
+    </set>
+    where  MessageID= #{messageid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from message
+    where  MessageID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from message
+    where  MessageID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MessageFormBean" resultType="int">
+		SELECT COUNT(*) FROM message
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MessageFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,mem.memcard,mem.memname,mem.memmobile
+		 FROM message left join mem on message.MessageMemID=mem.memID
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Message" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM message
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

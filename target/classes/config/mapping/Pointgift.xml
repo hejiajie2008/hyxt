@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.PointgiftDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Pointgift" >
+     <id column="GiftID" property="giftid"  />
+     <result column="GiftName" property="giftname"  />
+     <result column="GiftCode" property="giftcode"  />
+     <result column="GiftClassID" property="giftclassid"  />
+     <result column="GiftPhoto" property="giftphoto"  />
+     <result column="GiftExchangePoint" property="giftexchangepoint"  />
+     <result column="GiftStockNumber" property="giftstocknumber"  />
+     <result column="GiftExchangeNumber" property="giftexchangenumber"  />
+     <result column="GiftShopID" property="giftshopid"  />
+     <result column="GiftRemark" property="giftremark"  />
+	  <!--新添加数据字段 -->
+	  <result column="GiftClassName" property="giftclassname" />
+	  <result column="ShopName" property="shopname"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="giftname != null" >
+		       
+		         GiftName = #{giftname} 
+		      </if>
+     	
+     	
+		      <if test="giftcode != null" >
+		       
+		         and GiftCode = #{giftcode} 
+		      </if>
+     	
+     	
+		      <if test="giftclassid != null" >
+		       
+		         and GiftClassID = #{giftclassid} 
+		      </if>
+     	
+     	
+		      <if test="giftphoto != null" >
+		       
+		         and GiftPhoto = #{giftphoto} 
+		      </if>
+     	
+     	
+		      <if test="giftexchangepoint != null" >
+		       
+		         and GiftExchangePoint = #{giftexchangepoint} 
+		      </if>
+     	
+     	
+		      <if test="giftstocknumber != null" >
+		       
+		         and GiftStockNumber = #{giftstocknumber} 
+		      </if>
+     	
+     	
+		      <if test="giftexchangenumber != null" >
+		       
+		         and GiftExchangeNumber = #{giftexchangenumber} 
+		      </if>
+     	
+     	
+		      <if test="giftshopid != null" >
+		       
+		         and GiftShopID = #{giftshopid} 
+		      </if>
+     	
+     	
+		      <if test="giftremark != null" >
+		       
+		         and GiftRemark = #{giftremark} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+GiftID,GiftName,GiftCode,GiftClassID,GiftPhoto,GiftExchangePoint,GiftStockNumber,GiftExchangeNumber,GiftShopID,GiftRemark    
+  </sql>
+  
+  
+  <!--添加礼品-->
+  <insert id="addGift" parameterType="com.jfxy.pojo.Pointgift" >
+    insert into pointgift (GiftID,GiftName,GiftCode,GiftClassID,GiftPhoto,GiftExchangePoint,GiftStockNumber,GiftExchangeNumber,GiftShopID,GiftRemark)values (#{giftid},#{giftname},#{giftcode},#{giftclassid},#{giftphoto},#{giftexchangepoint},#{giftstocknumber},#{giftexchangenumber},#{giftshopid},#{giftremark})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="updateGift" parameterType="com.jfxy.pojo.Pointgift" >
+    update pointgift
+    <set >
+	      <if test="giftname != null" >
+	        GiftName = #{giftname},
+	      </if>
+	      <if test="giftcode != null" >
+	        GiftCode = #{giftcode},
+	      </if>
+	      <if test="giftclassid != null" >
+	        GiftClassID = #{giftclassid},
+	      </if>
+	      <if test="giftphoto != null" >
+	        GiftPhoto = #{giftphoto},
+	      </if>
+	      <if test="giftexchangepoint != null" >
+	        GiftExchangePoint = #{giftexchangepoint},
+	      </if>
+	      <if test="giftstocknumber != null" >
+	        GiftStockNumber = #{giftstocknumber},
+	      </if>
+	      <if test="giftexchangenumber != null" >
+	        GiftExchangeNumber = #{giftexchangenumber},
+	      </if>
+	      <if test="giftshopid != null" >
+	        GiftShopID = #{giftshopid},
+	      </if>
+	      <if test="giftremark != null" >
+	        GiftRemark = #{giftremark},
+	      </if>
+    </set>
+    where  GiftID= #{giftid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from pointgift
+    where  GiftID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from pointgift
+    where  GiftID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.PointgiftFormBean" resultType="int">
+		SELECT COUNT(*) FROM pointgift
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.PointgiftFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM pointgift
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Pointgift" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM pointgift
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+
+	<!--查询礼品列表-->
+	<select id="queryPointGiftListByCondition" resultMap="ResultMap" parameterType="com.jfxy.pojo.Pointgift">
+	SELECT
+		p.GiftID,
+	p.GiftName,
+  p.GiftCode,
+  g.GiftClassName,
+  p.GiftExchangePoint,
+  p.GiftPhoto,
+  s.ShopName,
+  p.GiftStockNumber,
+  p.GiftExchangeNumber,
+  p.GiftRemark
+FROM
+	pointgift p
+  LEFT JOIN giftclass g on p.GiftClassID=g.GiftClassID
+  left JOIN  sysshop s on s.ShopID=p.GiftShopID
+WHERE
+	1 = 1
+			limit ${firstResult},${pageSize}
+	</select>
+	<!--查询兑换礼品下礼品信息 -->
+	<select id="queryPointGiftListByPage" resultMap="ResultMap" parameterType="java.util.Map">
+		SELECT
+		p.GiftID,
+		p.GiftName,
+		p.GiftCode,
+		g.GiftClassName,
+		p.GiftExchangePoint,
+		p.GiftPhoto,
+		s.ShopName,
+		p.GiftStockNumber,
+		p.GiftExchangeNumber,
+		p.GiftRemark
+		FROM
+		pointgift p
+		LEFT JOIN giftclass g on p.GiftClassID=g.GiftClassID
+		left JOIN  sysshop s on s.ShopID=p.GiftShopID
+		WHERE
+		1 = 1
+		<if test="key!=null">
+           AND (p.GiftName LIKE #{key} escape '/'
+			 OR  p.GiftCode LIKE #{key}
+			)
+		</if>
+		limit ${firstResult},${pageSize}
+	</select>
+	<!--查询礼品数目-->
+	<select id="queryGiftCountByCondition" resultType="java.lang.Integer" parameterType="com.jfxy.pojo.Pointgift">
+		SELECT
+        COUNT(*)
+		FROM
+		pointgift p
+		LEFT JOIN giftclass g on p.GiftClassID=g.GiftClassID
+		left JOIN  sysshop s on s.ShopID=p.GiftShopID
+		WHERE
+		1 = 1
+	</select>
+	<!--查询兑换礼品下里面数目 -->
+	<select id="queryGiftCountByPage" resultType="java.lang.Integer" parameterType="java.util.Map">
+		SELECT
+		COUNT(*)
+		FROM
+		pointgift p
+		LEFT JOIN giftclass g on p.GiftClassID=g.GiftClassID
+		left JOIN  sysshop s on s.ShopID=p.GiftShopID
+		WHERE
+		1 = 1
+		<if test="key!=null">
+			AND (p.GiftName LIKE #{key} escape '/'
+			OR  p.GiftCode LIKE #{key}
+			)
+		</if>
+	</select>
+	<!--根据礼品id查询礼品详情-->
+	<select id="queryPointGiftDetailById" resultMap="ResultMap" parameterType="java.lang.Integer">
+SELECT
+ p.GiftID,
+ p.GiftName,
+  p.GiftCode,
+  g.GiftClassID,
+  g.GiftClassName,
+  p.GiftExchangePoint,
+  p.GiftPhoto,
+  p.GiftStockNumber,
+  p.GiftExchangeNumber,
+  p.GiftRemark
+FROM
+	pointgift p
+  LEFT JOIN giftclass g on p.GiftClassID=g.GiftClassID
+WHERE
+	1 = 1
+and p.GiftID=#{giftid}
+			</select>
+	<!--删除礼品 -->
+	<delete id="deleteGiftById" parameterType="java.lang.Integer">
+		delete from
+		pointgift
+		where giftid = #{giftID}
+	</delete>
+	<!--根据礼品id查询礼品是否已兑换-->
+	<select id="queryGiftCountById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+		SELECT count(*) from pointexchange WHERE ExchangeGiftID=#{giftID}
+	</select>
+	<select id="queryGiftCountByName" resultType="java.lang.Integer" parameterType="com.jfxy.pojo.Pointgift">
+		SELECT count(*) from pointgift WHERE GiftName=#{giftname}
+	</select>
+
+</mapper>

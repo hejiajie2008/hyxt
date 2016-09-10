@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemcustomfieldDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memcustomfield" >
+    <id column="CustomFieldID" property="customfieldid"  />
+     <result column="CustomType" property="customtype"  />
+     <result column="CustomField" property="customfield"  />
+     <result column="CustomFieldName" property="customfieldname"  />
+     <result column="CustomFieldIsNull" property="customfieldisnull"  />
+     <result column="CustomFieldIsShow" property="customfieldisshow"  />
+     <result column="CustomFieldType" property="customfieldtype"  />
+     <result column="CustomFieldInfo" property="customfieldinfo"  />
+     <result column="CustomFieldShopID" property="customfieldshopid"  />
+     <result column="CustomFieldCreateTime" property="customfieldcreatetime"  />
+     <result column="CustomFieldUserID" property="customfielduserid"  />
+     <result column="username" property="username"/>
+     <result column="shopname" property="shopname"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  
+   <resultMap id="ExcelResultMap" type="com.jfxy.pojo.ExcelField" >
+    <id column="FieldID" property="fieldid"  />
+    
+     <result column="Field" property="field"  />
+     <result column="FieldName" property="fieldname"  />
+     <result column="FieldIsNull" property="fieldisnull"  />
+     <result column="FieldValue" property="fieldvalue"  />
+     <result column="FieldLength" property="fieldlength"/>
+     <result column="fieldtype" property="fieldtype"/>
+  </resultMap>
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="customtype != null" >
+		       
+		         CustomType = #{customtype} 
+		      </if>
+     	
+     	
+		      <if test="customfield != null" >
+		       
+		         and CustomField = #{customfield} 
+		      </if>
+     	
+     	
+		      <if test="customfieldname != null" >
+		       
+		         and CustomFieldName = #{customfieldname} 
+		      </if>
+     	
+     	
+		      <if test="customfieldisnull != null" >
+		       
+		         and CustomFieldIsNull = #{customfieldisnull} 
+		      </if>
+     	
+     	
+		      <if test="customfieldisshow != null" >
+		       
+		         and CustomFieldIsShow = #{customfieldisshow} 
+		      </if>
+     	
+     	
+		      <if test="customfieldtype != null" >
+		       
+		         and CustomFieldType = #{customfieldtype} 
+		      </if>
+     	
+     	
+		      <if test="customfieldinfo != null" >
+		       
+		         and CustomFieldInfo = #{customfieldinfo} 
+		      </if>
+     	
+     	
+		      <if test="customfieldshopid != null" >
+		       
+		         and CustomFieldShopID = #{customfieldshopid} 
+		      </if>
+     	
+     	
+		      <if test="customfieldcreatetime != null" >
+		       
+		         and CustomFieldCreateTime = #{customfieldcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="customfielduserid != null" >
+		       
+		         and CustomFieldUserID = #{customfielduserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+CustomFieldID,CustomType,CustomField,CustomFieldName,CustomFieldIsNull,CustomFieldIsShow,CustomFieldType,CustomFieldInfo,CustomFieldShopID,CustomFieldCreateTime,CustomFieldUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memcustomfield" >
+    insert into memcustomfield (CustomFieldID,CustomType,CustomField,CustomFieldName,CustomFieldIsNull,CustomFieldIsShow,CustomFieldType,CustomFieldInfo,CustomFieldShopID,CustomFieldCreateTime,CustomFieldUserID)values (#{customfieldid},#{customtype},#{customfield},#{customfieldname},#{customfieldisnull},#{customfieldisshow},#{customfieldtype},#{customfieldinfo},#{customfieldshopid},#{customfieldcreatetime},#{customfielduserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memcustomfield" >
+    update memcustomfield
+    <set >
+	      <if test="customtype != null" >
+	        CustomType = #{customtype},
+	      </if>
+	      <if test="customfield != null" >
+	        CustomField = #{customfield},
+	      </if>
+	      <if test="customfieldname != null" >
+	        CustomFieldName = #{customfieldname},
+	      </if>
+	      <if test="customfieldisnull != null" >
+	        CustomFieldIsNull = #{customfieldisnull},
+	      </if>
+	      <if test="customfieldisshow != null" >
+	        CustomFieldIsShow = #{customfieldisshow},
+	      </if>
+	      <if test="customfieldtype != null" >
+	        CustomFieldType = #{customfieldtype},
+	      </if>
+	      <if test="customfieldinfo != null" >
+	        CustomFieldInfo = #{customfieldinfo},
+	      </if>
+	      <if test="customfieldshopid != null" >
+	        CustomFieldShopID = #{customfieldshopid},
+	      </if>
+	      <if test="customfieldcreatetime != null" >
+	        CustomFieldCreateTime = #{customfieldcreatetime},
+	      </if>
+	      <if test="customfielduserid != null" >
+	        CustomFieldUserID = #{customfielduserid},
+	      </if>
+    </set>
+    where  CustomFieldID= #{customfieldid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memcustomfield
+    where  CustomFieldID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memcustomfield
+    where  CustomFieldID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemcustomfieldFormBean" resultType="int">
+		SELECT COUNT(*) FROM memcustomfield
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemcustomfieldFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		,sysuser.username,sysshop.ShopName
+		 FROM memcustomfield
+		 left join 
+sysuser on memcustomfield.CustomFieldUserID=sysuser.UserID left join sysshop on memcustomfield.CustomFieldShopID=sysshop.ShopID
+
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memcustomfield" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memcustomfield
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	
+	<select id="listExcel" parameterType="int"  resultMap="ExcelResultMap">
+		SELECT 
+		 FieldID,Field,FieldName,FieldIsNull,FieldValue,FieldLength,fieldtype
+		  FROM memexcelfield where type=#{value}
+		
+		  
+		
+	</select>
+	
+	
+	<select id="findbyid" parameterType="int" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memcustomfield
+		 
+			where CustomFieldID= #{customfieldid}
+		  
+		
+	</select>
+	
+	<update id="alterTableSql" parameterType="map"> 
+		${sql} 
+	</update>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

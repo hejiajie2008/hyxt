@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.WeixinnewsDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Weixinnews" >
+    <id column="NewsID" property="newsid"  />
+     <result column="NewsRuleID" property="newsruleid"  />
+     <result column="NewsTitle" property="newstitle"  />
+     <result column="NewsDesc" property="newsdesc"  />
+     <result column="NewsUrlFirst" property="newsurlfirst"  />
+     <result column="NewsUrlSecond" property="newsurlsecond"  />
+     <result column="NewsLinkContent" property="newslinkcontent"  />
+     <result column="NewsCreateTime" property="newscreatetime"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="newsruleid != null" >
+		       
+		         NewsRuleID = #{newsruleid} 
+		      </if>
+     	
+     	
+		      <if test="newstitle != null" >
+		       
+		         and NewsTitle = #{newstitle} 
+		      </if>
+     	
+     	
+		      <if test="newsdesc != null" >
+		       
+		         and NewsDesc = #{newsdesc} 
+		      </if>
+     	
+     	
+		      <if test="newsurlfirst != null" >
+		       
+		         and NewsUrlFirst = #{newsurlfirst} 
+		      </if>
+     	
+     	
+		      <if test="newsurlsecond != null" >
+		       
+		         and NewsUrlSecond = #{newsurlsecond} 
+		      </if>
+     	
+     	
+		      <if test="newslinkcontent != null" >
+		       
+		         and NewsLinkContent = #{newslinkcontent} 
+		      </if>
+     	
+     	
+		      <if test="newscreatetime != null" >
+		       
+		         and NewsCreateTime = #{newscreatetime} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+NewsID,NewsRuleID,NewsTitle,NewsDesc,NewsUrlFirst,NewsUrlSecond,NewsLinkContent,NewsCreateTime    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Weixinnews" >
+    insert into weixinnews (NewsID,NewsRuleID,NewsTitle,NewsDesc,NewsUrlFirst,NewsUrlSecond,NewsLinkContent,NewsCreateTime)values (#{newsid},#{newsruleid},#{newstitle},#{newsdesc},#{newsurlfirst},#{newsurlsecond},#{newslinkcontent},#{newscreatetime})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Weixinnews" >
+    update weixinnews
+    <set >
+	      <if test="newsruleid != null" >
+	        NewsRuleID = #{newsruleid},
+	      </if>
+	      <if test="newstitle != null" >
+	        NewsTitle = #{newstitle},
+	      </if>
+	      <if test="newsdesc != null" >
+	        NewsDesc = #{newsdesc},
+	      </if>
+	      <if test="newsurlfirst != null" >
+	        NewsUrlFirst = #{newsurlfirst},
+	      </if>
+	      <if test="newsurlsecond != null" >
+	        NewsUrlSecond = #{newsurlsecond},
+	      </if>
+	      <if test="newslinkcontent != null" >
+	        NewsLinkContent = #{newslinkcontent},
+	      </if>
+	      <if test="newscreatetime != null" >
+	        NewsCreateTime = #{newscreatetime},
+	      </if>
+    </set>
+    where  NewsID= #{newsid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from weixinnews
+    where  NewsID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from weixinnews
+    where  NewsID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.WeixinnewsFormBean" resultType="int">
+		SELECT COUNT(*) FROM weixinnews
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.WeixinnewsFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM weixinnews
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Weixinnews" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM weixinnews
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.TimingprojectDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Timingproject" >
+    <id column="ProjectID" property="projectid"  />
+     <result column="ProjectName" property="projectname"  />
+     <result column="ProjectCategoryID" property="projectcategoryid"  />
+     <result column="ProjectRulesID" property="projectrulesid"  />
+     <result column="ProjectAddTime" property="projectaddtime"  />
+     <result column="ProjectShopID" property="projectshopid"  />
+     <result column="ProjectUserID" property="projectuserid"  />
+     <result column="ProjectRemark" property="projectremark"  />
+     <result column="RulesName" property="rulesname"  />
+     <result column="UserName" property="username"  />
+   <result column="RulesRemark" property="rulesremark"/>
+   <result column="RulesInterval" property="rulesinterval"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     		<if test="projectid != null" >
+		       
+		         ProjectID = #{projectid} 
+		      </if>
+     	
+     	
+		      <if test="projectname != null and projectname != ''" >
+		       
+		        and  ProjectName = #{projectname} 
+		      </if>
+     	
+     	
+		      <if test="projectcategoryid != null" >
+		       
+		         and ProjectCategoryID = #{projectcategoryid} 
+		      </if>
+     	
+     	
+		      <if test="projectrulesid != null" >
+		       
+		         and ProjectRulesID = #{projectrulesid} 
+		      </if>
+     	
+     	
+		      <if test="projectaddtime != null" >
+		       
+		         and ProjectAddTime = #{projectaddtime} 
+		      </if>
+     	
+     	
+		      <if test="projectshopid != null" >
+		       
+		         and ProjectShopID = #{projectshopid} 
+		      </if>
+     	
+     	
+		      <if test="projectuserid != null" >
+		       
+		         and ProjectUserID = #{projectuserid} 
+		      </if>
+     	
+     	
+		      <if test="projectremark != null" >
+		       
+		         and ProjectRemark = #{projectremark} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ProjectID,ProjectName,ProjectCategoryID,ProjectRulesID,ProjectAddTime,ProjectShopID,ProjectUserID,ProjectRemark    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Timingproject" >
+    insert into timingproject (ProjectID,ProjectName,ProjectCategoryID,ProjectRulesID,ProjectAddTime,ProjectShopID,ProjectUserID,ProjectRemark)values (#{projectid},#{projectname},#{projectcategoryid},#{projectrulesid},#{projectaddtime},#{projectshopid},#{projectuserid},#{projectremark})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Timingproject" >
+    update timingproject
+    <set >
+	      <if test="projectname != null" >
+	        ProjectName = #{projectname},
+	      </if>
+	      <if test="projectcategoryid != null" >
+	        ProjectCategoryID = #{projectcategoryid},
+	      </if>
+	      <if test="projectrulesid != null" >
+	        ProjectRulesID = #{projectrulesid},
+	      </if>
+	      <if test="projectaddtime != null" >
+	        ProjectAddTime = #{projectaddtime},
+	      </if>
+	      <if test="projectshopid != null" >
+	        ProjectShopID = #{projectshopid},
+	      </if>
+	      <if test="projectuserid != null" >
+	        ProjectUserID = #{projectuserid},
+	      </if>
+	      <if test="projectremark != null" >
+	        ProjectRemark = #{projectremark},
+	      </if>
+    </set>
+    where  ProjectID= #{projectid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from timingproject
+    where  ProjectID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from timingproject
+    where  ProjectID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.TimingprojectFormBean" resultType="int">
+		SELECT COUNT(*) FROM timingproject
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.TimingprojectFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />,timingrules.RulesName,sysuser.UserName,
+		timingrules.RulesRemark,timingrules.RulesInterval 
+		 FROM timingproject
+		  left join timingrules on timingproject.ProjectRulesID=timingrules.RulesID
+left join sysuser  on timingproject.ProjectUserID=sysuser.UserID
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Timingproject" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />,timingrules.RulesRemark,timingrules.RulesInterval 
+		  FROM timingproject
+		  left join timingrules on timingproject.ProjectRulesID=timingrules.RulesID
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

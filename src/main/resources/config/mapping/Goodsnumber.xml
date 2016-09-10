@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.GoodsnumberDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Goodsnumber" >
+    <id column="ID" property="id"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="ShopID" property="shopid"  />
+     <result column="Number" property="number"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="goodsid != null" >
+		       
+		         GoodsID = #{goodsid} 
+		      </if>
+     	
+     	
+		      <if test="shopid != null" >
+		       
+		         and ShopID = #{shopid} 
+		      </if>
+     	
+     	
+		      <if test="number != null" >
+		       
+		         and Number = #{number} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ID,GoodsID,ShopID,Number    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Goodsnumber" >
+    insert into goodsnumber (ID,GoodsID,ShopID,Number)values (#{id},#{goodsid},#{shopid},#{number})
+  </insert>
+  
+  <!--添加数据-->
+  <insert id="replace" parameterType="List" >
+    replace into goodsnumber (GoodsID,ShopID,Number)  
+    <foreach collection ="list" item ="item" index ="index" separator ="union all"> 
+		       select goodsid,  #{item.shopid},#{item.number} from goods where goodscode=#{item.goodscode}   
+		       and createshopid=#{item.shopid}
+	</foreach>
+    
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Goodsnumber" >
+    update goodsnumber
+    <set >
+	      <if test="goodsid != null" >
+	        GoodsID = #{goodsid},
+	      </if>
+	      <if test="shopid != null" >
+	        ShopID = #{shopid},
+	      </if>
+	      <if test="number != null" >
+	        Number = #{number},
+	      </if>
+    </set>
+    where  ID= #{id}
+  </update>
+  
+   <!--修改数据-->
+  <update id="updateNumber" parameterType="com.jfxy.pojo.Goodsnumber" >
+    update goodsnumber
+    <set >
+	     
+	      <if test="innumber != null" >
+	        Number = Number+ #{innumber}
+	      </if>
+    </set>
+    <where>
+     	<if test="goodsid != null" >
+	        GoodsID = #{goodsid}
+	      </if>
+	      <if test="shopid != null" >
+	        and ShopID = #{shopid}
+	      </if>
+    </where>
+   
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from goodsnumber
+    where  ID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from goodsnumber
+    where  ID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.GoodsnumberFormBean" resultType="int">
+		SELECT COUNT(*) FROM goodsnumber
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.GoodsnumberFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM goodsnumber
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Goodsnumber" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM goodsnumber
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

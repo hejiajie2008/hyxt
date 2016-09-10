@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.MemcountdetailDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Memcountdetail" >
+    <id column="CountDetailID" property="countdetailid"  />
+     <result column="CountDetailCountID" property="countdetailcountid"  />
+     <result column="GoodsID" property="goodsid"  />
+     <result column="CountDetailMemID" property="countdetailmemid"  />
+     <result column="CountDetailTotalNumber" property="countdetailtotalnumber"  />
+     <result column="CountDetailNumber" property="countdetailnumber"  />
+     <result column="CountDetailDiscountMoney" property="countdetaildiscountmoney"  />
+     <result column="CountDetailPoint" property="countdetailpoint"  />
+     <result column="CountCreateTime" property="countcreatetime"  />
+     <result column="name" property="name"/>
+     <result column="unit" property="unit"/>
+     <result column="goodscode" property="goodscode"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="countdetailcountid != null" >
+		       
+		         CountDetailCountID = #{countdetailcountid} 
+		      </if>
+     	
+     	
+		      <if test="goodsid != null" >
+		       
+		         and GoodsID = #{goodsid} 
+		      </if>
+     	
+     	
+		      <if test="countdetailmemid != null" >
+		       
+		         and CountDetailMemID = #{countdetailmemid} 
+		      </if>
+     	
+     	
+		      <if test="countdetailtotalnumber != null" >
+		       
+		         and CountDetailTotalNumber = #{countdetailtotalnumber} 
+		      </if>
+     	
+     	
+		      <if test="countdetailnumber != null" >
+		       
+		         and CountDetailNumber = #{countdetailnumber} 
+		      </if>
+     	
+     	
+		      <if test="countdetaildiscountmoney != null" >
+		       
+		         and CountDetailDiscountMoney = #{countdetaildiscountmoney} 
+		      </if>
+     	
+     	
+		      <if test="countdetailpoint != null" >
+		       
+		         and CountDetailPoint = #{countdetailpoint} 
+		      </if>
+     	
+     	
+		      <if test="countcreatetime != null" >
+		       
+		         and CountCreateTime = #{countcreatetime} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+CountDetailID,CountDetailCountID,GoodsID,CountDetailMemID,CountDetailTotalNumber,CountDetailNumber,CountDetailDiscountMoney,CountDetailPoint,CountCreateTime    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Memcountdetail" >
+    insert into memcountdetail (CountDetailID,CountDetailCountID,GoodsID,CountDetailMemID,CountDetailTotalNumber,CountDetailNumber,CountDetailDiscountMoney,CountDetailPoint,CountCreateTime)values 
+    (#{countdetailid},#{countdetailcountid},#{goodsid},#{countdetailmemid},#{countdetailtotalnumber}+getmemcountnumber(#{goodsid},#{countdetailmemid}),#{countdetailnumber},#{countdetaildiscountmoney},#{countdetailpoint},#{countcreatetime})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Memcountdetail" >
+    update memcountdetail
+    <set >
+	      <if test="countdetailcountid != null" >
+	        CountDetailCountID = #{countdetailcountid},
+	      </if>
+	      <if test="goodsid != null" >
+	        GoodsID = #{goodsid},
+	      </if>
+	      <if test="countdetailmemid != null" >
+	        CountDetailMemID = #{countdetailmemid},
+	      </if>
+	      <if test="countdetailtotalnumber != null" >
+	        CountDetailTotalNumber = #{countdetailtotalnumber},
+	      </if>
+	      <if test="countdetailnumber != null" >
+	        CountDetailNumber = #{countdetailnumber},
+	      </if>
+	      <if test="countdetaildiscountmoney != null" >
+	        CountDetailDiscountMoney = #{countdetaildiscountmoney},
+	      </if>
+	      <if test="countdetailpoint != null" >
+	        CountDetailPoint = #{countdetailpoint},
+	      </if>
+	      <if test="countcreatetime != null" >
+	        CountCreateTime = #{countcreatetime},
+	      </if>
+    </set>
+    where  CountDetailID= #{countdetailid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from memcountdetail
+    where  CountDetailID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from memcountdetail
+    where  CountDetailID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.MemcountdetailFormBean" resultType="int">
+		SELECT COUNT(*) FROM memcountdetail
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.MemcountdetailFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM memcountdetail
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Memcountdetail" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM memcountdetail
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+	
+	<select id="queryServingProductPageList" parameterType="com.jfxy.pojo.form.MemcountdetailFormBean" resultMap="ResultMap" >
+	 select memcountdetail.GoodsID,memcountdetail.CountDetailTotalNumber,goods.name
+,goods.unit from memcountdetail
+left join goods on memcountdetail.GoodsID=goods.goodsid 
+ where countdetailid in
+(
+select max(countdetailid) from memcountdetail where
+countdetailmemid=#{countdetailmemid}  group by goodsid
+) and countdetailmemid=#{countdetailmemid} and CountDetailTotalNumber>0
+	</select>
+	
+	
+	<!-- 查询总记录数 -->
+	<select id="queryServingProductCount" parameterType="com.jfxy.pojo.form.MemcountdetailFormBean" resultType="int">
+		select count(*) from memcountdetail
+ where countdetailid in
+(
+select max(countdetailid) from memcountdetail
+where countdetailmemid=#{countdetailmemid} group by goodsid
+) and countdetailmemid=#{countdetailmemid} and CountDetailTotalNumber>0
+	</select>
+	
+	<select id="queryMemcountdetailbyid" parameterType="int" resultMap="ResultMap">
+SELECT 
+		 CountDetailID,CountDetailCountID,memcountdetail.GoodsID,
+		 CountDetailPoint,CountDetailDiscountMoney,CountDetailNumber,
+		 CountDetailTotalNumber,goods.name,goods.goodscode
+		  FROM memcountdetail left join goods on memcountdetail.goodsid=goods.goodsid
+		 where CountDetailCountID=#{id}
+		  
+		
+	</select>
+ 
+  
+ 
+  <update id="updateMemCountdetailnumber" parameterType="com.jfxy.pojo.Memcountdetail">
+  	update  memcountdetail as a,
+(
+select max(t.countdetailid) id from memcountdetail  t where t.CountDetailMemID=#{countdetailmemid}
+ and
+t.GoodsID=#{goodsid}
+) as b set a.CountDetailTotalNumber=a.CountDetailTotalNumber+#{countdetailtotalnumber}
+where a.countdetailid=b.id
+  </update>
+  
+  
+  
+ 
+  
+
+</mapper>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.PointexchangeDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Pointexchange" >
+    <id column="ExchangeID" property="exchangeid"  />
+     <result column="ExchangeMemID" property="exchangememid"  />
+     <result column="ExchangeGiftID" property="exchangegiftid"  />
+     <result column="ExchangeNumber" property="exchangenumber"  />
+     <result column="ExchangeTotalPoint" property="exchangetotalpoint"  />
+     <result column="ExchangeShopID" property="exchangeshopid"  />
+     <result column="ExchangeTime" property="exchangetime"  />
+     <result column="ExchangeUserID" property="exchangeuserid"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="exchangememid != null" >
+		       
+		         ExchangeMemID = #{exchangememid} 
+		      </if>
+     	
+     	
+		      <if test="exchangegiftid != null" >
+		       
+		         and ExchangeGiftID = #{exchangegiftid} 
+		      </if>
+     	
+     	
+		      <if test="exchangenumber != null" >
+		       
+		         and ExchangeNumber = #{exchangenumber} 
+		      </if>
+     	
+     	
+		      <if test="exchangetotalpoint != null" >
+		       
+		         and ExchangeTotalPoint = #{exchangetotalpoint} 
+		      </if>
+     	
+     	
+		      <if test="exchangeshopid != null" >
+		       
+		         and ExchangeShopID = #{exchangeshopid} 
+		      </if>
+     	
+     	
+		      <if test="exchangetime != null" >
+		       
+		         and ExchangeTime = #{exchangetime} 
+		      </if>
+     	
+     	
+		      <if test="exchangeuserid != null" >
+		       
+		         and ExchangeUserID = #{exchangeuserid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ExchangeID,ExchangeMemID,ExchangeGiftID,ExchangeNumber,ExchangeTotalPoint,ExchangeShopID,ExchangeTime,ExchangeUserID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Pointexchange" >
+    insert into pointexchange (ExchangeID,ExchangeMemID,ExchangeGiftID,ExchangeNumber,ExchangeTotalPoint,ExchangeShopID,ExchangeTime,ExchangeUserID)values (#{exchangeid},#{exchangememid},#{exchangegiftid},#{exchangenumber},#{exchangetotalpoint},#{exchangeshopid},#{exchangetime},#{exchangeuserid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Pointexchange" >
+    update pointexchange
+    <set >
+	      <if test="exchangememid != null" >
+	        ExchangeMemID = #{exchangememid},
+	      </if>
+	      <if test="exchangegiftid != null" >
+	        ExchangeGiftID = #{exchangegiftid},
+	      </if>
+	      <if test="exchangenumber != null" >
+	        ExchangeNumber = #{exchangenumber},
+	      </if>
+	      <if test="exchangetotalpoint != null" >
+	        ExchangeTotalPoint = #{exchangetotalpoint},
+	      </if>
+	      <if test="exchangeshopid != null" >
+	        ExchangeShopID = #{exchangeshopid},
+	      </if>
+	      <if test="exchangetime != null" >
+	        ExchangeTime = #{exchangetime},
+	      </if>
+	      <if test="exchangeuserid != null" >
+	        ExchangeUserID = #{exchangeuserid},
+	      </if>
+    </set>
+    where  ExchangeID= #{exchangeid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from pointexchange
+    where  ExchangeID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from pointexchange
+    where  ExchangeID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.PointexchangeFormBean" resultType="int">
+		SELECT COUNT(*) FROM pointexchange
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.PointexchangeFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM pointexchange
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Pointexchange" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM pointexchange
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.WeixinruleDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Weixinrule" >
+    <id column="RuleID" property="ruleid"  />
+     <result column="RuleNUmber" property="rulenumber"  />
+     <result column="RuleNewsType" property="rulenewstype"  />
+     <result column="RuleDesc" property="ruledesc"  />
+     <result column="RuleContent" property="rulecontent"  />
+     <result column="RuleUserID" property="ruleuserid"  />
+     <result column="RuleCreateTime" property="rulecreatetime"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="rulenumber != null" >
+		       
+		         RuleNUmber = #{rulenumber} 
+		      </if>
+     	
+     	
+		      <if test="rulenewstype != null" >
+		       
+		         and RuleNewsType = #{rulenewstype} 
+		      </if>
+     	
+     	
+		      <if test="ruledesc != null" >
+		       
+		         and RuleDesc = #{ruledesc} 
+		      </if>
+     	
+     	
+		      <if test="rulecontent != null" >
+		       
+		         and RuleContent = #{rulecontent} 
+		      </if>
+     	
+     	
+		      <if test="ruleuserid != null" >
+		       
+		         and RuleUserID = #{ruleuserid} 
+		      </if>
+     	
+     	
+		      <if test="rulecreatetime != null" >
+		       
+		         and RuleCreateTime = #{rulecreatetime} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+RuleID,RuleNUmber,RuleNewsType,RuleDesc,RuleContent,RuleUserID,RuleCreateTime    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Weixinrule" >
+    insert into weixinrule (RuleID,RuleNUmber,RuleNewsType,RuleDesc,RuleContent,RuleUserID,RuleCreateTime)values (#{ruleid},#{rulenumber},#{rulenewstype},#{ruledesc},#{rulecontent},#{ruleuserid},#{rulecreatetime})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Weixinrule" >
+    update weixinrule
+    <set >
+	      <if test="rulenumber != null" >
+	        RuleNUmber = #{rulenumber},
+	      </if>
+	      <if test="rulenewstype != null" >
+	        RuleNewsType = #{rulenewstype},
+	      </if>
+	      <if test="ruledesc != null" >
+	        RuleDesc = #{ruledesc},
+	      </if>
+	      <if test="rulecontent != null" >
+	        RuleContent = #{rulecontent},
+	      </if>
+	      <if test="ruleuserid != null" >
+	        RuleUserID = #{ruleuserid},
+	      </if>
+	      <if test="rulecreatetime != null" >
+	        RuleCreateTime = #{rulecreatetime},
+	      </if>
+    </set>
+    where  RuleID= #{ruleid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from weixinrule
+    where  RuleID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from weixinrule
+    where  RuleID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.WeixinruleFormBean" resultType="int">
+		SELECT COUNT(*) FROM weixinrule
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.WeixinruleFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM weixinrule
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Weixinrule" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM weixinrule
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

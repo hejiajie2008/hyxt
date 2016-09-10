@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.SysshopDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Sysshop" >
+    <id column="ShopID" property="shopid"  />
+     <result column="ShopName" property="shopname"  />
+     <result column="ShopTelephone" property="shoptelephone"  />
+     <result column="ShopContactMan" property="shopcontactman"  />
+     <result column="ShopAreaID" property="shopareaid"  />
+     <result column="ShopAddress" property="shopaddress"  />
+     <result column="ShopRemark" property="shopremark"  />
+     <result column="ShopCreateTime" property="shopcreatetime"  />
+     <result column="ShopState" property="shopstate"  />
+     <result column="ShopPrintTitle" property="shopprinttitle"  />
+     <result column="ShopPrintFoot" property="shopprintfoot"  />
+     <result column="ShopSmsName" property="shopsmsname"  />
+     <result column="FatherShopID" property="fathershopid"  />
+     <result column="IsAllianceProgram" property="isallianceprogram"  />
+     <result column="SettlementInterval" property="settlementinterval"  />
+     <result column="ShopProportion" property="shopproportion"  />
+     <result column="PointCount" property="pointcount"  />
+     <result column="SmsCount" property="smscount"  />
+     <result column="PointType" property="pointtype"  />
+     <result column="SmsType" property="smstype"  />
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	<if test="shopid!=null">
+     		<![CDATA[ 
+     		shopid <>${shopid}
+     		]]>
+     	</if>
+     			<if test="shopauthorityshopid!=null">
+     			 and	sysshopauthority.ShopAuthorityShopID=${shopauthorityshopid}
+     			</if>
+		      <if test="shopname != null" >
+		       
+		         and ShopName = #{shopname} 
+		      </if>
+		      
+		      <if test="searchcontent != null" >
+		       
+		       or  ShopName like  CONCAT('%',#{searchcontent} ,'%')  
+		         
+		         or ShopAddress like  CONCAT('%',#{searchcontent} ,'%')  
+		         or ShopTelephone like  CONCAT('%',#{searchcontent} ,'%')  
+		          or ShopContactMan like  CONCAT('%',#{searchcontent} ,'%')  
+		      </if>
+     	
+     	
+		      <if test="shoptelephone != null" >
+		       
+		         and ShopTelephone = #{shoptelephone} 
+		      </if>
+     	
+     	
+		      <if test="shopcontactman != null" >
+		       
+		         and ShopContactMan = #{shopcontactman} 
+		      </if>
+     	
+     	
+		      <if test="shopareaid != null" >
+		       
+		         and ShopAreaID = #{shopareaid} 
+		      </if>
+     	
+     	
+		      <if test="shopaddress != null" >
+		       
+		         and ShopAddress = #{shopaddress} 
+		      </if>
+     	
+     	
+		      <if test="shopremark != null" >
+		       
+		         and ShopRemark = #{shopremark} 
+		      </if>
+     	
+     	
+		      <if test="shopcreatetime != null" >
+		       
+		         and ShopCreateTime = #{shopcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="shopstate != null" >
+		       
+		         and ShopState = #{shopstate} 
+		      </if>
+     	
+     	
+		      <if test="shopprinttitle != null" >
+		       
+		         and ShopPrintTitle = #{shopprinttitle} 
+		      </if>
+     	
+     	
+		      <if test="shopprintfoot != null" >
+		       
+		         and ShopPrintFoot = #{shopprintfoot} 
+		      </if>
+     	
+     	
+		      <if test="shopsmsname != null" >
+		       
+		         and ShopSmsName = #{shopsmsname} 
+		      </if>
+     	
+     	
+		      <if test="fathershopid != null" >
+		       
+		         and FatherShopID = #{fathershopid} 
+		      </if>
+     	
+     	
+		      <if test="isallianceprogram != null" >
+		       
+		         and IsAllianceProgram = #{isallianceprogram} 
+		      </if>
+     	
+     	
+		      <if test="settlementinterval != null" >
+		       
+		         and SettlementInterval = #{settlementinterval} 
+		      </if>
+     	
+     	<!--  
+		      <if test="shopproportion != null" >
+		       
+		         and ShopProportion = #{shopproportion} 
+		      </if>
+     	-->
+     	
+		      <if test="pointcount != null" >
+		       
+		         and PointCount = #{pointcount} 
+		      </if>
+     	
+     	
+		      <if test="smscount != null" >
+		       
+		         and SmsCount = #{smscount} 
+		      </if>
+     	
+     	
+		      <if test="pointtype != null" >
+		       
+		         and PointType = #{pointtype} 
+		      </if>
+     	
+     	
+		      <if test="smstype != null" >
+		       
+		         and SmsType = #{smstype} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+ShopID,ShopName,ShopTelephone,ShopContactMan,ShopAreaID,ShopAddress,ShopRemark,ShopCreateTime,ShopState,ShopPrintTitle,ShopPrintFoot,ShopSmsName,FatherShopID,IsAllianceProgram,SettlementInterval,ShopProportion,PointCount,SmsCount,PointType,SmsType    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Sysshop" useGeneratedKeys="true" keyProperty="shopid">
+    insert into sysshop (ShopName,ShopTelephone,ShopContactMan,ShopAreaID,ShopAddress,ShopRemark,ShopCreateTime,ShopState,ShopPrintTitle,ShopPrintFoot,ShopSmsName,FatherShopID,IsAllianceProgram,SettlementInterval,ShopProportion,PointCount,SmsCount,PointType,SmsType)values (#{shopname},#{shoptelephone},#{shopcontactman},#{shopareaid},#{shopaddress},#{shopremark},#{shopcreatetime},#{shopstate},#{shopprinttitle},#{shopprintfoot},#{shopsmsname},#{fathershopid},#{isallianceprogram},#{settlementinterval},#{shopproportion},#{pointcount},#{smscount},#{pointtype},#{smstype})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Sysshop" >
+    update sysshop
+    <set >
+	      <if test="shopname != null" >
+	        ShopName = #{shopname},
+	      </if>
+	      <if test="shoptelephone != null" >
+	        ShopTelephone = #{shoptelephone},
+	      </if>
+	      <if test="shopcontactman != null" >
+	        ShopContactMan = #{shopcontactman},
+	      </if>
+	      <if test="shopareaid != null" >
+	        ShopAreaID = #{shopareaid},
+	      </if>
+	      <if test="shopaddress != null" >
+	        ShopAddress = #{shopaddress},
+	      </if>
+	      <if test="shopremark != null" >
+	        ShopRemark = #{shopremark},
+	      </if>
+	      <if test="shopcreatetime != null" >
+	        ShopCreateTime = #{shopcreatetime},
+	      </if>
+	      <if test="shopstate != null" >
+	        ShopState = #{shopstate},
+	      </if>
+	      <if test="shopprinttitle != null" >
+	        ShopPrintTitle = #{shopprinttitle},
+	      </if>
+	      <if test="shopprintfoot != null" >
+	        ShopPrintFoot = #{shopprintfoot},
+	      </if>
+	      <if test="shopsmsname != null" >
+	        ShopSmsName = #{shopsmsname},
+	      </if>
+	      <if test="fathershopid != null" >
+	        FatherShopID = #{fathershopid},
+	      </if>
+	      <if test="isallianceprogram != null" >
+	        IsAllianceProgram = #{isallianceprogram},
+	      </if>
+	      <if test="settlementinterval != null" >
+	        SettlementInterval = #{settlementinterval},
+	      </if>
+	      <if test="shopproportion != null" >
+	        ShopProportion = #{shopproportion},
+	      </if>
+	      <if test="pointcount != null" >
+	        PointCount = #{pointcount},
+	      </if>
+	      <if test="smscount != null" >
+	        SmsCount = #{smscount},
+	      </if>
+	      <if test="pointtype != null" >
+	        PointType = #{pointtype},
+	      </if>
+	      <if test="smstype != null" >
+	        SmsType = #{smstype},
+	      </if>
+    </set>
+    where  ShopID= #{shopid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from sysshop
+    where  ShopID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from sysshop
+    where  ShopID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.SysshopFormBean" resultType="int">
+		SELECT COUNT(*) FROM sysshop left join sysshopauthority on  find_in_set(sysshop.ShopID,sysshopauthority.ShopAuthorityData) 
+		
+		
+		<include refid="Where_Clause" />
+	</select>
+	
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.SysshopFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		 FROM sysshop  
+		 
+		 left join sysshopauthority on  find_in_set(sysshop.ShopID,sysshopauthority.ShopAuthorityData) 
+		 
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Sysshop" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysshop
+		
+		  
+		
+	</select>
+	
+	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="findbyid" parameterType="int" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysshop where shopid=#{value}
+		
+		  
+		
+	</select>
+	
+	
+	
+		 <!-- 按条件查询结果集(不带分页) -->
+	<select id="listbyForm" parameterType="com.jfxy.pojo.form.SysshopFormBean" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM sysshop
+		  
+		  <where>
+		<if test="shopids!=null and shopids.size!=0">
+	    	   shopid in 
+		    <foreach collection="shopids" item="item" index="index" separator=","  open="(" close=")">
+				#{item}
+			</foreach>
+	    </if>
+	    </where>
+		
+		
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

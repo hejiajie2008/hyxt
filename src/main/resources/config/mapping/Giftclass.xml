@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.GiftclassDao">
+	<!--映射返回值 -->
+	<resultMap id="ResultMap" type="com.jfxy.pojo.Giftclass">
+		<id column="GiftClassID" property="giftclassid" />
+		<result column="GiftClassName" property="giftclassname" />
+		<result column="GiftClassRemark" property="giftclassremark" />
+		<result column="GiftParentID" property="giftparentid" />
+	</resultMap>
+	<!--where 条件组装 -->
+
+	<sql id="Where_Clause">
+		<where>
+
+
+
+			<if test="giftclassname != null">
+
+				GiftClassName = #{giftclassname}
+			</if>
+
+
+			<if test="giftclassremark != null">
+
+				and GiftClassRemark = #{giftclassremark}
+			</if>
+
+
+			<if test="giftparentid != null">
+
+				and GiftParentID = #{giftparentid}
+			</if>
+		</where>
+	</sql>
+
+	<!--基本列 -->
+	<sql id="Base_Column_List">
+		GiftClassID,GiftClassName,GiftClassRemark,GiftParentID
+	</sql>
+	<!--添加分类数据 -->
+	<insert id="addGiftClass" parameterType="com.jfxy.pojo.Giftclass">
+		insert into giftclass
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="giftclassid != null">
+				GiftClassID,
+			</if>
+			<if test="giftclassname != null">
+				GiftClassName,
+			</if>
+			<if test="giftclassremark != null">
+				GiftClassRemark,
+			</if>
+			<if test="giftparentid != null">
+				GiftParentID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="giftclassid != null">
+				#{giftclassid,jdbcType=INTEGER},
+			</if>
+			<if test="giftclassname != null">
+				#{giftclassname,jdbcType=VARCHAR},
+			</if>
+			<if test="giftclassremark != null">
+				#{giftclassremark,jdbcType=VARCHAR},
+			</if>
+			<if test="giftparentid != null">
+				#{giftparentid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<!--修改数据 -->
+	<update id="update" parameterType="com.jfxy.pojo.Giftclass">
+		update giftclass
+		<set>
+			<if test="giftclassname != null">
+				GiftClassName = #{giftclassname},
+			</if>
+			<if test="giftclassremark != null">
+				GiftClassRemark = #{giftclassremark},
+			</if>
+			<if test="giftparentid != null">
+				GiftParentID = #{giftparentid},
+			</if>
+		</set>
+		where GiftClassID= #{giftclassid}
+	</update>
+
+
+	<!--批量删除的方法 -->
+	<delete id="deleteById" parameterType="int">
+		delete from giftclass
+		where GiftClassID=#{value}
+	</delete>
+
+
+	<!--批量删除的方法 -->
+	<delete id="deleteByIds" parameterType="map">
+		delete from giftclass
+		where GiftClassID in (
+		<foreach collection="Ids" item="item" index="index" separator=",">
+			#{item}
+		</foreach>
+		)
+	</delete>
+
+
+
+
+
+	<!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Giftclass"
+		resultMap="ResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM giftclass
+		<if test="_parameter != null">
+			<include refid="Where_Clause" />
+		</if>
+
+
+	</select>
+	<!--查询礼品分类列表 -->
+	<select id="queryGiftClassList" resultMap="ResultMap">
+		SELECT
+		GiftClassName,
+		GiftClassRemark,
+		GiftClassID
+		FROM
+		giftclass
+		WHERE
+		GiftParentID IN (
+		SELECT
+		GiftClassID
+		FROM
+		giftclass
+		)
+	</select>
+	<!--<select id="queryGiftClassList" parameterType="java.util.Map" statementType="CALLABLE"
+			resultMap="ResultMap" >
+		{call pro_show_giftclass(
+		#{rootId,jdbcType=INTEGER,mode=IN}
+		)
+		}
+	</select>-->
+	<!--获取礼品类别列表 -->
+	<select id="queryGiftCategory" resultMap="ResultMap">
+		SELECT * from giftclass g WHERE 1=1
+		and g.GiftParentID=0
+	</select>
+	<select id="queryGiftClassCountByName" resultType="java.lang.Integer"
+		parameterType="com.jfxy.pojo.Giftclass">
+		SELECT
+		COUNT(*)
+		FROM
+		giftclass g
+		WHERE
+		1 = 1
+		AND g.GiftClassName=#{giftclassname}
+	</select>
+	  <!-- 获取礼品分类id集合-->
+	<select id="queryGiftClassIdList" resultMap="ResultMap">
+		SELECT
+		GiftClassID,GiftClassName
+		FROM
+		giftclass
+	</select>
+</mapper>

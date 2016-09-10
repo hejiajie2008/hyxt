@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jfxy.dao.PointlogDao" >
+  <!--映射返回值-->
+  <resultMap id="ResultMap" type="com.jfxy.pojo.Pointlog" >
+    <id column="PointID" property="pointid"  />
+     <result column="PointMemID" property="pointmemid"  />
+     <result column="PointNumber" property="pointnumber"  />
+     <result column="PointChangeType" property="pointchangetype"  />
+     <result column="PointRemark" property="pointremark"  />
+     <result column="PointShopID" property="pointshopid"  />
+     <result column="PointCreateTime" property="pointcreatetime"  />
+     <result column="PointUserID" property="pointuserid"  />
+     <result column="PointOrderCode" property="pointordercode"  />
+     <result column="PointGiveMemID" property="pointgivememid"  />
+     <result column="memcard" property="memcard"  />
+     <result column="memname" property="memname"/>
+     <result column="shopname" property="shopname" />
+     <result column="username" property="username"/>
+  </resultMap>
+  <!--where 条件组装-->
+  
+  <sql id="Where_Clause" >
+    <where >
+     	
+     	
+     	
+     	
+		      <if test="pointmemid != null" >
+		       
+		         PointMemID = #{pointmemid} 
+		      </if>
+     	
+     	
+		      <if test="pointnumber != null" >
+		       
+		         and PointNumber = #{pointnumber} 
+		      </if>
+     	
+     	
+		      <if test="pointchangetype != null" >
+		       
+		         and PointChangeType = #{pointchangetype} 
+		      </if>
+     	
+     	
+		      <if test="pointremark != null" >
+		       
+		         and PointRemark = #{pointremark} 
+		      </if>
+     	
+     	
+		      <if test="pointshopid != null" >
+		       
+		         and PointShopID = #{pointshopid} 
+		      </if>
+     	
+     	
+		      <if test="pointcreatetime != null" >
+		       
+		         and PointCreateTime = #{pointcreatetime} 
+		      </if>
+     	
+     	
+		      <if test="pointuserid != null" >
+		       
+		         and PointUserID = #{pointuserid} 
+		      </if>
+     	
+     	
+		      <if test="pointordercode != null" >
+		       
+		         and PointOrderCode = #{pointordercode} 
+		      </if>
+     	
+     	
+		      <if test="pointgivememid != null" >
+		       
+		         and PointGiveMemID = #{pointgivememid} 
+		      </if>
+    </where>
+  </sql>
+
+ <!--基本列-->
+  <sql id="Base_Column_List" >
+PointID,PointMemID,PointNumber,PointChangeType,PointRemark,PointShopID,PointCreateTime,PointUserID,PointOrderCode,PointGiveMemID    
+  </sql>
+  
+  
+  <!--添加数据-->
+  <insert id="insert" parameterType="com.jfxy.pojo.Pointlog" >
+    insert into pointlog (PointID,PointMemID,PointNumber,PointChangeType,PointRemark,PointShopID,PointCreateTime,PointUserID,PointOrderCode,PointGiveMemID)values (#{pointid},#{pointmemid},#{pointnumber},#{pointchangetype},#{pointremark},#{pointshopid},#{pointcreatetime},#{pointuserid},#{pointordercode},#{pointgivememid})
+  </insert>
+  
+  
+  <!--修改数据-->
+  <update id="update" parameterType="com.jfxy.pojo.Pointlog" >
+    update pointlog
+    <set >
+	      <if test="pointmemid != null" >
+	        PointMemID = #{pointmemid},
+	      </if>
+	      <if test="pointnumber != null" >
+	        PointNumber = #{pointnumber},
+	      </if>
+	      <if test="pointchangetype != null" >
+	        PointChangeType = #{pointchangetype},
+	      </if>
+	      <if test="pointremark != null" >
+	        PointRemark = #{pointremark},
+	      </if>
+	      <if test="pointshopid != null" >
+	        PointShopID = #{pointshopid},
+	      </if>
+	      <if test="pointcreatetime != null" >
+	        PointCreateTime = #{pointcreatetime},
+	      </if>
+	      <if test="pointuserid != null" >
+	        PointUserID = #{pointuserid},
+	      </if>
+	      <if test="pointordercode != null" >
+	        PointOrderCode = #{pointordercode},
+	      </if>
+	      <if test="pointgivememid != null" >
+	        PointGiveMemID = #{pointgivememid},
+	      </if>
+    </set>
+    where  PointID= #{pointid}
+  </update>
+  
+  
+   <!--批量删除的方法-->
+   <delete id="deleteById" parameterType="int" >
+    delete from pointlog
+    where  PointID=#{value}
+  </delete>
+  
+  
+  	<!--批量删除的方法-->
+   <delete id="deleteByIds" parameterType="map" >
+    delete from pointlog
+    where  PointID in (
+    <foreach collection="Ids" item="item" index="index" separator=",">
+		#{item}
+	</foreach>
+	)
+  </delete>
+  
+  
+  
+  	<!-- 查询总记录数 -->
+	<select id="count" parameterType="com.jfxy.pojo.form.PointlogFormBean" resultType="int">
+		SELECT COUNT(*) FROM pointlog
+		
+		<include refid="Where_Clause" />
+	</select>
+  
+ 	 <!-- 按条件查询结果集(带分页) -->
+	<select id="pageList" parameterType="com.jfxy.pojo.form.PointlogFormBean" resultMap="ResultMap">
+		SELECT  <include refid="Base_Column_List" />
+		,mem.MemCard ,mem.MemName,sysshop.ShopName,sysuser.UserName 
+		 FROM pointlog
+		 
+		 
+		 left join mem on pointlog.PointMemID=mem.MemID left join sysshop
+on pointlog.PointShopID=sysshop.ShopID left join sysuser on pointlog.PointUserID=sysuser.UserID
+
+		 <if test="_parameter != null" >
+		<include refid="Where_Clause" />
+		
+		order by pointlog.PointCreateTime desc
+		  
+		  LIMIT #{firstResult},#{pageSize}
+		  </if>
+		  
+		  
+		  
+	</select>
+  
+ 	 <!-- 按条件查询结果集(不带分页) -->
+	<select id="list" parameterType="com.jfxy.pojo.Pointlog" resultMap="ResultMap">
+		SELECT 
+		 <include refid="Base_Column_List" />
+		  FROM pointlog
+		 <if test="_parameter != null" >
+			<include refid="Where_Clause" />
+		</if>
+		  
+		
+	</select>
+  
+ 
+  
+  
+  
+  
+ 
+  
+
+</mapper>

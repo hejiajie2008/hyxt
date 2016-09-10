@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+	version="2.1">
+	<tlib-version>1.0</tlib-version>
+	<short-name>utils</short-name>
+	<tag>
+		<description>生成订单编号标签</description>
+		<name>order</name>
+		<tag-class>com.jfxy.util.tags.OrderTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>菜单标签</description>
+		<name>menu</name>
+		<tag-class>com.jfxy.util.tags.MenuTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
+	<tag>
+		<description>生成店铺列表标签</description>
+		<name>shoplist</name>
+		<tag-class>com.jfxy.util.tags.ShopTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>shopid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>系统用户列表标签</description>
+		<name>userlist</name>
+		<tag-class>com.jfxy.util.tags.SysUserTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>userid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<description>系统用户列表checkbox标签</description>
+		<name>sysusercheck</name>
+		<tag-class>com.jfxy.util.tags.SysUserCheckBoxTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>userid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<description>生成会员等级列表标签</description>
+		<name>memlevel</name>
+		<tag-class>com.jfxy.util.tags.MemLevelTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>levelid</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+	
+	<tag>
+		<description>生成单位标签</description>
+		<name>unitlist</name>
+		<tag-class>com.jfxy.util.tags.UnitTag</tag-class>
+		<body-content>empty</body-content>
+		
+	</tag>
+	
+	<tag>
+		<description>标提标签</description>
+		<name>title</name>
+		<tag-class>com.jfxy.util.tags.TitleTag</tag-class>
+		<body-content>empty</body-content>
+	</tag>
+	
+	
+	<tag>
+		<description>生成角色树形标签</description>
+		<name>groupAuthorityTag</name>
+		<tag-class>com.jfxy.util.tags.GroupAuthorityTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>sysgroup</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>com.jfxy.pojo.Sysgroup</type>
+		</attribute>
+		<attribute>
+			
+			<name>listSysmoduleandaction</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.List</type>
+			
+			
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<description>扩展字段</description>
+		<name>customfield</name>
+		<tag-class>com.jfxy.util.tags.CustomfieldTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+
+			<name>map</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Map</type>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<description>扩展表单</description>
+		<name>customTable</name>
+		<tag-class>com.jfxy.util.tags.CustomTableTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+
+			<name>type</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+		
+		<attribute>
+
+			<name>map</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.util.Map</type>
+		</attribute>
+	</tag>
+	
+	
+	<tag>
+		<description>区域</description>
+		<name>area</name>
+		<tag-class>com.jfxy.util.tags.AreaTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>areaName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.String</type>
+		</attribute>
+		<attribute>
+			<name>memprovince</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<name>memcity</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<name>memcounty</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+		<attribute>
+			<name>memvillage</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>java.lang.Integer</type>
+		</attribute>
+	</tag>
+
+
+
+</taglib> 
